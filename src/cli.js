@@ -88,7 +88,7 @@ async function main() {
   const parsed = parseArgs(process.argv);
   const { command, args, rawArgs, flags } = parsed;
   const cwd    = process.cwd();
-  const config = loadConfig(cwd);
+  const config = command === 'canary-killer' ? DEFAULT_CONFIG : loadConfig(cwd);
 
   if (flags.version) {
     process.stdout.write(`npa ${VERSION} (${NAME})\n`);

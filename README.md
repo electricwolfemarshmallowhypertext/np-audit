@@ -93,12 +93,33 @@ Non-malicious CVEs produce warnings but never block installation. Only confirmed
 | `npa install [package]`        | `npa i`     | Audit then run `npm install`       |
 | `npa ci`                       | —           | Audit then run `npm ci`            |
 | `npa scan [package]`           | `npa s`     | Scan only, no install              |
+| `npa canary-killer <root> [root...]` | —      | Optional read-only repository scan |
 | `npa config get`               | `npa c get` | Show current configuration         |
 | `npa config set <key> <value>` | `npa c set` | Update a config value              |
 | `npa alias --install`          | —           | Install shell alias                |
 | `npa alias --uninstall`        | —           | Remove shell alias                 |
 
 Any unrecognized command is forwarded to npm (e.g. `npa run test`, `npa publish`).
+
+### Canary Killer (optional repository scan)
+
+Run from a local checkout without installing globally:
+
+```bash
+node /path/to/np-audit/bin/npa.js canary-killer /path/to/checkout --json
+node /path/to/np-audit/bin/npa.js canary-killer /srv/app /dev/shm /tmp
+node /path/to/np-audit/bin/npa.js canary-killer ./checkout --exclude ./checkout/node_modules
+```
+
+Supply every scan root explicitly. Paths and repeated `--exclude <path>` options resolve from the current directory. Temporary directories, hidden files, untracked files and `node_modules` are scanned when present under supplied roots; there is no name-based exclusion for `/dev/shm` or `/tmp`. A root may also be an individual regular file. The command only reads local files: it never invokes npm, Git, hooks, scanned scripts, downloads or repository-configured external commands, and does not run registry, vulnerability or update checks. It provides no deletion or quarantine operation. Existing `scan`, `install` and `ci` behavior remains unchanged.
+
+The scan examines all `package.json` scripts (including build and preparation), resolves recognizable literal local interpreter/direct-script targets, and records existing, missing and unresolved references. Local JavaScript imports use np-audit's existing import extraction and a limited extension/index search. It reads local `.git/config`, `config.worktree`, unconditional literal includes, `.git` worktree pointers and `commondir`, and inspects default and configured `core.hooksPath` directories. Paths outside supplied roots require another explicit root. Versioned `.husky`/`.githooks` files are also inspected as text. System/global Git configuration, environment overrides, conditional includes, runtime options with complex resolution, inline JavaScript local-import resolution, package-name imports, arbitrary shell syntax and full Node module resolution are unsupported; dynamic and unrecognized command entry points are reported as unresolved. A bare Git repository is not inferred from an ordinary directory root.
+
+Behavior findings explain download-to-shell pipelines/substitutions, saved downloads passed to shells, host/user/environment collection alongside network primitives, and commands that write scripts or assign executable permissions after file creation. Collection/network co-occurrence does not prove data flow. Matching is heuristic and can flag comments, quoted examples, test fixtures and legitimate setup tools. Renamed files are inspected by content; `canary.js` is an informational search indicator, never proof of malware. `package.jsonl` is a nonstandard text file and is never parsed as an npm manifest. Reports do not attribute the motivating incident or establish a connection to published malware cases.
+
+JSON and text reports include absolute paths, source lines, bounded evidence, reference targets/statuses, inspected paths, unreadable paths, exclusions, hook/config coverage and limitations. Evidence is capped at 240 characters with an explicit truncation flag; terminal control characters are escaped in text output. The scan is bounded to 10,000 text files, 20,000 traversal entries, 1 MiB per file, a 32 MiB content budget (plus one-byte overflow checks), 2,000 finding/reference/gap/configuration records and 100 directory levels. Symlinks/reparse points and special files are not followed; binary/non-UTF-8 content and Git metadata other than hook/config files and pointers are excluded and reported. A limit, exclusion, read failure or unresolved reference makes coverage **incomplete**. Git checkouts normally report incomplete coverage because Git object/index metadata is deliberately excluded. Output never labels a repository clean.
+
+Exit codes are `0` for complete coverage without behavior-review findings, `1` for behavior-review findings, and `2` for incomplete coverage or invalid arguments (`2` takes precedence). Informational canary/nonstandard-file indicators alone do not cause exit `1`. A GitHub repository is supported through its local checkout: the scan cannot inspect another machine's untracked files or local `.git/hooks`. No scan establishes host integrity, recovers deleted content or reconstructs a previously executed payload. For consistent results, scan a stable filesystem snapshot; this is not a hardened forensic reader for a concurrently changing hostile filesystem.
 
 ### Flags
 
