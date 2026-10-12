@@ -9,3 +9,7 @@ coverage/
 
 # Local implementation planning.
 /TODO.md
+
+# Canary Killer: keep introduced canaries and quarantine storage out of Git.
+canary.js
+.np-audit-quarantine/

