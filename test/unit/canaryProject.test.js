@@ -26,5 +26,9 @@ try {
   assert.match(env.NODE_OPTIONS, /^--require /);
   assert.ok(env.NODE_OPTIONS.endsWith('--trace-warnings'));
   assert.strictEqual(automaticEnvironment(env).NODE_OPTIONS, env.NODE_OPTIONS);
+  const prior = automaticEnvironment({ BASH_ENV: path.join(parent, 'original.sh') });
+  assert.strictEqual(prior.NPA_CANARY_ORIGINAL_BASH_ENV, path.join(parent, 'original.sh'));
+  assert.ok(prior.BASH_ENV.endsWith('/bin/canary-bash-guard.sh'));
+  assert.strictEqual(automaticEnvironment(prior).NPA_CANARY_ORIGINAL_BASH_ENV, prior.NPA_CANARY_ORIGINAL_BASH_ENV);
   console.log('  automatic roots: nearest project, loose canary, entry path, no project and idempotent environment passed');
 } finally { fs.rmSync(parent, { recursive: true, force: true }); }

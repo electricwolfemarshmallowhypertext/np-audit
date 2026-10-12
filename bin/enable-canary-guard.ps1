@@ -16,6 +16,9 @@ if (-not $npaSetup.env.NPA_CANARY_GUARD -or -not $npaSetup.env.NODE_OPTIONS) {
 
 [Environment]::SetEnvironmentVariable('NPA_CANARY_GUARD', $npaSetup.env.NPA_CANARY_GUARD, 'Process')
 [Environment]::SetEnvironmentVariable('NODE_OPTIONS', $npaSetup.env.NODE_OPTIONS, 'Process')
+foreach ($npaSetting in @('BASH_ENV', 'NPA_CANARY_NODE', 'NPA_CANARY_CLI', 'NPA_CANARY_ORIGINAL_BASH_ENV')) {
+    [Environment]::SetEnvironmentVariable($npaSetting, $npaSetup.env.$npaSetting, 'Process')
+}
 
 $npaCli = Join-Path $PSScriptRoot 'npa.js'
 [string[]]$npaSelectedRoots = if ($Roots.Count) { @(($npaSetup.env.NPA_CANARY_GUARD | ConvertFrom-Json).roots) } else { @('--auto') }
@@ -44,5 +47,6 @@ foreach ($npaLauncher in @('cmd', 'powershell', 'pwsh', 'bash', 'sh')) {
         $npaConfiguredLaunchers += $npaName
     }
 }
+& (Join-Path $PSScriptRoot 'enable-canary-lookup.ps1') -NodePath $npaNode -CliPath $npaCli -SelectedRoots $npaSelectedRoots
 Write-Output 'Node startup and shell-launcher protection configured for this PowerShell session.'
 Write-Output ('Protected shell launchers: ' + ($npaConfiguredLaunchers -join ', '))

@@ -44,6 +44,7 @@ const E2E_TESTS = [
   'e2e/canary-shell-launch-live.test.js',
   'e2e/canary-terminal-auto-live.test.js',
   'e2e/canary-terminal-installer.test.js',
+  'e2e/canary-shell-paths-live.test.js',
   'e2e/registry.test.js',
 ];
 

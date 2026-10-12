@@ -33,9 +33,23 @@ module.exports = {
     if (rawArgs[0] === '--auto') {
       const env = automaticEnvironment(process.env);
       if (rawArgs.length === 3 && rawArgs[1] === '--cmd-env-file') {
-        fs.writeFileSync(path.resolve(cwd, rawArgs[2]), env.NODE_OPTIONS + '\n', { flag: 'wx' });
+        const values = ['NODE_OPTIONS', 'BASH_ENV', 'NPA_CANARY_NODE', 'NPA_CANARY_CLI', 'NPA_CANARY_ORIGINAL_BASH_ENV'].map(name => env[name]);
+        const content = values.join('\n') + '\n';
+        if (values.some(value => /[\r\n\0]/.test(value)) || Buffer.byteLength(content) > 65536) throw new Error('Unsupported CMD guard environment data');
+        const target = path.resolve(cwd, rawArgs[2]);
+        const created = [];
+        try {
+          for (const [index, name] of ['NODE_OPTIONS', 'BASH_ENV', 'NPA_CANARY_NODE', 'NPA_CANARY_CLI', 'NPA_CANARY_ORIGINAL_BASH_ENV'].entries()) {
+            const file = index ? target + '.' + name : target;
+            fs.writeFileSync(file, values[index] + '\n', { flag: 'wx' });
+            created.push(file);
+          }
+        } catch (err) {
+          for (const file of created) fs.unlinkSync(file);
+          throw err;
+        }
       } else if (rawArgs.length === 1) {
-        process.stdout.write(JSON.stringify({ env: { NPA_CANARY_GUARD: env.NPA_CANARY_GUARD, NODE_OPTIONS: env.NODE_OPTIONS } }) + '\n');
+        process.stdout.write(JSON.stringify({ env: guardSettings(env) }) + '\n');
       } else throw new Error('Unsupported automatic guard setup option');
       return;
     }
@@ -47,7 +61,11 @@ module.exports = {
     }
     const env = startupEnvironment(process.env, options.roots[0], {}, options.roots);
     const setup = shellSetup(env);
-    if (flags.json) process.stdout.write(JSON.stringify({ env: { NPA_CANARY_GUARD: env.NPA_CANARY_GUARD, NODE_OPTIONS: env.NODE_OPTIONS }, setup }, null, 2) + '\n');
+    if (flags.json) process.stdout.write(JSON.stringify({ env: guardSettings(env), setup }, null, 2) + '\n');
     else process.stdout.write(setup.join('\n') + '\n');
   },
 };
+
+function guardSettings(env) {
+  return Object.fromEntries(['NPA_CANARY_GUARD', 'NODE_OPTIONS', 'BASH_ENV', 'NPA_CANARY_NODE', 'NPA_CANARY_CLI', 'NPA_CANARY_ORIGINAL_BASH_ENV'].map(name => [name, env[name]]));
+}
