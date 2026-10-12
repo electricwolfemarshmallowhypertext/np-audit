@@ -1,6 +1,6 @@
 # Canary Killer technical guide
 
-[Back to the README](../README.md#canary-killer-optional-repository-scan) | [Observed validation results](validation/canary-killer/README.md)
+[Back to the README](../README.md#canary-killer) | [np-audit architecture](TECHNICAL_ARCHITECTURE.md) | [Observed validation results](validation/canary-killer/README.md)
 
 Canary Killer is the optional repository scan for project scripts, configured Git hooks and residual files under explicit local roots. It complements the dependency audit by inspecting files already present on disk, including missing-target references and separately supplied temporary directories. Scans are read-only by default. Optional protection removes confirmed direct canary calls, quarantines exact `canary.js` files and adds Git ignore rules.
 
