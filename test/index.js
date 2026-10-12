@@ -18,6 +18,7 @@ const UNIT_TESTS = [
   'unit/canaryQuarantine.test.js',
   'unit/canaryProtection.test.js',
   'unit/canaryTrust.test.js',
+  'unit/canaryProject.test.js',
   'unit/canaryMonitor.test.js',
   'unit/requireWalker.test.js',
   'unit/updateChecker.test.js',
@@ -41,6 +42,8 @@ const E2E_TESTS = [
   'e2e/canary-startup-live.test.js',
   'e2e/canary-powershell-session-live.test.js',
   'e2e/canary-shell-launch-live.test.js',
+  'e2e/canary-terminal-auto-live.test.js',
+  'e2e/canary-terminal-installer.test.js',
   'e2e/registry.test.js',
 ];
 

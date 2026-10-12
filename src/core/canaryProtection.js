@@ -7,7 +7,7 @@ const { quarantineCanaries, DIRECTORY, inside, checkPath } = require('./canaryQu
 const { repairCanaryReferences, isHook } = require('./canaryRepair');
 const { loadTrustedFiles, verifyTrustedFiles, key } = require('./canaryTrust');
 
-function coverageFailures(scan, trustedPaths = new Set()) {
+function coverageFailures(scan, trustedPaths = new Set(), trustedReferencePaths = new Set()) {
   const critical = target => ['package.json', '.git'].includes(path.basename(target)) || isHook(target, scan) ||
     scan.coverage.gitConfigs.some(config => config.path === target) || /(?:^|[\\/])\.git(?:[\\/])/.test(target);
   const failures = scan.unreadable.filter(item => critical(item.path) || !/encoded data was not valid/.test(item.reason));
@@ -26,7 +26,7 @@ function coverageFailures(scan, trustedPaths = new Set()) {
   for (const item of scan.unresolved) {
     if (/record limit|nesting limit|Git directory pointer|Conditional or expanded Git include|Unsupported Git configuration|Unterminated Git configuration|Unsupported hooksPath/.test(item.reason) ||
         (item.reason === 'Outside supplied scan roots' && scan.coverage.hookDirectories.some(dir => inside(dir.path, item.path)))) failures.push(item);
-    if (item.reference && path.basename(item.reference.replace(/\\/g, '/')) === 'canary.js' && !(item.target && trustedPaths.has(key(item.target)))) failures.push(item);
+    if (item.reference && path.basename(item.reference.replace(/\\/g, '/')) === 'canary.js' && !(item.target && trustedPaths.has(key(item.target))) && !trustedReferencePaths.has(key(item.path))) failures.push(item);
     if (/Inline JavaScript|Dynamic inline|Runtime option|Dynamic working directory/.test(item.reason) && /canary\.js/.test(item.evidence || item.command || '')) failures.push(item);
   }
   return failures;
@@ -45,8 +45,8 @@ function protectRepository(options) {
   quarantine.evidence = initial.findings.filter(finding => targets.has(finding.path));
   const report = scanRepository(scanOptions);
   const trust = verifyTrustedFiles(report, entries);
-  const remaining = report.references.filter(ref => path.basename((ref.reference || '').replace(/\\/g, '/')) === 'canary.js' && !(ref.target && trust.trustedPaths.has(key(ref.target))));
-  const failures = [...coverageFailures(initial, initialTrust.trustedPaths).filter(item => !item.reference), ...coverageFailures(report, trust.trustedPaths),
+  const remaining = report.references.filter(ref => path.basename((ref.reference || '').replace(/\\/g, '/')) === 'canary.js' && !(ref.target && trust.trustedPaths.has(key(ref.target))) && !trust.trustedReferencePaths.has(key(ref.path)));
+  const failures = [...coverageFailures(initial, initialTrust.trustedPaths, initialTrust.trustedReferencePaths).filter(item => !item.reference), ...coverageFailures(report, trust.trustedPaths, trust.trustedReferencePaths),
     ...repairs.failures, ...quarantine.ignoreFailures, ...quarantine.actions.filter(action => action.status !== 'quarantined'),
     ...report.coverage.canaryFiles.filter(candidate => !trust.trustedPaths.has(key(candidate.path))), ...remaining];
   report.trust = { files: trust.files, before: initialTrust.files, basis: trust.basis };

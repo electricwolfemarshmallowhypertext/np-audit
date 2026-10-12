@@ -8,5 +8,19 @@
       "path": "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js",
       "sha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
     }
+  ],
+  "canaryTrustedReferenceFiles": [
+    {
+      "path": "test/fixtures/incident-derived-reconstruction/present/.githooks/pre-commit",
+      "sha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c"
+    },
+    {
+      "path": "test/fixtures/incident-derived-reconstruction/removed/package.json",
+      "sha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4"
+    },
+    {
+      "path": "test/fixtures/incident-derived-reconstruction/removed/.githooks/pre-commit",
+      "sha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c"
+    }
   ]
 }

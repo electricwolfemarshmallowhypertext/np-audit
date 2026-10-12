@@ -101,6 +101,8 @@ node bin/npa.js canary-killer /path/to/project --quarantine
 node bin/npa.js canary-monitor /path/to/project
 ```
 
+Windows: [install automatic terminal protection once](docs/CANARY_KILLER_TECHNICAL.md#automatic-windows-terminal-activation). New PowerShell and CMD terminals then check the current project before Node starts.
+
 ---
 
 ## Usage

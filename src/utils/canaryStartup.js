@@ -4,6 +4,13 @@ const path = require('path');
 const ACTIVE = Symbol.for('np-audit.canary-startup');
 const activeStartup = () => globalThis[ACTIVE] || null;
 
+function automaticEnvironment(env) {
+  const preload = path.resolve(__dirname, '../core/canaryPreload.js').split(path.sep).join('/');
+  const prefix = `--require ${JSON.stringify(preload)}`;
+  return { ...env, NPA_CANARY_GUARD: JSON.stringify({ autoProject: true }),
+    NODE_OPTIONS: env.NODE_OPTIONS?.startsWith(prefix) ? env.NODE_OPTIONS : prefix + (env.NODE_OPTIONS ? ' ' + env.NODE_OPTIONS : '') };
+}
+
 function startupEnvironment(env, base, config = {}, roots = null) {
   const selected = roots || [base, ...(config.canaryRoots || []).map(root => path.resolve(base, root)), ...(activeStartup()?.roots || [])];
   const settings = JSON.stringify({ roots: [...new Set(selected.map(root => path.resolve(root)))], base: path.resolve(base) });
@@ -19,4 +26,4 @@ function shellSetup(env) {
     ? `$env:${name} = ${quote(env[name])}` : `export ${name}=${quote(env[name])}`);
 }
 
-module.exports = { startupEnvironment, shellSetup, activeStartup, ACTIVE };
+module.exports = { startupEnvironment, automaticEnvironment, shellSetup, activeStartup, ACTIVE };

@@ -79,6 +79,33 @@ try {
   assert.strictEqual(report.trust.files[0].status, 'trusted');
   assert.ok(report.findings.some(finding => finding.name === 'remote-to-shell' && finding.severity === 'review'));
   assert.ok(report.trust.basis.includes('neither filenames nor trust entries establish'));
+
+  const references = path.join(parent, 'trusted-reference-fixture');
+  fs.mkdirSync(path.join(references, '.git/hooks'), { recursive: true });
+  fs.writeFileSync(path.join(references, '.git/config'), '[core]\n');
+  const manifest = JSON.stringify({ scripts: { build: 'node canary.js && tsc', prepare: 'node canary.js' } });
+  const hook = 'node canary.js\necho preserved\n';
+  fs.writeFileSync(path.join(references, 'package.json'), manifest);
+  fs.writeFileSync(path.join(references, '.git/hooks/pre-commit'), hook);
+  fs.writeFileSync(path.join(references, '.npmauditor.json'), JSON.stringify({ canaryTrustedReferenceFiles: [
+    { path: 'package.json', sha256: hash(manifest) },
+    { path: '.git/hooks/pre-commit', sha256: hash(hook) },
+  ] }));
+  report = protectRepository({ roots: [references] });
+  assert.strictEqual(report.protection.allowed, true, JSON.stringify(report.protection.failures));
+  assert.strictEqual(report.complete, false, 'Preserved intentional missing references still mean incomplete scan coverage');
+  assert.strictEqual(report.references.filter(reference => reference.status === 'missing').length, 3);
+  assert.strictEqual(report.repairs.actions.length, 0);
+  assert.strictEqual(fs.readFileSync(path.join(references, 'package.json'), 'utf8'), manifest);
+  assert.strictEqual(fs.readFileSync(path.join(references, '.git/hooks/pre-commit'), 'utf8'), hook);
+  fs.writeFileSync(path.join(references, 'canary.js'), '// untrusted arrival\n');
+  report = protectRepository({ roots: [references] });
+  assert.strictEqual(report.protection.allowed, true);
+  assert.strictEqual(report.quarantine.actions.length, 1, 'Reference trust must not trust the target file');
+  fs.writeFileSync(path.join(references, 'package.json'), manifest + '\n');
+  report = protectRepository({ roots: [references] });
+  assert.strictEqual(report.trust.before.find(file => file.path.endsWith('package.json')).status, 'changed');
+  assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.join(references, 'package.json'), 'utf8')).scripts, { build: 'tsc' });
   console.log('  canary trust: exact pins preserve files/calls, changed content loses trust, mixed ignore exceptions and review evidence passed');
 } finally { fs.rmSync(parent, { recursive: true, force: true }); }
 

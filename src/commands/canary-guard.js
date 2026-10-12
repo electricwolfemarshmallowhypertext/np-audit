@@ -1,9 +1,10 @@
 'use strict';
 
 const fs = require('fs');
+const path = require('path');
 const { parseOptions } = require('./canary-killer');
 const { checkPath } = require('../core/canaryQuarantine');
-const { startupEnvironment, shellSetup } = require('../utils/canaryStartup');
+const { startupEnvironment, automaticEnvironment, shellSetup } = require('../utils/canaryStartup');
 
 module.exports = {
   name: 'canary-guard',
@@ -14,6 +15,7 @@ module.exports = {
   npa canary-guard — Node startup protection for selected folders
 
   Usage: npa canary-guard <root> [root...] [--json]
+         npa canary-guard --auto
 
   Prints current-session environment settings; apply them in your terminal.
   Configured Node processes check selected roots before their entrypoint runs.
@@ -22,10 +24,21 @@ module.exports = {
   Does not install a service, change profiles or intercept non-Node programs.
   Native protected npm commands receive this startup guard automatically.
   PowerShell Node/shell setup: & ./bin/enable-canary-guard.ps1 -Roots <root>
+  Automatic Windows startup: & ./bin/install-canary-terminal.ps1
+  The installer preserves existing current-user profiles and CMD AutoRun.
 `;
   },
   run({ rawArgs, flags, cwd }) {
     if (flags.skip || flags.noDev || flags.review || flags.verbose || flags.protectCanary) throw new Error('Unsupported canary-guard flag');
+    if (rawArgs[0] === '--auto') {
+      const env = automaticEnvironment(process.env);
+      if (rawArgs.length === 3 && rawArgs[1] === '--cmd-env-file') {
+        fs.writeFileSync(path.resolve(cwd, rawArgs[2]), env.NODE_OPTIONS + '\n', { flag: 'wx' });
+      } else if (rawArgs.length === 1) {
+        process.stdout.write(JSON.stringify({ env: { NPA_CANARY_GUARD: env.NPA_CANARY_GUARD, NODE_OPTIONS: env.NODE_OPTIONS } }) + '\n');
+      } else throw new Error('Unsupported automatic guard setup option');
+      return;
+    }
     const options = parseOptions(rawArgs, cwd);
     if (options.quarantine || options.excludes.length) throw new Error('canary-guard accepts explicit directory roots and --json');
     for (const root of options.roots) {

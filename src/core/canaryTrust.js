@@ -32,11 +32,11 @@ function readBounded(target, limit, budget) {
 function loadTrustedFiles(roots, excludes = [], additional = [], base = process.cwd()) {
   const entries = [];
   const budget = { bytes: 0 };
-  function append(files, directory, configuredBy) {
+  function append(files, directory, configuredBy, references = false) {
     if (!Array.isArray(files) || files.length > 128) throw new Error('canaryTrustedFiles must be an array with at most 128 entries');
     for (const entry of files) {
       if (!entry || typeof entry.path !== 'string' || !entry.path || typeof entry.sha256 !== 'string' || !/^[a-f\d]{64}$/i.test(entry.sha256)) throw new Error('Each canaryTrustedFiles entry requires an exact path and a SHA-256 hash');
-      const item = { path: path.resolve(directory, entry.path), sha256: entry.sha256.toLowerCase(), configuredBy };
+      const item = { path: path.resolve(directory, entry.path), sha256: entry.sha256.toLowerCase(), configuredBy, references };
       if (!entries.some(existing => key(existing.path) === key(item.path) && existing.sha256 === item.sha256)) entries.push(item);
       if (entries.length > 128) throw new Error('canaryTrustedFiles supports at most 128 distinct entries');
     }
@@ -51,6 +51,7 @@ function loadTrustedFiles(roots, excludes = [], additional = [], base = process.
     try { buffer = readBounded(config, 128 * 1024, budget); } catch (err) { if (err.code === 'ENOENT') continue; throw err; }
     const settings = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(buffer).replace(/^\uFEFF/, ''));
     append(settings.canaryTrustedFiles || [], root, config);
+    append(settings.canaryTrustedReferenceFiles || [], root, config, true);
   }
   append(additional, base, 'np-audit configuration');
   return entries;
@@ -59,29 +60,32 @@ function loadTrustedFiles(roots, excludes = [], additional = [], base = process.
 function verifyTrustedFiles(scan, entries) {
   const files = [];
   const trustedPaths = new Set();
+  const trustedReferencePaths = new Set();
   const declared = new Map();
   const budget = { bytes: 0 };
   for (const entry of entries) {
     const target = path.resolve(entry.path);
-    if (path.basename(target) !== 'canary.js' || !scan.roots.some(root => inside(root, target))) throw new Error('Trusted canary paths must name canary.js inside selected roots');
+    if (!scan.roots.some(root => inside(root, target)) || (!entry.references && path.basename(target) !== 'canary.js')) throw new Error('Trusted canary paths must name canary.js inside selected roots');
+    if (entry.references && path.basename(target) !== 'package.json' && !require('./canaryRepair').isHook(target, scan)) throw new Error('Trusted reference files must be manifests or hooks');
     if (declared.has(key(target))) {
       if (declared.get(key(target)) !== entry.sha256) throw new Error('Conflicting trusted hashes for the same canary path');
       continue;
     }
     declared.set(key(target), entry.sha256);
-    const item = { path: target, expectedSha256: entry.sha256, configuredBy: entry.configuredBy };
-    if (!scan.coverage.canaryFiles.some(candidate => key(candidate.path) === key(target))) {
+    const item = { path: target, expectedSha256: entry.sha256, configuredBy: entry.configuredBy, references: !!entry.references };
+    const scanned = entry.references ? scan.coverage.files.some(file => key(file) === key(target)) : scan.coverage.canaryFiles.some(candidate => key(candidate.path) === key(target));
+    if (!scanned) {
       item.status = scan.exclusions.some(exclusion => inside(exclusion.path, target)) ? 'unscanned' : 'missing';
     } else {
       try {
         item.actualSha256 = crypto.createHash('sha256').update(readBounded(target, LIMITS.fileBytes, budget)).digest('hex');
         item.status = item.actualSha256 === entry.sha256 ? 'trusted' : 'changed';
-        if (item.status === 'trusted') trustedPaths.add(key(target));
+        if (item.status === 'trusted') (entry.references ? trustedReferencePaths : trustedPaths).add(key(target));
       } catch (err) { item.status = 'unverified'; item.error = err.code || err.message; }
     }
     files.push(item);
   }
-  return { files, trustedPaths, basis: 'Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict.' };
+  return { files, trustedPaths, trustedReferencePaths, basis: 'Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict. Reference exceptions preserve reviewed test-data calls without hiding their scan findings.' };
 }
 
 function startupTrustedFiles(base) {

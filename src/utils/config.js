@@ -23,6 +23,7 @@ const DEFAULT_CONFIG = Object.freeze({
   canaryProtection: false,
   canaryRoots: [],
   canaryTrustedFiles: [],
+  canaryTrustedReferenceFiles: [],
 });
 
 const VALID_KEYS = new Set(Object.keys(DEFAULT_CONFIG));

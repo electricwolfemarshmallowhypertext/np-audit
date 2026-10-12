@@ -73,7 +73,7 @@ function cleanCommand(command, base, roots, trustedPaths = new Set()) {
     value: kept.filter(Boolean).join(' && '), targets };
 }
 
-function repairCanaryReferences(scan, { trustedPaths = new Set() } = {}) {
+function repairCanaryReferences(scan, { trustedPaths = new Set(), trustedReferencePaths = new Set() } = {}) {
   const actions = [];
   const failures = [];
   const ignoreRoots = new Set();
@@ -89,6 +89,7 @@ function repairCanaryReferences(scan, { trustedPaths = new Set() } = {}) {
     return (repos.length ? repos : roots).sort((a, b) => b.length - a.length)[0];
   }
   for (const target of scan.coverage.files) {
+    if (trustedReferencePaths.has(require('./canaryTrust').key(target))) continue;
     if (path.basename(target) !== 'package.json' && !isHook(target, scan)) continue;
     if (path.basename(target) === 'canary.js') continue;
     try {

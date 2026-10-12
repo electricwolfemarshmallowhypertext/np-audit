@@ -1,10 +1,11 @@
 param(
-    [Parameter(Mandatory = $true, Position = 0)]
-    [string[]]$Roots
+    [Parameter(Position = 0)]
+    [string[]]$Roots = @()
 )
 
 $npaNode = (Get-Command node -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
-$npaSetupJson = & $npaNode (Join-Path $PSScriptRoot 'npa.js') canary-guard @Roots --json
+[string[]]$npaArguments = if ($Roots.Count) { $Roots } else { @('--auto') }
+$npaSetupJson = & $npaNode (Join-Path $PSScriptRoot 'npa.js') canary-guard @npaArguments --json
 if ($LASTEXITCODE -ne 0) {
     throw 'Canary guard setup failed; session settings were not changed.'
 }
@@ -17,7 +18,7 @@ if (-not $npaSetup.env.NPA_CANARY_GUARD -or -not $npaSetup.env.NODE_OPTIONS) {
 [Environment]::SetEnvironmentVariable('NODE_OPTIONS', $npaSetup.env.NODE_OPTIONS, 'Process')
 
 $npaCli = Join-Path $PSScriptRoot 'npa.js'
-$npaSelectedRoots = @(($npaSetup.env.NPA_CANARY_GUARD | ConvertFrom-Json).roots)
+[string[]]$npaSelectedRoots = if ($Roots.Count) { @(($npaSetup.env.NPA_CANARY_GUARD | ConvertFrom-Json).roots) } else { @('--auto') }
 $npaConfiguredLaunchers = @()
 foreach ($npaLauncher in @('cmd', 'powershell', 'pwsh', 'bash', 'sh')) {
     $npaApplication = Get-Command $npaLauncher -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1

@@ -16,6 +16,7 @@ The command is registered through the existing command loader. Its separate repo
 | [Output helpers](../src/utils/output.js) | Reuse terminal formatting; emit repository-specific JSON/text reports |
 | [Quarantine helper](../src/core/canaryQuarantine.js) | On explicit `--quarantine`, move discovered `canary.js` files and append ignore rules; preserve the file contents and report each action |
 | [Reference repair](../src/core/canaryRepair.js) and [protection gate](../src/core/canaryProtection.js) | Remove confirmed direct calls, preserve remaining commands, and block controlled commands when protection fails |
+| [Project selection](../src/utils/canaryProject.js), [Node preload](../src/core/canaryPreload.js) and [terminal installer](../bin/install-canary-terminal.ps1) | Select the current project and activate protection in new current-user Windows terminals |
 
 The standalone repository commands read trusted-file settings but bypass dependency audit settings, registry/vulnerability requests and update checks. The dependency audit retains its existing behavior unless canary protection is enabled; enabled protection runs before auditing and again immediately before controlled npm launches. Protected npm launches also automatically inherit the Node startup guard.
 
@@ -120,7 +121,27 @@ The [observed Windows trust and monitor results](validation/canary-killer/cda0b7
 
 Protected np-audit npm launches automatically prepend the startup guard to `NODE_OPTIONS`. Descendant Node processes that inherit this environment repeat protection before loading their entrypoint. This uses the same bounded protection and trusted-file policy, with no second enable flag on protected npm launches. An already active session guard also applies when the native `canaryProtection` setting is false; forwarding npm preserves that session environment. Protected child launches retain the inherited selected roots.
 
-Direct Node commands need the documented session settings below, either applied in the current terminal or inherited from a configured parent process. np-audit does not install system profiles or services. Protected npm launches through np-audit receive the guard automatically.
+Direct Node commands inherit protection from an activated terminal. The Windows installer below activates new terminals automatically; manual session setup remains available. Protected npm launches through np-audit receive the guard automatically.
+
+## Automatic Windows terminal activation
+
+From this checkout, install current-user activation once:
+
+```powershell
+& ./bin/install-canary-terminal.ps1
+```
+
+Open a new normal PowerShell or CMD terminal afterward. No per-terminal helper command or project-path placeholder is needed. The installer adds managed blocks to the current user's `Documents/PowerShell/profile.ps1` and `Documents/WindowsPowerShell/profile.ps1`, and adds `enable-canary.cmd` to `HKCU\Software\Microsoft\Command Processor\AutoRun`. Existing profile bytes are preserved, and the original CMD AutoRun value and type are saved for restoration. Reinstalling replaces the managed blocks. Conflicting edits to the managed CMD value cause an error rather than being overwritten. Remove activation with `& ./bin/install-canary-terminal.ps1 -Uninstall` while this checkout is still present.
+
+The terminal supplies `NPA_CANARY_GUARD={"autoProject":true}` and the Node preload through `NODE_OPTIONS`. Each new Node process selects the closest ancestor of its working directory containing `package.json` or `.git`. A loose `canary.js` in the working directory also selects that directory. When there is no current project, an entrypoint inside a project selects that project; a direct `canary.js` entrypoint also selects its own project or parent directory. Without a project or canary indicator, the guard does not recursively scan the user's home directory. Changing directories selects the new project on the next guarded launch. Additional temporary roots remain explicitly selected through standalone scans or manual root settings.
+
+PowerShell profiles also register the available shell-launcher functions described below, using automatic project selection. CMD installs interactive DOSKEY macros for `powershell`, `pwsh`, `bash` and `sh`; those macros do not intercept noninteractive batch commands. Node and npm launched from CMD still inherit the Node startup check, including full executable paths. No global package installation, machine-wide environment change, service or deployment change is made. The checkout and Node executable paths are stored in startup settings; reinstall if either moves.
+
+Already-open terminals retain their existing environment; reopen them to load activation. `PowerShell -NoProfile` and `cmd /d` deliberately skip these startup hooks when launched without inherited guard settings. Higher-precedence host-specific profiles, aliases or commands that clear `NODE_OPTIONS` can override integration. This is current-user terminal activation, not an operating-system execution policy. See Microsoft's [PowerShell profiles documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.6) and [CMD AutoRun documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd).
+
+The [automatic terminal validation record](validation/canary-killer/2026-10-12-automatic-terminals.md) records fresh normal Windows PowerShell, PowerShell 7 and CMD processes, actual Node/npm launches, quarantine and reference repair, shell preflight, trusted-byte preservation and failed protection blocking entrypoints. No scanned fixture script, hook, canary or downloaded content was executed.
+
+### Manual session setup
 
 In PowerShell, apply the settings to the current terminal with one command from this checkout:
 
@@ -130,7 +151,7 @@ In PowerShell, apply the settings to the current terminal with one command from 
 
 The helper calls `canary-guard --json` and applies the returned environment values to the current PowerShell process. Subsequent direct Node commands inherit protection, including absolute-path invocations. Existing `NODE_OPTIONS` are preserved. Invalid guard setup stops before changing those settings. The helper also registers session functions for available `cmd`, `powershell`, `pwsh`, `bash` and `sh` executables, including their executable filenames. Those functions run the same protection before forwarding the shell launch and block launch on failure. The helper prints the command names it configured; an alias overriding a protected function makes setup report an error. The helper is included under `bin/` in the package; it needs no global installation and does not edit profiles, user/machine environment settings or services. [Microsoft documents session environment inheritance](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5) and [session function scope](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.6).
 
-Use a selected application folder. Pointing protection at np-audit's entire source checkout also includes its intentional missing-target regression fixtures; the guard can repair those references or block startup. The foreground monitor's exclusions are not automatically copied into Node session settings.
+Use a selected application folder. np-audit's checkout configuration pins its reviewed reconstruction canaries and three intentional reference sources by exact path and SHA-256 so automatic startup preserves test inputs. A project's `canaryTrustedReferenceFiles` may similarly pin reviewed `package.json` or hook fixtures. These exceptions preserve source calls without hiding findings or trusting their target files; changed bytes lose the exception. Missing targets and incomplete coverage remain reported. The foreground monitor's exclusions are not automatically copied into Node session settings.
 
 To obtain the assignments for manual setup, including supported shells on other platforms:
 
@@ -152,7 +173,7 @@ The [observed direct Node PowerShell session results](validation/canary-killer/2
 
 ## Check before shell commands launch
 
-The PowerShell helper above now configures selected shell launchers as well as Node. From that configured session, ordinary `cmd`, `powershell`, `pwsh`, `bash` and `sh` commands use pre-launch protection when their executables are available. Working directories must stay inside selected roots. The launcher arguments are transported as encoded JSON so PowerShell quoting does not strip their contents. Child Node processes inherit the startup guard.
+The PowerShell helper configures selected shell launchers as well as Node, either automatically through the installed profile or manually. Ordinary `cmd`, `powershell`, `pwsh`, `bash` and `sh` commands use pre-launch protection when their executables are available. Explicit root settings require working directories inside those roots; automatic mode selects the current project on each launch. Launcher arguments are transported as encoded JSON so PowerShell quoting does not strip their contents. Child Node processes inherit the startup guard.
 
 For an explicit program path or a launcher outside those session functions, use the same check directly:
 
@@ -162,7 +183,7 @@ node bin/npa.js canary-run C:/path/to/project -- C:/Windows/System32/cmd.exe /d 
 
 `canary-run` checks the selected roots, repairs direct calls, quarantines untrusted canaries and updates ignore rules before launching the supplied program. It blocks launch if protection fails. Arguments after `--` are forwarded without np-audit evaluating them as shell text. The supplied program may interpret its own arguments, such as `cmd /c` or PowerShell `-Command`. Real command exit codes are preserved; failed process launches return failure.
 
-Session functions apply to the PowerShell process where setup ran, not other already-open terminals. Each terminal must run the helper for its selected project. A [full-path executable invocation bypasses PowerShell function lookup](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-7.6); use `canary-run` for full-path non-Node launches. This does not intercept every cmdlet, dot-sourced script or nested command inside a shell already running. Files introduced after that shell starts still require the monitor or another protected launch. This is selected-launcher integration, not host-wide execution enforcement.
+Installed profiles activate the functions in new PowerShell terminals. Already-open terminals need reopening or manual session setup. A [full-path executable invocation bypasses PowerShell function lookup](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-7.6); use `canary-run` for full-path non-Node launches. This does not intercept every cmdlet, dot-sourced script or nested command inside a shell already running. Files introduced after that shell starts still require the monitor or another protected launch. This is selected-launcher integration, not host-wide execution enforcement.
 
 The [observed shell-launch results](validation/canary-killer/2026-10-12-shell-launch.md) verify actual `cmd.exe` and PowerShell routing, blocked launches, literal arguments, exit status and trusted-file preservation. They distinguish tested runtimes from available but untested launchers.
 
