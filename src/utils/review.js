@@ -3,6 +3,7 @@
 const readline = require('readline');
 const path     = require('path');
 const { spawnSync } = require('child_process');
+const { spawnNpm } = require('./npm');
 const output   = require('./output');
 
 const KEY_UP    = '\x1b[A';
@@ -25,11 +26,11 @@ const KEY_QUIT  = 'q';
  * @returns {Promise<number>}  exit code
  */
 async function runAware(opts) {
-  const { results, command, npmArgs, cwd } = opts;
+  const { results, command, npmArgs, cwd, config } = opts;
 
   if (results.length === 0) {
     output.success('No install scripts found. Running npm without restrictions.');
-    return runNpm(command, npmArgs, cwd);
+    return runNpm(command, npmArgs, cwd, config);
   }
 
   // Default: allow OK scripts, deny BLOCK scripts, warn for WARN
@@ -157,13 +158,14 @@ async function runAware(opts) {
   if (deniedItems.length > 0) {
     if (filteredNpmArgs.length > 0 || npmArgs.length === 0) {
       output.warn('Running npm with --ignore-scripts (will run allowed scripts manually after)');
-      const code = runNpm(command, [...filteredNpmArgs, '--ignore-scripts'], cwd);
+      const code = runNpm(command, [...filteredNpmArgs, '--ignore-scripts'], cwd, config);
       if (code !== 0) return code;
 
       for (const item of allowedItems) {
-        const exitCode = runPackageScripts(item.result, cwd);
+        const exitCode = runPackageScripts(item.result, cwd, config);
         if (exitCode !== 0) {
           output.error(`Script for ${item.result.pkg.name} exited with code ${exitCode}`);
+          if (config?.canaryProtection) return exitCode;
         }
       }
       return 0;
@@ -172,7 +174,7 @@ async function runAware(opts) {
       return 0;
     }
   } else {
-    return runNpm(command, filteredNpmArgs.length > 0 ? filteredNpmArgs : npmArgs, cwd);
+    return runNpm(command, filteredNpmArgs.length > 0 ? filteredNpmArgs : npmArgs, cwd, config);
   }
 }
 
@@ -180,22 +182,61 @@ async function runAware(opts) {
  * Spawn npm install/ci and return the exit code.
  * Sets NPA_RUNNING=1 to prevent recursive hooks when npm is aliased to npa.
  */
-function runNpm(command, args, cwd) {
-  const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+function guardCommand(cwd, config, args = []) {
+  if (!config?.canaryProtection) return true;
+  const { protectionForCommand, commandScopeError } = require('../core/canaryProtection');
+  try {
+    const scopeError = commandScopeError(args);
+    if (scopeError) throw new Error(scopeError);
+    const report = protectionForCommand(cwd, config);
+    if (!report.protection.allowed) {
+      output.error('Canary protection failed; command was not started');
+      for (const failure of report.protection.failures) output.error(JSON.stringify(failure));
+      return false;
+    }
+    return true;
+  } catch (err) { output.error(err.message); return false; }
+}
+
+function runNpm(command, args, cwd, config) {
+  if (!guardCommand(cwd, config, args)) return 2;
   const npmArgs = command === 'ci' ? ['ci', ...args] : ['install', ...args];
-  const result = spawnSync(npmCmd, npmArgs, {
+  const result = spawnNpm(npmArgs, {
     stdio: 'inherit',
     cwd,
     env: { ...process.env, NPA_RUNNING: '1' },
-  });
-  return result.status || 0;
+  }, config?.canaryProtection);
+  if (config?.canaryProtection && result.error) output.error(result.error.message);
+  return config?.canaryProtection ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0;
 }
 
 /**
  * Run the install scripts for a single package from its node_modules directory.
  */
-function runPackageScripts(scanResult, cwd) {
-  const pkgDir = path.join(cwd, 'node_modules', scanResult.pkg.name);
+function runPackageScripts(scanResult, cwd, config) {
+  const pkgDir = config?.canaryProtection && scanResult.pkg.self ? cwd : path.join(cwd, 'node_modules', scanResult.pkg.name);
+
+  if (config?.canaryProtection) {
+    const fs = require('fs');
+    const { checkPath } = require('../core/canaryQuarantine');
+    for (const lifecycle of new Set(scanResult.scripts.map(script => script.lifecycle))) {
+      if (!guardCommand(cwd, config)) return 2;
+      const manifest = path.join(pkgDir, 'package.json');
+      try {
+        checkPath(manifest);
+        const info = fs.lstatSync(manifest);
+        if (!info.isFile() || info.size > 1024 * 1024) throw new Error('Protected manifest read limit/type failure');
+        const current = JSON.parse(fs.readFileSync(manifest, 'utf8').replace(/^\uFEFF/, ''));
+        if (!current.scripts?.[lifecycle]) continue;
+      } catch (err) { output.error(err.message); return 2; }
+      const result = spawnNpm(['run', lifecycle, '--ignore-scripts'], {
+        stdio: 'inherit', cwd: pkgDir, env: { ...process.env, NPA_RUNNING: '1' },
+      }, true);
+      if (result.error) output.error(result.error.message);
+      if (result.status !== 0) return Number.isInteger(result.status) ? result.status : 1;
+    }
+    return 0;
+  }
 
   for (const scriptInfo of scanResult.scripts) {
     if (scriptInfo.file === '(inline)') {
@@ -220,4 +261,4 @@ function runPackageScripts(scanResult, cwd) {
   return 0;
 }
 
-module.exports = { runAware, runNpm };
+module.exports = { runAware, runNpm, guardCommand };

@@ -78,6 +78,35 @@ try {
   result = run(['--help']);
   assert.strictEqual(result.status, 0);
   assert.ok(result.stdout.includes('explicit'));
+  assert.ok(result.stdout.includes('--quarantine'));
+  const manifestBeforeQuarantine = hash(manifest);
+  const hookBeforeQuarantine = hash(path.join(root, '.git', 'hooks', 'pre-commit'));
+  const payloadBeforeQuarantine = hash(script);
+  result = run([root, '--quarantine', '--json']);
+  assert.strictEqual(result.status, 2, result.stderr);
+  report = JSON.parse(result.stdout);
+  assert.strictEqual(report.quarantine.actionsComplete, true);
+  assert.strictEqual(report.quarantine.actions.length, 1);
+  const action = report.quarantine.actions[0];
+  assert.strictEqual(action.status, 'quarantined');
+  assert.strictEqual(action.path, script);
+  assert.strictEqual(fs.existsSync(script), false);
+  assert.strictEqual(hash(action.target), payloadBeforeQuarantine);
+  assert.ok(fs.readFileSync(path.join(root, '.gitignore'), 'utf8').includes('\ncanary.js\n'));
+  assert.notStrictEqual(hash(manifest), manifestBeforeQuarantine);
+  assert.notStrictEqual(hash(path.join(root, '.git', 'hooks', 'pre-commit')), hookBeforeQuarantine);
+  assert.deepStrictEqual(JSON.parse(fs.readFileSync(manifest, 'utf8')).scripts, {});
+  assert.ok(!fs.readFileSync(path.join(root, '.git', 'hooks', 'pre-commit'), 'utf8').includes('node deleted/canary.js'));
+  assert.ok(!report.references.some(ref => /(?:^|\/)canary\.js$/.test(ref.reference || '')));
+  assert.strictEqual(report.repairs.actions.length, 3);
+  assert.strictEqual(report.protection.allowed, true);
+  assert.ok(report.quarantine.evidence.some(f => f.path === script && f.name === 'canary-indicator'));
+  assert.strictEqual(fs.existsSync(marker), false);
+  result = run([root, '--quarantine']);
+  assert.strictEqual(result.status, 2);
+  assert.ok(result.stdout.includes('Before quarantine coverage: incomplete'));
+  assert.ok(result.stdout.includes('Canary protection: policy satisfied'));
+  assert.strictEqual(fs.existsSync(marker), false);
   console.log('  canary-killer CLI: JSON/text, exit codes, explicit roots and non-execution passed');
 } finally { fs.rmSync(parent, { recursive: true, force: true }); }
 

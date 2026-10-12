@@ -28,6 +28,7 @@ ${lines.join('\n')}
     --no-dev      Skip devDependencies
     --verbose     Show extra detail
     --skip        Skip auditing for this install or ci command
+    --protect-canary  Quarantine canary files and repair calls before commands
     --version     Print version
     --help, -h    Print this help (use <command> -h for command help)
 
@@ -53,6 +54,7 @@ function parseArgs(argv) {
     skip:    false,
     version: false,
     help:    false,
+    protectCanary: false,
   };
   const positionals = [];
   const npaFlagIndexes = new Set();
@@ -65,6 +67,7 @@ function parseArgs(argv) {
       case '--no-dev':   flags.noDev   = true; npaFlagIndexes.add(index); break;
       case '--verbose':  flags.verbose = true; npaFlagIndexes.add(index); break;
       case '--skip':     flags.skip    = true; npaFlagIndexes.add(index); break;
+      case '--protect-canary': flags.protectCanary = true; npaFlagIndexes.add(index); break;
       case '--version':
       case '-v':         flags.version = true; npaFlagIndexes.add(index); break;
       case '--help':
@@ -89,6 +92,7 @@ async function main() {
   const { command, args, rawArgs, flags } = parsed;
   const cwd    = process.cwd();
   const config = command === 'canary-killer' ? DEFAULT_CONFIG : loadConfig(cwd);
+  if (flags.protectCanary && command !== 'canary-killer') config.canaryProtection = true;
 
   if (flags.version) {
     process.stdout.write(`npa ${VERSION} (${NAME})\n`);
@@ -110,15 +114,29 @@ async function main() {
   }
 
   const cmd = commands.get(command);
+  let protection = null;
+  if (config.canaryProtection && (!cmd || ['scan', 'install', 'ci'].includes(cmd.name))) {
+    const { protectionForCommand, commandScopeError } = require('./core/canaryProtection');
+    const scopeError = commandScopeError(rawArgs);
+    protection = scopeError ? null : protectionForCommand(cwd, config);
+    if (scopeError || !protection.protection.allowed) {
+      const error = scopeError || 'Canary protection failed; command was not started';
+      if (flags.json) process.stdout.write(JSON.stringify({ error, protection }, null, 2) + '\n');
+      else { output.error(error); if (protection) for (const failure of protection.protection.failures) output.error(JSON.stringify(failure)); }
+      process.exitCode = 2;
+      return;
+    }
+    if (!flags.json && (protection.quarantine.actions.length || protection.repairs.actions.length)) output.info(`Canary protection: ${protection.quarantine.actions.length} files quarantined; ${protection.repairs.actions.length} references repaired`);
+  }
   if (!cmd) {
     // Forward unknown commands to npm (allows `alias npm='npa'`)
-    const { spawnSync } = require('child_process');
-    const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-    const result = spawnSync(npmCmd, process.argv.slice(2), {
+    const { spawnNpm } = require('./utils/npm');
+    const result = spawnNpm(process.argv.slice(2).filter(arg => arg !== '--protect-canary'), {
       stdio: 'inherit',
       cwd,
-    });
-    process.exit(result.status || 0);
+    }, config.canaryProtection);
+    if (config.canaryProtection && result.error) output.error(result.error.message);
+    process.exit(config.canaryProtection ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0);
     return;
   }
 
@@ -135,7 +153,7 @@ async function main() {
     ? checkForUpdate(config, VERSION)
     : Promise.resolve(null);
 
-  await cmd.run({ args, rawArgs, flags, config, cwd });
+  await cmd.run({ args, rawArgs, flags, config, cwd, protection });
 
   // Print update notice after command output
   const latestVersion = await updatePromise;

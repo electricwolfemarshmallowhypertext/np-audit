@@ -19,6 +19,7 @@ module.exports = {
     --json        Output results as JSON
     --no-dev      Skip devDependencies
     --verbose     Show detailed findings
+    --protect-canary  Quarantine canaries and repair calls before the audit
     -h, --help    Show this help
 
   Examples:
@@ -29,7 +30,7 @@ module.exports = {
 `;
   },
 
-  async run({ args, flags, config, cwd }) {
+  async run({ args, flags, config, cwd, protection }) {
     const packages = args.filter(a => !a.startsWith('-'));
     const spinner = !flags.json && !config.silent ? output.createSpinner('Auditing packages...') : null;
     if (spinner) spinner.start();
@@ -40,10 +41,10 @@ module.exports = {
     const hasIssues = results.some(r => r.verdict !== 'OK');
     const silent = config.silent && !hasIssues;
 
-    output.printScanHeader(silent);
+    if (!flags.json) output.printScanHeader(silent);
 
     if (flags.json) {
-      process.stdout.write(JSON.stringify(toJsonReport(results), null, 2) + '\n');
+      process.stdout.write(JSON.stringify(toJsonReport(results, protection), null, 2) + '\n');
       const hasBlock = results.some(r => r.verdict === 'BLOCK');
       process.exit(hasBlock ? 1 : 0);
     }
@@ -67,8 +68,9 @@ function printResults(results, silent = false) {
   }
 }
 
-function toJsonReport(results) {
+function toJsonReport(results, protection) {
   return {
+    ...(protection ? { protection } : {}),
     summary: {
       total:   results.length,
       blocked: results.filter(r => r.verdict === 'BLOCK').length,

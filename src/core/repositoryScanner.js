@@ -54,7 +54,7 @@ function scriptLocations(code) {
     if (!m) throw new Error('Unable to locate JSON token');
     return { text: m[1], offset: token.lastIndex - m[1].length };
   }
-  function visit(keys, depth) {
+  function visit(keys, depth, keyOffset = 0) {
     if (depth > LIMITS.depth) throw new Error('JSON nesting limit reached');
     const t = next();
     if (t.text === '{') {
@@ -62,7 +62,7 @@ function scriptLocations(code) {
       if (key.text === '}') return;
       while (true) {
         next(); // colon
-        visit([...keys, JSON.parse(key.text)], depth + 1);
+        visit([...keys, JSON.parse(key.text)], depth + 1, key.offset);
         if (next().text === '}') break;
         key = next();
       }
@@ -75,24 +75,25 @@ function scriptLocations(code) {
         if (next().text === ']') break;
       }
     } else if (keys.length === 2 && keys[0] === 'scripts' && t.text.startsWith('"')) {
-      values.push({ script: keys[1], command: JSON.parse(t.text), offset: t.offset });
+      values.push({ script: keys[1], command: JSON.parse(t.text), offset: t.offset, end: token.lastIndex, keyOffset });
     }
   }
   visit([], 0);
   return values;
 }
 
-function scanRepository({ roots, excludes = [], limits = {} }) {
+function scanRepository({ roots, excludes = [], limits = {}, excludeQuarantine = false, protectionOnly = false }) {
   if (!Array.isArray(roots) || !roots.length) throw new Error('Supply at least one explicit scan root');
   const caps = { ...LIMITS, ...limits };
   const scanRoots = [...new Set(roots.map(p => path.resolve(p)))];
   const excluded = excludes.map(p => path.resolve(p));
   const report = { scan: 'canary-killer', roots: scanRoots, complete: true,
     findings: [], references: [], unreadable: [], exclusions: [], unresolved: [],
-    coverage: { files: [], entries: 0, bytes: 0, gitConfigs: [], hookDirectories: [] },
+    coverage: { files: [], canaryFiles: [], repositories: [], entries: 0, bytes: 0, gitConfigs: [], hookDirectories: [] },
     limits: caps, limitations: LIMITATIONS };
   const seen = new Set();
   const contents = new Map();
+  const filenameOnly = new Set();
   const shellSources = new Set();
   const findingsSeen = new Set();
   const missingPaths = new Set();
@@ -323,6 +324,13 @@ function scanRepository({ roots, excludes = [], limits = {} }) {
     }
   }
   function file(target, s, depth, repo, isConfig) {
+    if (path.basename(target) === 'canary.js') record(report.coverage.canaryFiles, { path: target });
+    if (protectionOnly && !isConfig && !['package.json', 'canary.js'].includes(path.basename(target)) &&
+        ![...hooks.keys()].some(dir => inside(dir, target)) && !/(?:^|[\\/])(?:\.husky|\.githooks)(?:[\\/])/.test(target)) {
+      filenameOnly.add(target);
+      return;
+    }
+    filenameOnly.delete(target);
     const code = read(target, s);
     if (code === null) return;
     behavior(target, code);
@@ -408,7 +416,16 @@ function scanRepository({ roots, excludes = [], limits = {} }) {
   const gitDirs = new Set();
   function visit(target, depth = 0, repo = null, isConfig = false) {
     if (stopped) return;
+    if (excludeQuarantine && path.basename(target) === '.np-audit-quarantine') {
+      gap('exclusions', target, 'Quarantine storage is not analyzed');
+      return;
+    }
     if (seen.has(target)) {
+      if (isConfig && filenameOnly.has(target)) {
+        const info = stat(target);
+        if (info && info.isFile()) file(target, info, depth, repo, true);
+        return;
+      }
       if (isConfig && contents.has(target)) gitConfig(target, contents.get(target), repo, depth);
       return;
     }
@@ -419,6 +436,7 @@ function scanRepository({ roots, excludes = [], limits = {} }) {
     seen.add(target);
     if (path.basename(target) === '.git') {
       const root = path.dirname(target);
+      record(report.coverage.repositories, { path: root });
       if (s.isDirectory()) { gitDirectory(target, root, depth); return; }
       if (s.isFile()) {
         const code = read(target, s);
@@ -447,16 +465,24 @@ function scanRepository({ roots, excludes = [], limits = {} }) {
   // A separately supplied hook root may have been visited before its config.
   for (const [dir, repo] of hooks) {
     if (stopped) break;
+    for (const target of [...filenameOnly]) {
+      if (stopped) break;
+      if (inside(dir, target)) { const info = stat(target); if (info && info.isFile()) file(target, info, 0, repo, false); }
+    }
     for (const [target, code] of contents) {
       if (stopped) break;
       if (inside(dir, target) && (!/\.(?:[cm]?js|[cm]?ts|json)$/.test(target) || /^#![^\n]*\b(?:ba|da|z)?sh\b/.test(code))) shellReferences(target, code, repo);
     }
   }
   for (const target of excluded) if (!report.exclusions.some(item => item.path === target)) gap('exclusions', target, 'Explicit path exclusion');
+  if (protectionOnly) {
+    report.coverage.filenameOnlyFiles = [...filenameOnly];
+    report.limitations = [...LIMITATIONS, 'Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately.'];
+  }
   report.summary = { status: report.complete ? 'complete' : 'incomplete', files: report.coverage.files.length,
     findings: report.findings.length, unresolved: report.unresolved.length,
     unreadable: report.unreadable.length, exclusions: report.exclusions.length };
   return report;
 }
 
-module.exports = { scanRepository, LIMITS };
+module.exports = { scanRepository, scriptLocations, location, LIMITS };

@@ -2,3 +2,10 @@ node_modules/
 .DS_Store
 package-lock.json
 coverage/
+
+# Keep local canary files out of Git.
+/test/fixtures/incident-derived-reconstruction/present/canary.js
+/test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js
+
+# Local implementation planning.
+/TODO.md

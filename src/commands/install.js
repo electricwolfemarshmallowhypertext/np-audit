@@ -22,6 +22,7 @@ module.exports = {
     --no-dev      Skip devDependencies in scan
     --verbose     Show detailed findings
     --skip        Skip auditing and run npm directly
+    --protect-canary  Quarantine canaries and repair calls before execution
     -h, --help    Show this help
 
   Examples:
@@ -31,10 +32,10 @@ module.exports = {
 `;
   },
 
-  async run({ args, rawArgs, flags, config, cwd }) {
+  async run({ args, rawArgs, flags, config, cwd, protection }) {
     if (flags.skip) {
       output.warn('Audit skipped for this npm install command.');
-      process.exit(runNpm('install', rawArgs, cwd));
+      process.exit(runNpm('install', rawArgs, cwd, config));
     }
 
     const packages = args.filter(a => !a.startsWith('-'));
@@ -55,10 +56,10 @@ module.exports = {
     const hasIssues = results.some(r => r.verdict !== 'OK');
     const silent = config.silent && !hasIssues;
 
-    output.printScanHeader(silent);
+    if (!flags.json) output.printScanHeader(silent);
 
     if (flags.json) {
-      process.stdout.write(JSON.stringify(toJsonReport(results), null, 2) + '\n');
+      process.stdout.write(JSON.stringify(toJsonReport(results, protection), null, 2) + '\n');
     } else {
       printResults(results, silent);
       if (!silent) output.printSummary(results, elapsedMs);
@@ -84,10 +85,11 @@ module.exports = {
         command: 'install',
         npmArgs,
         cwd,
+        config,
       });
       process.exit(exit);
     } else {
-      const exit = runNpm('install', npmArgs, cwd);
+      const exit = runNpm('install', npmArgs, cwd, config);
       process.exit(exit);
     }
   },
@@ -104,8 +106,9 @@ function printResults(results, silent = false) {
   }
 }
 
-function toJsonReport(results) {
+function toJsonReport(results, protection) {
   return {
+    ...(protection ? { protection } : {}),
     summary: {
       total:   results.length,
       blocked: results.filter(r => r.verdict === 'BLOCK').length,

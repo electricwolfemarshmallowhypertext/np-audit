@@ -22,6 +22,7 @@ module.exports = {
     --no-dev      Skip devDependencies in scan
     --verbose     Show detailed findings
     --skip        Skip auditing and run npm directly
+    --protect-canary  Quarantine canaries and repair calls before execution
     -h, --help    Show this help
 
   Examples:
@@ -30,10 +31,10 @@ module.exports = {
 `;
   },
 
-  async run({ rawArgs, flags, config, cwd }) {
+  async run({ rawArgs, flags, config, cwd, protection }) {
     if (flags.skip) {
       output.warn('Audit skipped for this npm ci command.');
-      process.exit(runNpm('ci', rawArgs, cwd));
+      process.exit(runNpm('ci', rawArgs, cwd, config));
     }
 
     const spinner = !flags.json && !config.silent ? output.createSpinner('Auditing packages...') : null;
@@ -45,10 +46,10 @@ module.exports = {
     const hasIssues = results.some(r => r.verdict !== 'OK');
     const silent = config.silent && !hasIssues;
 
-    output.printScanHeader(silent);
+    if (!flags.json) output.printScanHeader(silent);
 
     if (flags.json) {
-      process.stdout.write(JSON.stringify(toJsonReport(results), null, 2) + '\n');
+      process.stdout.write(JSON.stringify(toJsonReport(results, protection), null, 2) + '\n');
     } else {
       printResults(results, silent);
       if (!silent) output.printSummary(results, elapsedMs);
@@ -62,10 +63,10 @@ module.exports = {
     }
 
     if (flags.review) {
-      const exit = await runAware({ results, command: 'ci', npmArgs: rawArgs, cwd });
+      const exit = await runAware({ results, command: 'ci', npmArgs: rawArgs, cwd, config });
       process.exit(exit);
     } else {
-      const exit = runNpm('ci', rawArgs, cwd);
+      const exit = runNpm('ci', rawArgs, cwd, config);
       process.exit(exit);
     }
   },
@@ -82,8 +83,9 @@ function printResults(results, silent = false) {
   }
 }
 
-function toJsonReport(results) {
+function toJsonReport(results, protection) {
   return {
+    ...(protection ? { protection } : {}),
     summary: {
       total:   results.length,
       blocked: results.filter(r => r.verdict === 'BLOCK').length,

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Incident-derived reconstruction: representative hook, not recovered content.
+node canary.js

@@ -2,16 +2,20 @@
 
 const path = require('path');
 const { scanRepository } = require('../core/repositoryScanner');
+const { protectRepository } = require('../core/canaryProtection');
 const output = require('../utils/output');
 
 function parseOptions(args, cwd) {
   const roots = [];
   const excludes = [];
+  let quarantine = false;
   let positionalOnly = false;
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (!positionalOnly && arg === '--') { positionalOnly = true; continue; }
-    if (!positionalOnly && arg === '--exclude') {
+    if (!positionalOnly && arg === '--quarantine') {
+      quarantine = true;
+    } else if (!positionalOnly && arg === '--exclude') {
       if (!args[i + 1] || args[i + 1].startsWith('-')) throw new Error('--exclude requires a path');
       excludes.push(path.resolve(cwd, args[++i]));
     } else if (!positionalOnly && arg.startsWith('-')) {
@@ -19,7 +23,7 @@ function parseOptions(args, cwd) {
     } else roots.push(path.resolve(cwd, arg));
   }
   if (!roots.length) throw new Error('Canary Killer requires explicit scan roots: npa canary-killer <root> [root...]');
-  return { roots, excludes };
+  return { roots, excludes, quarantine };
 }
 
 function printReport(report) {
@@ -28,6 +32,28 @@ function printReport(report) {
   output.printScanHeader();
   log(`Canary Killer: ${report.summary.status}; ${report.summary.files} text files inspected; ${report.summary.findings} findings`);
   for (const root of report.roots) log(`Root: ${root}`);
+  if (report.quarantine) {
+    log(`Before quarantine coverage: ${report.quarantine.before.summary.status}`);
+    for (const action of report.quarantine.actions) {
+      log(`${action.path} [${action.status}] ${action.target || action.error}`);
+      if (action.ignore) log(`Git ignore: ${action.ignore.path} [${action.ignore.status}]`);
+    }
+    for (const evidence of report.quarantine.evidence) {
+      log(`${evidence.path}:${evidence.line} [before quarantine] ${evidence.name}: ${evidence.detail}`);
+      log(`  ${evidence.evidence}${evidence.evidenceTruncated ? ' [evidence truncated]' : ''}`);
+    }
+    for (const kind of ['unreadable', 'exclusions']) {
+      for (const item of report.quarantine.before[kind]) log(`${item.path} [before quarantine ${kind}] ${item.reason}`);
+    }
+    for (const failure of report.quarantine.ignoreFailures || []) log(`${failure.path} [ignore failed] ${failure.error}`);
+  }
+  if (report.repairs) {
+    for (const action of report.repairs.actions) {
+      log(`${action.path}:${action.line} [reference repaired] ${action.script || 'hook'}: ${action.after || '(removed)'}`);
+    }
+    for (const failure of report.repairs.failures) log(`${failure.path} [repair failed] ${failure.error}`);
+    log(`Canary protection: ${report.protection.allowed ? 'policy satisfied' : 'blocked'}`);
+  }
   for (const finding of report.findings) {
     log(`${finding.path}:${finding.line} [${finding.severity}] ${finding.name}: ${finding.detail}`);
     log(`  ${finding.evidence}${finding.evidenceTruncated ? ' [evidence truncated]' : ''}`);
@@ -52,16 +78,22 @@ function printReport(report) {
 module.exports = {
   name: 'canary-killer',
   aliases: [],
-  description: 'Optional read-only repository scan (explicit local roots)',
+  description: 'Repository scan; opt-in canary quarantine (explicit roots)',
   help() {
     return `
-  npa canary-killer — Read-only static repository scan
+  npa canary-killer — Static repository scan; optional quarantine
 
-  Usage: npa canary-killer <root> [root...] [--exclude <path>] [--json]
+  Usage: npa canary-killer <root> [root...] [--exclude <path>] [--json] [--quarantine]
 
   Supply explicit roots; roots and exclusions resolve from the current directory.
   Every package.json script and local Git config/hook is inspected as text.
   No npm, Git, scripts, hooks or downloaded content are executed.
+  Default: read-only. --quarantine moves exact canary.js files into
+  .np-audit-quarantine/ and appends canary.js/storage ignore rules.
+  Direct canary calls are removed from scripts/hooks; remaining && commands
+  are preserved. Ambiguous canary commands are reported as blocked.
+  This filename policy is explicit; it does not classify matches as malware.
+  Quarantine requires directory roots. Git index/history are not rewritten.
   Exit codes: 0 = complete/no review findings; 1 = review findings;
               2 = incomplete coverage or invalid arguments (takes precedence).
   canary.js is only an indicator; package.jsonl is not an npm manifest.
@@ -70,13 +102,16 @@ module.exports = {
     npa canary-killer . --json
     npa canary-killer /srv/app /dev/shm /tmp
     npa canary-killer ./checkout --exclude ./checkout/node_modules
+    npa canary-killer ./checkout --quarantine --json
 `;
   },
   async run({ rawArgs, flags, cwd }) {
     let report;
     try {
-      if (flags.skip || flags.noDev || flags.review || flags.verbose) throw new Error('Canary Killer supports only --json, --exclude and explicit roots');
-      report = scanRepository(parseOptions(rawArgs, cwd));
+      if (flags.skip || flags.noDev || flags.review || flags.verbose) throw new Error('Canary Killer supports only --json, --exclude, --quarantine and explicit roots');
+      const options = parseOptions(rawArgs, cwd);
+      if (flags.protectCanary) options.quarantine = true;
+      report = options.quarantine ? protectRepository({ ...options, protectionOnly: false }) : scanRepository(options);
     }
     catch (err) {
       if (flags.json) process.stdout.write(JSON.stringify({ scan: 'canary-killer', complete: false, error: err.message }) + '\n');

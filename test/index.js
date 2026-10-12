@@ -13,7 +13,10 @@ const UNIT_TESTS = [
   'unit/lockfile.test.js',
   'unit/config.test.js',
   'unit/command.test.js',
+  'unit/incident-derived-reconstruction.test.js',
   'unit/repositoryScanner.test.js',
+  'unit/canaryQuarantine.test.js',
+  'unit/canaryProtection.test.js',
   'unit/requireWalker.test.js',
   'unit/updateChecker.test.js',
   'unit/cve.test.js',
@@ -30,6 +33,8 @@ const E2E_TESTS = [
   'e2e/require-following.test.js',
   'e2e/scan-self.test.js',
   'e2e/canary-killer.test.js',
+  'e2e/canary-protection.test.js',
+  'e2e/canary-protection-live.test.js',
   'e2e/registry.test.js',
 ];
 

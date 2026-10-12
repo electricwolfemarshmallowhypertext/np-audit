@@ -20,6 +20,8 @@ const DEFAULT_CONFIG = Object.freeze({
   checkVulnerabilities: true,
   deepResolve: false,
   disabledMarshallers: [],
+  canaryProtection: false,
+  canaryRoots: [],
 });
 
 const VALID_KEYS = new Set(Object.keys(DEFAULT_CONFIG));

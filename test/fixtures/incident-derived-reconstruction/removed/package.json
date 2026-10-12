@@ -1,0 +1,8 @@
+{
+  "name": "incident-derived-reconstruction",
+  "private": true,
+  "scripts": {
+    "build": "node canary.js && tsc",
+    "prepare": "node canary.js"
+  }
+}
