@@ -1,5 +1,6 @@
 # Canary Killer validation records
 
+- [Extended Windows shell paths and Git Bash (2026-10-12)](2026-10-12-shell-paths.md), with [recorded real-process results](2026-10-12-shell-paths-real-results.json).
 - [Automatic Windows terminal activation (2026-10-12)](2026-10-12-automatic-terminals.md), with [recorded real-process results](2026-10-12-automatic-terminals-real-results.json).
 - [Selected shell-launch protection (2026-10-12)](2026-10-12-shell-launch.md), with [recorded real-process results](2026-10-12-shell-launch-real-results.json).
 - [Direct Node PowerShell session setup (2026-10-12)](2026-10-12-powershell-session.md), with [recorded real-process results](2026-10-12-powershell-session-real-results.json).

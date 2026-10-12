@@ -1,0 +1,1043 @@
+{
+  "date": "2026-10-12T21:22:50.251Z",
+  "testedRevision": "8890eee27f8a6f4ac6d4fd30ad10ecd5f9e24768",
+  "platform": "win32",
+  "node": "v24.16.0",
+  "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+  "powershell": [
+    {
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "version": "5.1.26100.9444"
+    },
+    {
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "version": "7.6.5"
+    }
+  ],
+  "bash": "GNU bash, version 5.3.9(1)-release (x86_64-pc-cygwin)",
+  "method": "Actual processes and filesystem; inert incident-derived reconstructions only. Harmless drivers are outside scanned roots. No scanned canary, hook, fixture script or downloaded payload executed. No application, protection or launch result mocked.",
+  "sources": [
+    {
+      "path": "bin/canary-bash-guard.sh",
+      "sha256": "31f3ffe9447a8ea6bf7eb53a79daf1201db471d177ab44b33cccea5c723a885e"
+    },
+    {
+      "path": "bin/enable-canary-lookup.ps1",
+      "sha256": "31a5699d00808972629d9995022b1279e53cf2dcc95568e3fa9e1bb10a884e31"
+    },
+    {
+      "path": "bin/enable-canary-guard.ps1",
+      "sha256": "32b49aafec0ff816932b1f42cea70c0b8a6275dbd19904faf9183b713c307c06"
+    },
+    {
+      "path": "bin/enable-canary.cmd",
+      "sha256": "893db46aae93810ede5676807242e313f63e3305386b1e13f1a96f1bfe761f1b"
+    },
+    {
+      "path": "src/commands/canary-guard.js",
+      "sha256": "73fd8528f882cfce50ac82e10a56b71436dc494f47184b7c8f9dc12279798c26"
+    },
+    {
+      "path": "src/commands/canary-run.js",
+      "sha256": "24911125e32fa500878fb637bfabba389eea231b8fb5e0061213b93472aa7ec7"
+    },
+    {
+      "path": "src/utils/canaryStartup.js",
+      "sha256": "4ada20892c922fbc2cdbc70c1f8938ceebfdd9af574bf66eb032df5f1d5a6a57"
+    },
+    {
+      "path": "test/e2e/canary-shell-paths-live.test.js",
+      "sha256": "7097ad02c2e80db6e291d3fead9eb7a9db4f80cabcd9ea550818709fb136a81d"
+    },
+    {
+      "path": "test/e2e/canary-terminal-auto-live.test.js",
+      "sha256": "d1e8d9333d60dc67bfafb51a5c4163c8dcbf035b0bbf43d2df3caf7cd479fed1"
+    }
+  ],
+  "observations": [
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "full-path-cmd",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 0",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "full-path-cmd",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 1",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 1\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 1\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 1\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\windows\\System32\\cmd.exe>> : Canary protection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-2.ps1:8 char:1\r\n+ & 'C:\\windows\\System32\\cmd.exe' /d /c 'echo protected>entry-marker.tx ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\window \r\n   s\\System32\\cmd.exe>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "variable-full-path",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 2",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "variable-full-path",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 3",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 3\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 3\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 3\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\windows\\System32\\cmd.exe>> : Canary protection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-4.ps1:8 char:49\r\n+ ... 32\\cmd.exe'; & $npaExecutable /d /c 'echo protected>entry-marker.txt'\r\n+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\window \r\n   s\\System32\\cmd.exe>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "start-process",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 4",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "start-process",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 5",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 5\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 5\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 5\\\\\\\\canary.js\\\"}]\"\nStart-Process : Canary protection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-6.ps1:8 char:13\r\n+ $npaChild = Start-Process -FilePath 'C:\\windows\\System32\\cmd.exe' -Ar ...\r\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<Start-Pro \r\n   cess>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "invoke-expression",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 6",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "invoke-expression",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 7",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 7\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 7\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 7\\\\\\\\canary.js\\\"}]\"\nInvoke-Expression : Canary protection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-8.ps1:8 char:1\r\n+ Invoke-Expression '& ''C:\\windows\\System32\\cmd.exe'' /d /c ''echo pro ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<Invoke-Ex \r\n   pression>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "direct-batch",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 8",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "direct-batch",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 9",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 9\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 9\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 9\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-10.cmd>> : Canary \r\nprotection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-10.ps1:8 char:1\r\n+ & 'C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-10. ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\Users\\ \r\n   tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-10.cmd>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "dot-source",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 10",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "dot-source",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 11",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 11\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 11\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 11\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-12.ps1>> : Canary \r\nprotection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-12.ps1:8 char:1\r\n+ . 'C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-12. ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\Users\\ \r\n   tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-12.ps1>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "nested-powershell",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 12",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "nested-powershell",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 13",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 13\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 13\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\windows\\System32\\cmd.exe>> : Canary protection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-14.ps1:5 char:1\r\n+ & 'C:\\windows\\System32\\cmd.exe' /d /c 'echo protected>entry-marker.tx ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\window \r\n   s\\System32\\cmd.exe>>\r\n \r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "nested-batch-node",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 14",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "nested-batch-node",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 15",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 15\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 15\\\\\\\\canary.js\\\"}]\"\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 16",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 17",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 17\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 17\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-function-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 18",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-function-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 19",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 19\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 19\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-subshell-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 20",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-subshell-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 21",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 21\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 21\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-substitution-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 22",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "git-bash-substitution-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 23",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 23\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 23\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "full-path-cmd",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 24",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "full-path-cmd",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 25",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 25\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 25\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 25\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-26.ps1:8\r\nLine |\r\n   8 |  & 'C:\\windows\\System32\\cmd.exe' /d /c 'echo protected>entry-marker.tx …\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "variable-full-path",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 26",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "variable-full-path",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 27",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 27\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 27\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 27\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-28.ps1:8\r\nLine |\r\n   8 |  … 32\\cmd.exe'; & $npaExecutable /d /c 'echo protected>entry-marker.txt'\r\n     |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "start-process",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 28",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "start-process",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 29",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 29\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 29\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 29\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-30.ps1:8\r\nLine |\r\n   8 |  $npaChild = Start-Process -FilePath 'C:\\windows\\System32\\cmd.exe' -Ar …\r\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "invoke-expression",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 30",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "invoke-expression",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 31",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 31\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 31\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 31\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-32.ps1:8\r\nLine |\r\n   8 |  Invoke-Expression '& ''C:\\windows\\System32\\cmd.exe'' /d /c ''echo pro …\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "direct-batch",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 32",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "direct-batch",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 33",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 33\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 33\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 33\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-34.ps1:8\r\nLine |\r\n   8 |  & 'C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-34. …\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "dot-source",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 34",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "dot-source",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 35",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 35\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 35\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 35\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\driver-36.ps1:8\r\nLine |\r\n   8 |  . 'C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-36. …\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "nested-powershell",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 36",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "nested-powershell",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 37",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 37\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 37\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\child-38.ps1:5\r\nLine |\r\n   5 |  & 'C:\\windows\\System32\\cmd.exe' /d /c 'echo protected>entry-marker.tx …\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "nested-batch-node",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 38",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "nested-batch-node",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 39",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 39\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 39\\\\\\\\canary.js\\\"}]\"\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 40",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 41",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 41\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 41\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-function-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 42",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-function-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 43",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 43\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 43\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-subshell-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 44",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-subshell-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 45",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 45\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 45\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-substitution-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 46",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "route": "git-bash-substitution-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 47",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 47\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 47\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true,
+      "trustedHashUnchanged": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\cmd.exe",
+      "route": "cmd-bash-arrival",
+      "denied": false,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 48",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 0 references repaired\n",
+      "markerPresent": true,
+      "canaryPresent": false
+    },
+    {
+      "shell": "C:\\windows\\System32\\cmd.exe",
+      "route": "cmd-bash-arrival",
+      "denied": true,
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-paths-cJpfiu\\project with spaces 49",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 49\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-shell-paths-cJpfiu\\\\\\\\project with spaces 49\\\\\\\\canary.js\\\"}]\"\nCanary Bash protection failed; command was not run.\n",
+      "markerPresent": false,
+      "canaryPresent": true
+    },
+    {
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "route": "bash-preserve-startup-and-deny-missing-node-guard",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary command blocked: \"Inherited startup protection is required for --check\"\nCanary Bash protection failed; command was not run.\n",
+      "originalStartupRan": true,
+      "markerPresent": false
+    }
+  ],
+  "automatic": [
+    {
+      "shell": "windows-powershell",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "kind": "present-at-startup",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell present-at-startup",
+      "exit": 0,
+      "stdout": "{\"Version\":\"5.1.26100.9444\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "windows-powershell",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "kind": "introduced-after-cwd-change",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell introduced-after-cwd-change",
+      "exit": 0,
+      "stdout": "{\"Version\":\"5.1.26100.9444\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "windows-powershell",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "kind": "failed-protection",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell failed-protection",
+      "exit": 2,
+      "stdout": "{\"Version\":\"5.1.26100.9444\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\windows-powershell failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\windows-powershell failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\windows-powershell failed-protection\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\Program Files\\nodejs\\node.exe>> : Canary protection failed; command was not launched.\r\nAt C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell-failed-protection.ps1:6 char:1\r\n+ & 'C:\\Program Files\\nodejs\\node.exe' -e 'const fs=require(''fs'');fs. ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\Progra \r\n   m Files\\nodejs\\node.exe>>\r\n \r\n",
+      "entryRan": false,
+      "canaryPresent": true,
+      "entry": null,
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n"
+    },
+    {
+      "shell": "powershell-core",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "kind": "present-at-startup",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core present-at-startup",
+      "exit": 0,
+      "stdout": "{\"Version\":\"7.6.5\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "powershell-core",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "kind": "introduced-after-cwd-change",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core introduced-after-cwd-change",
+      "exit": 0,
+      "stdout": "{\"Version\":\"7.6.5\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "powershell-core",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "kind": "failed-protection",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core failed-protection",
+      "exit": 2,
+      "stdout": "{\"Version\":\"7.6.5\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\powershell-core failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\powershell-core failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\powershell-core failed-protection\\\\\\\\canary.js\\\"}]\"\nWrite-Error: C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core-failed-protection.ps1:6\r\nLine |\r\n   6 |  & 'C:\\Program Files\\nodejs\\node.exe' -e 'const fs=require(''fs'');fs. …\r\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "entryRan": false,
+      "canaryPresent": true,
+      "entry": null,
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n"
+    },
+    {
+      "shell": "cmd",
+      "executable": "C:\\windows\\System32\\cmd.exe",
+      "kind": "present-at-startup",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\cmd present-at-startup",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "cmd",
+      "executable": "C:\\windows\\System32\\cmd.exe",
+      "kind": "introduced-after-cwd-change",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\cmd introduced-after-cwd-change",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "cmd",
+      "executable": "C:\\windows\\System32\\cmd.exe",
+      "kind": "failed-protection",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\cmd failed-protection",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\cmd failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\cmd failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\cmd failed-protection\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "canaryPresent": true,
+      "entry": null,
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n"
+    },
+    {
+      "shell": "windows-powershell",
+      "kind": "automatic-shell-preflight",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell shell-launch false",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false
+    },
+    {
+      "shell": "windows-powershell",
+      "kind": "automatic-shell-block",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell shell-launch true",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\windows-powershell shell-launch true\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\windows-powershell shell-launch true\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\windows-powershell shell-launch true\\\\\\\\canary.js\\\"}]\"\nLookupHandlerReplacementFor<<C:\\Program Files\\nodejs\\node.exe>> : Canary protection failed; command was not launched.\r\nAt E:\\np-audit\\bin\\enable-canary-guard.ps1:35 char:13\r\n+             & $npaNode $npaCli canary-run @npaSelectedRoots --encoded ...\r\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,LookupHandlerReplacementFor<<C:\\Progra \r\n   m Files\\nodejs\\node.exe>>\r\n \r\n",
+      "entryRan": false,
+      "canaryPresent": true
+    },
+    {
+      "shell": "powershell-core",
+      "kind": "automatic-shell-preflight",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core shell-launch false",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false
+    },
+    {
+      "shell": "powershell-core",
+      "kind": "automatic-shell-block",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core shell-launch true",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\powershell-core shell-launch true\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\powershell-core shell-launch true\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-ty8lva\\\\\\\\powershell-core shell-launch true\\\\\\\\canary.js\\\"}]\"\nWrite-Error: E:\\np-audit\\bin\\enable-canary-guard.ps1:35\r\nLine |\r\n  35 |              & $npaNode $npaCli canary-run @npaSelectedRoots --encoded …\r\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Canary protection failed; command was not launched.\r\n",
+      "entryRan": false,
+      "canaryPresent": true
+    },
+    {
+      "shell": "windows-powershell",
+      "kind": "native-npm-prefix",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell native-npm",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\windows-powershell native-npm\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    },
+    {
+      "shell": "powershell-core",
+      "kind": "native-npm-prefix",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core native-npm",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\powershell-core native-npm\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    },
+    {
+      "shell": "cmd",
+      "kind": "native-npm-prefix",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\cmd native-npm",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-ty8lva\\cmd native-npm\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    }
+  ],
+  "suite": {
+    "date": "2026-10-12T21:18:13.025Z",
+    "exit": 0,
+    "stdout": "\nnpa test suite\n\nUnit tests:\n  large file test: 2.6MB processed in 128ms, score=80\n  detector.test.js: all tests passed\n  tarball.test.js: all tests passed\n  lockfile.test.js: all tests passed\n  config.test.js: all tests passed\n  command.test.js: all tests passed\n  incident-derived reconstruction: present/deleted targets, hooks and explicit temporary root passed; zero subprocess/network calls\n  repositoryScanner: targets, indicators, behaviors, hooks, roots and incomplete coverage passed\n  canary quarantine: moves, ignore rules, preserved contents/references, boundaries and failures passed; zero subprocess/network calls\n  canary protection: preserved builds, removed prepare/hook calls, missing files and fail-closed ambiguous/limited cases passed\n  canary trust: exact pins preserve files/calls, changed content loses trust, mixed ignore exceptions and review evidence passed\n  automatic roots: nearest project, loose canary, entry path, no project and idempotent environment passed\n  canary monitor: automatic periodic fallback, incomplete watch coverage, read-only mode, shutdown and zero subprocess/network calls passed\n  requireWalker.test.js: all tests passed\n  updateChecker.test.js: all tests passed\n  cve.test.js: all tests passed\nresolveVersion.test.js: all tests passed\n  marshallers-index.test.js: all tests passed\n    eval.test.js: passed\n    obfuscatorIo.test.js: passed\n    highEntropy.test.js: passed\n    hexEscapes.test.js: passed\n    fromCharCode.test.js: passed\n    base64Exec.test.js: passed\n    childProcess.test.js: passed\n    hexArray.test.js: passed\n    processEnv.test.js: passed\n    networkCalls.test.js: passed\n    filesystemManipulation.test.js: passed\n    runtimeDownload.test.js: passed\n    vscodeTasks.test.js: passed\n  marshallers/: all tests passed\n\nE2E tests:\n  Test 1 passed: clean package exits 0\n  Test 2 passed: blocked package exits 1\n  Test 3 passed: --json output is valid\n  Test 4 passed: --version works\n  Test 5 passed: --help works\n  Test 6 passed: empty directory exits 0\n  Test 7 passed: warn-level package exits 0\n  Test 8 passed: skipPackages config works\n  Test 9 passed: multiple packages, one blocked\n  Test 10 passed: install command shows summary with timing\n  Test 11 passed: ci command shows summary with timing\n  install.test.js: all tests passed\n  config.test.js (e2e): all tests passed\n  Test 1 passed: blocked package exits 1\n  Test 2 passed: clean script is OK or WARN\n  Test 3 passed: --no-dev skips dev dependencies\n  Test 4 passed: preinstall obfuscation is blocked\n  review.test.js: all tests passed\n  Test A passed: chained \"&&\" payload detected in second command\n  Test B passed: node -e inline payload detected\n  Test C passed: shell-script content is analyzed\n  Test D passed: prepare lifecycle script is scanned\n  Test E passed: missing referenced script is reported\n  command-coverage.test.js: all tests passed\n  Test 1 passed: single require hop is followed\n  Test 2 passed: deep require chain is followed\n  Test 3 passed: ESM import chain is followed\n  Test 4 passed: dynamic require is recorded as a finding\n  Test 5 passed: external requires are not walked\n  Test 6 passed: cycle terminates without hanging\n  Test 7 passed: findings tagged with originating file\n  require-following.test.js: all tests passed\n  Test 1 passed: own-project payload blocks by default\n  Test 2 passed: clean own-project scripts pass\n  Test 3 passed: scanSelf:false opts out of own-project scan\n  Test 4 passed: own-project require chain is followed\n  Test 5 passed: own project without lifecycle scripts is a no-op\n  scan-self.test.js: all tests passed\n  canary-killer CLI: JSON/text, exit codes, explicit roots and non-execution passed\n  automatic canary protection: native/proxy/skip/review gates, late-introduction recheck, JSON and blocking failures passed (npm mocked; no scripts/network executed)\n  live canary protection: real CLI read-only/quarantine/scan, real npm prefix/install/ci and blocked failures passed (offline; scripts/hooks disabled; no deployment tested)\n  live trusted canaries and monitor: real npm preserves exact pins, changed pins quarantine, real arrivals automatically quarantine, read-only arrivals preserve inputs (no scanned scripts executed)\n  live Node startup guard: pre-entry checks, failure blocking, exact trust, inherited child checks, preload ordering, session setup and real native npm late-file protection passed (no scanned scripts executed)\n  PowerShell session: real helper applies inherited guard, direct absolute-path Node checks before entry, trusted bytes/options preserved, failures stop entry (no scanned scripts executed)\n  shell launch protection: real pre-launch checks, blocked failures, preserved trust, literal argv/exit status and PowerShell session interception passed (no scanned scripts executed)\n  automatic terminals: 16 real startup/arrival/failure cases; profiles and AutoRun applied without setup commands; no scanned scripts executed\n  terminal installer: absent profile, original-byte preservation, idempotence and uninstall passed on isolated paths; registry unchanged\n  shell paths: 51 real full-path/script/nested success and failure cases; no scanned scripts executed\n  Test 1 passed: resolveFromPackageJson resolves partial version via dist-tags.latest\n  Test 2 passed: collectDeps resolves partial dep version via dist-tags.latest\n  registry.test.js: all tests passed\n\n35 passed, 0 failed\n\n",
+    "stderr": ""
+  },
+  "installed": {
+    "profiles": [
+      {
+        "path": "C:/Users/tionn/Documents/PowerShell/profile.ps1",
+        "sha256": "1397d305bbe16cfe8751c9d9009a40843cee582beb23e272b92ac3202288c6ba"
+      },
+      {
+        "path": "C:/Users/tionn/Documents/WindowsPowerShell/profile.ps1",
+        "sha256": "1397d305bbe16cfe8751c9d9009a40843cee582beb23e272b92ac3202288c6ba"
+      }
+    ],
+    "registry": "\r\nHKEY_CURRENT_USER\\Software\\Microsoft\\Command Processor\r\n    NpaOriginalAutoRun    REG_SZ    \r\n    NpaOriginalAutoRunPresent    REG_DWORD    0x0\r\n    NpaOriginalAutoRunKind    REG_DWORD    0x1\r\n    AutoRun    REG_SZ    call \"E:\\np-audit\\bin\\enable-canary.cmd\" \"C:\\Program Files\\nodejs\\node.exe\"\r\n    NpaManagedAutoRun    REG_SZ    call \"E:\\np-audit\\bin\\enable-canary.cmd\" \"C:\\Program Files\\nodejs\\node.exe\"\r\n\r\n",
+    "startup": {
+      "exit": 0,
+      "stdout": "{\"LookupGuard\":true,\"BashEnv\":\"E:/np-audit/bin/canary-bash-guard.sh\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": ""
+    },
+    "fixtures": [
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+        "sha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "afterSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\package.json",
+        "sha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+        "afterSha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks\\pre-commit",
+        "sha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+        "afterSha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed\\package.json",
+        "sha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+        "afterSha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed\\.githooks\\pre-commit",
+        "sha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+        "afterSha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+        "sha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+        "afterSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+      }
+    ]
+  },
+  "remaining": [
+    "macOS deferred; no macOS environment used.",
+    "Ubuntu WSL was present but command -v node returned no native Node path; native Linux guard unverified.",
+    "Direct .NET process creation, cached CommandInfo invocation, arbitrary non-Node commands inside running CMD, interactive/POSIX/privileged shell modes and deliberate removal of hooks/settings are not universally intercepted.",
+    "Bash redirection/expansion timing and concurrent filesystem races are not a universal before-execution guarantee."
+  ],
+  "wslProbe": {
+    "command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "if command -v node; then echo NPA_NODE_AVAILABLE; else echo NPA_NODE_ABSENT; fi"
+    ],
+    "exit": 0,
+    "stdout": "NPA_NODE_ABSENT\n",
+    "stderr": ""
+  }
+}
