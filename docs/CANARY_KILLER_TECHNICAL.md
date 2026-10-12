@@ -120,7 +120,9 @@ The [observed Windows trust and monitor results](validation/canary-killer/cda0b7
 
 Protected np-audit npm launches automatically prepend the startup guard to `NODE_OPTIONS`. Descendant Node processes that inherit this environment repeat protection before loading their entrypoint. This uses the same bounded protection and trusted-file policy, with no second enable flag on protected npm launches. An already active session guard also applies when the native `canaryProtection` setting is false; forwarding npm preserves that session environment. Protected child launches retain the inherited selected roots.
 
-For Node commands launched directly from your terminal, generate settings for explicitly selected folders:
+Direct Node commands need the documented session settings below, either applied in the current terminal or inherited from a configured parent process. np-audit does not install system profiles or services. Protected npm launches through np-audit receive the guard automatically.
+
+To configure direct Node commands for explicitly selected folders, generate the session settings:
 
 ```bash
 node bin/npa.js canary-guard /path/to/project
