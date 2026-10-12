@@ -173,6 +173,8 @@ Protection regression tests verify preserved build commands, removed prepare/hoo
 
 Protected Windows npm launches use the installed `npm-cli.js` entry point beside Node or a PATH directory, passing arguments directly to Node. This avoids attempting to spawn `npm.cmd` without a shell. A missing compatible npm entry point or a failed launch returns an error. Nonstandard Windows npm wrapper layouts are unsupported by this protected launch path.
 
+The [Windows live validation record](docs/validation/canary-killer/README.md) documents observed results for commit `94fc955`, including the unchanged raw stdout/stderr and filesystem observations. It distinguishes real npm operations with scripts disabled from mocked launch tests and untested build/deployment behavior.
+
 Exit codes are `0` for complete coverage without behavior-review findings, `1` for behavior-review findings, and `2` for incomplete coverage or invalid arguments (`2` takes precedence). Informational canary/nonstandard-file indicators alone do not cause exit `1`. A GitHub repository is supported through its local checkout: the scan cannot inspect another machine's untracked files or local `.git/hooks`. No scan establishes host integrity, recovers deleted content or reconstructs a previously executed payload. For consistent results, scan a stable filesystem snapshot; this is not a hardened forensic reader for a concurrently changing hostile filesystem.
 
 ### Incident-derived reconstruction
