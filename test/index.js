@@ -39,6 +39,7 @@ const E2E_TESTS = [
   'e2e/canary-protection-live.test.js',
   'e2e/canary-trust-monitor-live.test.js',
   'e2e/canary-startup-live.test.js',
+  'e2e/canary-powershell-session-live.test.js',
   'e2e/registry.test.js',
 ];
 

@@ -21,6 +21,7 @@ module.exports = {
   Trusted path/hash exceptions are preserved. Failed checks stop startup.
   Does not install a service, change profiles or intercept non-Node programs.
   Native protected npm commands receive this startup guard automatically.
+  PowerShell checkout setup: & ./bin/enable-canary-guard.ps1 -Roots <root>
 `;
   },
   run({ rawArgs, flags, cwd }) {

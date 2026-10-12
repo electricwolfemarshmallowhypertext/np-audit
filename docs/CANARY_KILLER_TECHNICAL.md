@@ -122,7 +122,17 @@ Protected np-audit npm launches automatically prepend the startup guard to `NODE
 
 Direct Node commands need the documented session settings below, either applied in the current terminal or inherited from a configured parent process. np-audit does not install system profiles or services. Protected npm launches through np-audit receive the guard automatically.
 
-To configure direct Node commands for explicitly selected folders, generate the session settings:
+In PowerShell, apply the settings to the current terminal with one command from this checkout:
+
+```powershell
+& ./bin/enable-canary-guard.ps1 -Roots C:/path/to/project
+```
+
+The helper calls `canary-guard --json` and applies the returned environment values to the current PowerShell process. Subsequent direct Node commands inherit protection, including absolute-path invocations. Existing `NODE_OPTIONS` are preserved. Setup failure stops the helper before changing the settings. The helper is included under `bin/` in the package; it needs no global installation and does not edit profiles, user/machine environment settings or services. It configures Node startup checks only. [Microsoft documents current-session environment changes and child-process inheritance](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5).
+
+Use a selected application folder. Pointing protection at np-audit's entire source checkout also includes its intentional missing-target regression fixtures; the guard can repair those references or block startup. The foreground monitor's exclusions are not automatically copied into Node session settings.
+
+To obtain the assignments for manual setup, including supported shells on other platforms:
 
 ```bash
 node bin/npa.js canary-guard /path/to/project
