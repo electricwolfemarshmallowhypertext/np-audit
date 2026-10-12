@@ -128,7 +128,7 @@ In PowerShell, apply the settings to the current terminal with one command from 
 & ./bin/enable-canary-guard.ps1 -Roots C:/path/to/project
 ```
 
-The helper calls `canary-guard --json` and applies the returned environment values to the current PowerShell process. Subsequent direct Node commands inherit protection, including absolute-path invocations. Existing `NODE_OPTIONS` are preserved. Setup failure stops the helper before changing the settings. The helper is included under `bin/` in the package; it needs no global installation and does not edit profiles, user/machine environment settings or services. It configures Node startup checks only. [Microsoft documents current-session environment changes and child-process inheritance](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5).
+The helper calls `canary-guard --json` and applies the returned environment values to the current PowerShell process. Subsequent direct Node commands inherit protection, including absolute-path invocations. Existing `NODE_OPTIONS` are preserved. Invalid guard setup stops before changing those settings. The helper also registers session functions for available `cmd`, `powershell`, `pwsh`, `bash` and `sh` executables, including their executable filenames. Those functions run the same protection before forwarding the shell launch and block launch on failure. The helper prints the command names it configured; an alias overriding a protected function makes setup report an error. The helper is included under `bin/` in the package; it needs no global installation and does not edit profiles, user/machine environment settings or services. [Microsoft documents session environment inheritance](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5) and [session function scope](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions?view=powershell-7.6).
 
 Use a selected application folder. Pointing protection at np-audit's entire source checkout also includes its intentional missing-target regression fixtures; the guard can repair those references or block startup. The foreground monitor's exclusions are not automatically copied into Node session settings.
 
@@ -149,6 +149,20 @@ Live tests use harmless inline Node entrypoints that write a marker; no scanned 
 The [observed Windows Node startup results](validation/canary-killer/760a3f8-windows-node-startup.md) retain the real-process output and entrypoint observations for implementation `760a3f8`.
 
 The [observed direct Node PowerShell session results](validation/canary-killer/2026-10-12-powershell-session.md) verify the session helper with actual PowerShell and absolute-path Node launches, including preservation and failure blocking.
+
+## Check before shell commands launch
+
+The PowerShell helper above now configures selected shell launchers as well as Node. From that configured session, ordinary `cmd`, `powershell`, `pwsh`, `bash` and `sh` commands use pre-launch protection when their executables are available. Working directories must stay inside selected roots. The launcher arguments are transported as encoded JSON so PowerShell quoting does not strip their contents. Child Node processes inherit the startup guard.
+
+For an explicit program path or a launcher outside those session functions, use the same check directly:
+
+```powershell
+node bin/npa.js canary-run C:/path/to/project -- C:/Windows/System32/cmd.exe /d /c "echo protected"
+```
+
+`canary-run` checks the selected roots, repairs direct calls, quarantines untrusted canaries and updates ignore rules before launching the supplied program. It blocks launch if protection fails. Arguments after `--` are forwarded without np-audit evaluating them as shell text. The supplied program may interpret its own arguments, such as `cmd /c` or PowerShell `-Command`. Real command exit codes are preserved; failed process launches return failure.
+
+Session functions apply to the PowerShell process where setup ran, not other already-open terminals. Each terminal must run the helper for its selected project. A [full-path executable invocation bypasses PowerShell function lookup](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-7.6); use `canary-run` for full-path non-Node launches. This does not intercept every cmdlet, dot-sourced script or nested command inside a shell already running. Files introduced after that shell starts still require the monitor or another protected launch. This is selected-launcher integration, not host-wide execution enforcement.
 
 ## Scope and reporting
 

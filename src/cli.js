@@ -88,6 +88,9 @@ function parseArgs(argv) {
 }
 
 async function main() {
+  if (process.argv[2] === 'canary-run') {
+    return commands.get('canary-run').run({ rawArgs: process.argv.slice(3), cwd: process.cwd() });
+  }
   const parsed = parseArgs(process.argv);
   const { command, args, rawArgs, flags } = parsed;
   const cwd    = process.cwd();
