@@ -1,5 +1,6 @@
 # Canary Killer validation records
 
+- [Selected shell-launch protection (2026-10-12)](2026-10-12-shell-launch.md), with [recorded real-process results](2026-10-12-shell-launch-real-results.json).
 - [Direct Node PowerShell session setup (2026-10-12)](2026-10-12-powershell-session.md), with [recorded real-process results](2026-10-12-powershell-session-real-results.json).
 - [Step 3: foreground monitor (2026-10-12)](2026-10-12-step3.md), with [recorded live arrival and session results](2026-10-12-step3-live-results.json).
 - [Step 2: repair, quarantine and ignore (2026-10-12)](2026-10-12-step2.md), with [recorded real CLI results](2026-10-12-step2-real-results.json).

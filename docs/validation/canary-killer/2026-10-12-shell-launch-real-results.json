@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-12",
+  "testedRevision": "6857365f1a413f331337a3a6231729767f2bf4e4",
+  "node": "v24.16.0",
+  "platform": "win32",
+  "method": "Real Node CLI, cmd.exe and Windows PowerShell processes. Only harmless inline command markers executed. No scanned canary, fixture script, hook or downloaded content executed. Session-interception cases clear NODE_OPTIONS after setup to prove shell routing performs its own check. Temporary projects removed after assertions. Other open terminals and profiles were not modified.",
+  "sourceSha256": {
+    "bin/enable-canary-guard.ps1": "0fa111f3fa8111573d36aa26f9a57b76102752e20cdc746499d1ad9729910d39",
+    "src/commands/canary-run.js": "3b39dde147f3abb95c1518f4a6a4b17fe2b1a405b8e3f31193ffa1cb970d7e6b",
+    "src/cli.js": "db7dd76abb00a24af5d75e89c5111dbf5d71396a84324bfdd84213e5aaae2706",
+    "src/core/canaryProtection.js": "04bcd0835699700f3642ec6e70a79ed065525163f0ca36a6a3536976496ce011",
+    "src/utils/canaryStartup.js": "a42370c61eabf49930dc6284d35938cd1d08d9ed1952d9ebec42457051a857e9",
+    "test/e2e/canary-shell-launch-live.test.js": "f21025851f8594fe8de470817949541661647aaff460673c4400a08534612c8a",
+    "test/index.js": "87c030992851710e0d34a3343eb5b738c9f719993355405ea34b777211289b6c"
+  },
+  "observations": [
+    {
+      "kind": "direct-shell-check-before-launch",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\direct launcher with spaces",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary command protection: 1 files quarantined; 3 references repaired\n",
+      "commandRan": true,
+      "marker": "protected\r\n",
+      "canaryPresent": false,
+      "trustedSha256": "7f03f5a3b735bb8609ce5358898307a78304d854defccdaba1919b924776d87f",
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "quarantine": [
+        {
+          "originalPath": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\direct launcher with spaces\\canary.js",
+          "sha256": "09d659d88ee6bfd1c004c2769ac2c0286b48f36914c74d9f3adfe5760df00c69"
+        }
+      ]
+    },
+    {
+      "kind": "failed-protection-does-not-launch-shell",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\blocked launch",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary command blocked: [{\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-shell-live-ahi4Px\\\\blocked launch\",\"error\":\".gitignore is not a regular file\"},{\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-shell-live-ahi4Px\\\\blocked launch\\\\canary.js\",\"status\":\"failed\",\"error\":\".gitignore is not a regular file\"},{\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-shell-live-ahi4Px\\\\blocked launch\\\\canary.js\"}]\n",
+      "commandRan": false,
+      "marker": null,
+      "canaryPresent": true
+    },
+    {
+      "kind": "shell-exit-status-propagated",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\exit propagation",
+      "exit": 7,
+      "stdout": "",
+      "stderr": "Canary command protection: 1 files quarantined; 3 references repaired\n",
+      "commandRan": false,
+      "marker": null,
+      "canaryPresent": false
+    },
+    {
+      "kind": "command-arguments-forwarded-literally",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\arguments preserved",
+      "exit": 0,
+      "stdout": "[\"--json\",\"--help\",\"--skip\",\"spaces and \\\"quotes\\\"\",\"literal ; & | $()\"]\n",
+      "stderr": "Canary command protection: 1 files quarantined; 3 references repaired\n",
+      "commandRan": false,
+      "marker": null,
+      "canaryPresent": false
+    },
+    {
+      "kind": "session-cmd-and-powershell-intercepted",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\session intercepted",
+      "exit": 0,
+      "stdout": "Node startup and shell-launcher protection configured for this PowerShell session.\r\nProtected shell launchers: cmd, cmd.exe, powershell, powershell.exe, pwsh, pwsh.exe, bash, bash.exe\r\n",
+      "stderr": "Canary command protection: 1 files quarantined; 3 references repaired\nCanary command protection: 1 files quarantined; 0 references repaired\n",
+      "commandRan": true,
+      "marker": "protected\r\n",
+      "canaryPresent": false,
+      "trustedSha256": "7f03f5a3b735bb8609ce5358898307a78304d854defccdaba1919b924776d87f",
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "quarantine": [
+        {
+          "originalPath": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\session intercepted\\canary.js",
+          "sha256": "09d659d88ee6bfd1c004c2769ac2c0286b48f36914c74d9f3adfe5760df00c69"
+        },
+        {
+          "originalPath": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\session intercepted\\canary.js",
+          "sha256": "09d659d88ee6bfd1c004c2769ac2c0286b48f36914c74d9f3adfe5760df00c69"
+        }
+      ],
+      "powershellMarker": "protected",
+      "nodeOptionsClearedBeforeLaunch": true
+    },
+    {
+      "kind": "session-shell-launch-blocked",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-shell-live-ahi4Px\\session blocked",
+      "exit": 2,
+      "stdout": "Node startup and shell-launcher protection configured for this PowerShell session.\r\nProtected shell launchers: cmd, cmd.exe, powershell, powershell.exe, pwsh, pwsh.exe, bash, bash.exe\r\n",
+      "stderr": "Canary command blocked: [{\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-shell-live-ahi4Px\\\\session blocked\",\"error\":\".gitignore is not a regular file\"},{\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-shell-live-ahi4Px\\\\session blocked\\\\canary.js\",\"status\":\"failed\",\"error\":\".gitignore is not a regular file\"},{\"path\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-shell-live-ahi4Px\\\\session blocked\\\\canary.js\"}]\n",
+      "commandRan": false,
+      "marker": null,
+      "canaryPresent": true
+    }
+  ],
+  "fullSuite": {
+    "command": "node test/index.js",
+    "exit": 0,
+    "summary": "31 passed, 0 failed",
+    "environment": "Isolated temporary HOME/USERPROFILE; vulnerability checks disabled, update cache seeded, Node guard environment reset for suite."
+  }
+}
