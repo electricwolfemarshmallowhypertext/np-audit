@@ -1,5 +1,6 @@
 # Canary Killer validation records
 
+- [Automatic Windows terminal activation (2026-10-12)](2026-10-12-automatic-terminals.md), with [recorded real-process results](2026-10-12-automatic-terminals-real-results.json).
 - [Selected shell-launch protection (2026-10-12)](2026-10-12-shell-launch.md), with [recorded real-process results](2026-10-12-shell-launch-real-results.json).
 - [Direct Node PowerShell session setup (2026-10-12)](2026-10-12-powershell-session.md), with [recorded real-process results](2026-10-12-powershell-session-real-results.json).
 - [Step 3: foreground monitor (2026-10-12)](2026-10-12-step3.md), with [recorded live arrival and session results](2026-10-12-step3-live-results.json).

@@ -1,0 +1,433 @@
+{
+  "date": "2026-10-12T20:37:31.422Z",
+  "testedRevision": "eedea7913ee837545168f319b9efc656c8663471",
+  "platform": "win32",
+  "node": "v24.16.0",
+  "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+  "npm": "11.13.0",
+  "method": "Actual installed current-user startup hooks; fresh normal terminals inherit empty parent guard settings. Real Node inline entrypoints, npm prefix, and shell echo commands. Canary/hook/manifest inputs are inert and never executed. No application processes or npm results mocked.",
+  "sources": [
+    {
+      "path": "bin/enable-canary.cmd",
+      "sha256": "41f234e0b701f732353ad8d58c459dc8ecd600325cf6c8c40b06afbc29fc1dc1"
+    },
+    {
+      "path": "bin/enable-canary-guard.ps1",
+      "sha256": "7819cce6edfa96fba61bd74ba29f87c4eda8fc2b429c15361bf4a319d8dfa18c"
+    },
+    {
+      "path": "bin/install-canary-terminal.ps1",
+      "sha256": "d355f822113ac6d9d746c2ba94e32b1b58b26c893d08552d8f93d1ba5e44851e"
+    },
+    {
+      "path": "src/utils/canaryProject.js",
+      "sha256": "97a5b6bca8ced2710b97e2348b306a8c5fd685bba9bb93863ffa804c5a4c6fef"
+    },
+    {
+      "path": "src/utils/canaryStartup.js",
+      "sha256": "0227820901e9346826ee75c4e4b376a03290cec5782e090833f9f4752e6757a6"
+    },
+    {
+      "path": "src/core/canaryPreload.js",
+      "sha256": "abcbd917fb9b85ac397fda3e638dde9eeef735205666d89d52fba0ce6b3527b3"
+    },
+    {
+      "path": "src/core/canaryTrust.js",
+      "sha256": "5af0a85c95b20797b0f5c353c24a7202d8116d6822813f81d720836be3253d8a"
+    },
+    {
+      "path": "src/core/canaryProtection.js",
+      "sha256": "51a6a2fbdd556cf528b3f19ce70c8f216785b7951461d7827fc789a74d5942c7"
+    },
+    {
+      "path": "src/core/canaryRepair.js",
+      "sha256": "0a8d55104a06e86e5fb28fac36afe54b0d72931ce59583ab9764ff1c8144c224"
+    },
+    {
+      "path": "test/e2e/canary-terminal-auto-live.test.js",
+      "sha256": "d1e8d9333d60dc67bfafb51a5c4163c8dcbf035b0bbf43d2df3caf7cd479fed1"
+    },
+    {
+      "path": "test/e2e/canary-terminal-installer.test.js",
+      "sha256": "18f0412faea743c865d5c6a0cdcdc226b790bb798e3282f8246e5fb9e731af8c"
+    },
+    {
+      "path": "test/unit/canaryProject.test.js",
+      "sha256": "2b6987345640bc38dc8dc34e269c1e410d8bdccc1451395d391771d2cd858c40"
+    },
+    {
+      "path": "test/unit/canaryTrust.test.js",
+      "sha256": "a3feca59dbef9f71a72baa58306ac825087e231d26ed665f1b019a98930cc63a"
+    }
+  ],
+  "profiles": [
+    {
+      "path": "C:/Users/tionn/Documents/PowerShell/profile.ps1",
+      "sha256": "1397d305bbe16cfe8751c9d9009a40843cee582beb23e272b92ac3202288c6ba",
+      "bytes": 423,
+      "managedBlockPresent": true
+    },
+    {
+      "path": "C:/Users/tionn/Documents/WindowsPowerShell/profile.ps1",
+      "sha256": "1397d305bbe16cfe8751c9d9009a40843cee582beb23e272b92ac3202288c6ba",
+      "bytes": 423,
+      "managedBlockPresent": true
+    }
+  ],
+  "registry": {
+    "exit": 0,
+    "stdout": "\r\nHKEY_CURRENT_USER\\Software\\Microsoft\\Command Processor\r\n    NpaOriginalAutoRun    REG_SZ    \r\n    NpaOriginalAutoRunPresent    REG_DWORD    0x0\r\n    NpaOriginalAutoRunKind    REG_DWORD    0x1\r\n    AutoRun    REG_SZ    call \"E:\\np-audit\\bin\\enable-canary.cmd\" \"C:\\Program Files\\nodejs\\node.exe\"\r\n    NpaManagedAutoRun    REG_SZ    call \"E:\\np-audit\\bin\\enable-canary.cmd\" \"C:\\Program Files\\nodejs\\node.exe\"\r\n\r\n",
+    "stderr": ""
+  },
+  "checkoutStartup": {
+    "exit": 0,
+    "stdout": "checkout startup verified",
+    "stderr": "",
+    "fixtures": [
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+        "sha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "afterSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\package.json",
+        "sha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+        "afterSha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\.githooks\\pre-commit",
+        "sha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+        "afterSha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed\\package.json",
+        "sha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+        "afterSha256": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\removed\\.githooks\\pre-commit",
+        "sha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+        "afterSha256": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+        "sha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+        "afterSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+      }
+    ]
+  },
+  "observations": [
+    {
+      "shell": "windows-powershell",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "kind": "present-at-startup",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell present-at-startup",
+      "exit": 0,
+      "stdout": "{\"Version\":\"5.1.26100.9444\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "windows-powershell",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "kind": "introduced-after-cwd-change",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell introduced-after-cwd-change",
+      "exit": 0,
+      "stdout": "{\"Version\":\"5.1.26100.9444\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "windows-powershell",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "kind": "failed-protection",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell failed-protection",
+      "exit": 2,
+      "stdout": "{\"Version\":\"5.1.26100.9444\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\windows-powershell failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\windows-powershell failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\windows-powershell failed-protection\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "canaryPresent": true,
+      "entry": null,
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n"
+    },
+    {
+      "shell": "powershell-core",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "kind": "present-at-startup",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core present-at-startup",
+      "exit": 0,
+      "stdout": "{\"Version\":\"7.6.5\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "powershell-core",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "kind": "introduced-after-cwd-change",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core introduced-after-cwd-change",
+      "exit": 0,
+      "stdout": "{\"Version\":\"7.6.5\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "powershell-core",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "kind": "failed-protection",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core failed-protection",
+      "exit": 2,
+      "stdout": "{\"Version\":\"7.6.5\",\"CmdType\":\"Function\",\"Guard\":\"{\\\"autoProject\\\":true}\"}\r\n",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\powershell-core failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\powershell-core failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\powershell-core failed-protection\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "canaryPresent": true,
+      "entry": null,
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n"
+    },
+    {
+      "shell": "cmd",
+      "executable": "C:\\windows\\System32\\cmd.exe",
+      "kind": "present-at-startup",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\cmd present-at-startup",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "cmd",
+      "executable": "C:\\windows\\System32\\cmd.exe",
+      "kind": "introduced-after-cwd-change",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\cmd introduced-after-cwd-change",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false,
+      "entry": {
+        "canaryPresent": false,
+        "guard": {
+          "autoProject": true
+        },
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n",
+      "quarantineHashMatched": true
+    },
+    {
+      "shell": "cmd",
+      "executable": "C:\\windows\\System32\\cmd.exe",
+      "kind": "failed-protection",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\cmd failed-protection",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\cmd failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\cmd failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\cmd failed-protection\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "canaryPresent": true,
+      "entry": null,
+      "trustedHashUnchanged": true,
+      "scripts": {
+        "build": "tsc",
+        "intentional": "node legit/canary.js"
+      },
+      "hook": "node legit/canary.js\necho preserved\n"
+    },
+    {
+      "shell": "windows-powershell",
+      "kind": "automatic-shell-preflight",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell shell-launch false",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false
+    },
+    {
+      "shell": "windows-powershell",
+      "kind": "automatic-shell-block",
+      "executable": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell shell-launch true",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\windows-powershell shell-launch true\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\windows-powershell shell-launch true\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\windows-powershell shell-launch true\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "canaryPresent": true
+    },
+    {
+      "shell": "powershell-core",
+      "kind": "automatic-shell-preflight",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core shell-launch false",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "canaryPresent": false
+    },
+    {
+      "shell": "powershell-core",
+      "kind": "automatic-shell-block",
+      "executable": "C:\\Users\\tionn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core shell-launch true",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\powershell-core shell-launch true\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\powershell-core shell-launch true\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-auto-terminal-QOROTG\\\\\\\\powershell-core shell-launch true\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "canaryPresent": true
+    },
+    {
+      "shell": "windows-powershell",
+      "kind": "native-npm-prefix",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell native-npm",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\windows-powershell native-npm\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    },
+    {
+      "shell": "powershell-core",
+      "kind": "native-npm-prefix",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core native-npm",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\powershell-core native-npm\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    },
+    {
+      "shell": "cmd",
+      "kind": "native-npm-prefix",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\cmd native-npm",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-auto-terminal-QOROTG\\cmd native-npm\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    }
+  ],
+  "suite": {
+    "date": "2026-10-12T20:35:44.126Z",
+    "exit": 0,
+    "stdout": "\nnpa test suite\n\nUnit tests:\n  large file test: 2.6MB processed in 129ms, score=80\n  detector.test.js: all tests passed\n  tarball.test.js: all tests passed\n  lockfile.test.js: all tests passed\n  config.test.js: all tests passed\n  command.test.js: all tests passed\n  incident-derived reconstruction: present/deleted targets, hooks and explicit temporary root passed; zero subprocess/network calls\n  repositoryScanner: targets, indicators, behaviors, hooks, roots and incomplete coverage passed\n  canary quarantine: moves, ignore rules, preserved contents/references, boundaries and failures passed; zero subprocess/network calls\n  canary protection: preserved builds, removed prepare/hook calls, missing files and fail-closed ambiguous/limited cases passed\n  canary trust: exact pins preserve files/calls, changed content loses trust, mixed ignore exceptions and review evidence passed\n  automatic roots: nearest project, loose canary, entry path, no project and idempotent environment passed\n  canary monitor: automatic periodic fallback, incomplete watch coverage, read-only mode, shutdown and zero subprocess/network calls passed\n  requireWalker.test.js: all tests passed\n  updateChecker.test.js: all tests passed\n  cve.test.js: all tests passed\nresolveVersion.test.js: all tests passed\n  marshallers-index.test.js: all tests passed\n    eval.test.js: passed\n    obfuscatorIo.test.js: passed\n    highEntropy.test.js: passed\n    hexEscapes.test.js: passed\n    fromCharCode.test.js: passed\n    base64Exec.test.js: passed\n    childProcess.test.js: passed\n    hexArray.test.js: passed\n    processEnv.test.js: passed\n    networkCalls.test.js: passed\n    filesystemManipulation.test.js: passed\n    runtimeDownload.test.js: passed\n    vscodeTasks.test.js: passed\n  marshallers/: all tests passed\n\nE2E tests:\n  Test 1 passed: clean package exits 0\n  Test 2 passed: blocked package exits 1\n  Test 3 passed: --json output is valid\n  Test 4 passed: --version works\n  Test 5 passed: --help works\n  Test 6 passed: empty directory exits 0\n  Test 7 passed: warn-level package exits 0\n  Test 8 passed: skipPackages config works\n  Test 9 passed: multiple packages, one blocked\n  Test 10 passed: install command shows summary with timing\n  Test 11 passed: ci command shows summary with timing\n  install.test.js: all tests passed\n  config.test.js (e2e): all tests passed\n  Test 1 passed: blocked package exits 1\n  Test 2 passed: clean script is OK or WARN\n  Test 3 passed: --no-dev skips dev dependencies\n  Test 4 passed: preinstall obfuscation is blocked\n  review.test.js: all tests passed\n  Test A passed: chained \"&&\" payload detected in second command\n  Test B passed: node -e inline payload detected\n  Test C passed: shell-script content is analyzed\n  Test D passed: prepare lifecycle script is scanned\n  Test E passed: missing referenced script is reported\n  command-coverage.test.js: all tests passed\n  Test 1 passed: single require hop is followed\n  Test 2 passed: deep require chain is followed\n  Test 3 passed: ESM import chain is followed\n  Test 4 passed: dynamic require is recorded as a finding\n  Test 5 passed: external requires are not walked\n  Test 6 passed: cycle terminates without hanging\n  Test 7 passed: findings tagged with originating file\n  require-following.test.js: all tests passed\n  Test 1 passed: own-project payload blocks by default\n  Test 2 passed: clean own-project scripts pass\n  Test 3 passed: scanSelf:false opts out of own-project scan\n  Test 4 passed: own-project require chain is followed\n  Test 5 passed: own project without lifecycle scripts is a no-op\n  scan-self.test.js: all tests passed\n  canary-killer CLI: JSON/text, exit codes, explicit roots and non-execution passed\n  automatic canary protection: native/proxy/skip/review gates, late-introduction recheck, JSON and blocking failures passed (npm mocked; no scripts/network executed)\n  live canary protection: real CLI read-only/quarantine/scan, real npm prefix/install/ci and blocked failures passed (offline; scripts/hooks disabled; no deployment tested)\n  live trusted canaries and monitor: real npm preserves exact pins, changed pins quarantine, real arrivals automatically quarantine, read-only arrivals preserve inputs (no scanned scripts executed)\n  live Node startup guard: pre-entry checks, failure blocking, exact trust, inherited child checks, preload ordering, session setup and real native npm late-file protection passed (no scanned scripts executed)\n  PowerShell session: real helper applies inherited guard, direct absolute-path Node checks before entry, trusted bytes/options preserved, failures stop entry (no scanned scripts executed)\n  shell launch protection: real pre-launch checks, blocked failures, preserved trust, literal argv/exit status and PowerShell session interception passed (no scanned scripts executed)\n  automatic terminals: 16 real startup/arrival/failure cases; profiles and AutoRun applied without setup commands; no scanned scripts executed\n  terminal installer: absent profile, original-byte preservation, idempotence and uninstall passed on isolated paths; registry unchanged\n  Test 1 passed: resolveFromPackageJson resolves partial version via dist-tags.latest\n  Test 2 passed: collectDeps resolves partial dep version via dist-tags.latest\n  registry.test.js: all tests passed\n\n34 passed, 0 failed\n\n",
+    "stderr": ""
+  },
+  "limits": [
+    "Already-open terminals retain their existing environment.",
+    "NoProfile and CMD /d skip startup hooks unless guard settings are inherited.",
+    "PowerShell functions and interactive CMD DOSKEY macros do not intercept every shell command or explicit non-Node executable path.",
+    "Full OS execution enforcement, earlier execution and host integrity are not established.",
+    "These incident-derived reconstructions do not execute or reconstruct the unknown fetched payload."
+  ]
+}

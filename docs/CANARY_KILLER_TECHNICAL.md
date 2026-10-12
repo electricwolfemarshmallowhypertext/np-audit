@@ -107,7 +107,7 @@ node bin/npa.js canary-monitor /srv/app /dev/shm --json
 
 Starting the monitor runs protection immediately. It watches the selected directory roots and automatically reuses the same repair, quarantine, ignore and trusted-file logic after changes. There is no second quarantine switch. It also rechecks every five seconds to detect persistent files missed by notifications, and groups nearby change events to avoid repeated scans. Duplicate reports are suppressed. `--interval <milliseconds>` changes the periodic interval from 200 to 300000 milliseconds.
 
-The monitor runs in the foreground until Ctrl+C. No service, automatic startup, shell profile or deployment configuration is installed. For observation without file changes, add `--read-only`. Monitoring uses the bounded protection profile: filenames throughout selected roots, with content reads for manifests, hooks, Git configuration and canary files. Use the standalone full scan for behavior searches in renamed files.
+The monitor runs in the foreground until Ctrl+C. The monitor itself installs no service, automatic startup, shell profile or deployment configuration. For observation without file changes, add `--read-only`. Monitoring uses the bounded protection profile: filenames throughout selected roots, with content reads for manifests, hooks, Git configuration and canary files. Use the standalone full scan for behavior searches in renamed files.
 
 `--json` emits one JSON record per changed report or error. Watch failures are explicit; periodic checks continue, and monitoring coverage remains incomplete. Missing roots, unreadable paths and scan limits are reported. Quarantine storage is excluded from analysis and does not trigger monitor scans.
 
