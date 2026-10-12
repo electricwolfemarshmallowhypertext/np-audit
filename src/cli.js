@@ -91,8 +91,8 @@ async function main() {
   const parsed = parseArgs(process.argv);
   const { command, args, rawArgs, flags } = parsed;
   const cwd    = process.cwd();
-  const config = ['canary-killer', 'canary-monitor'].includes(command) ? DEFAULT_CONFIG : loadConfig(cwd);
-  if (flags.protectCanary && !['canary-killer', 'canary-monitor'].includes(command)) config.canaryProtection = true;
+  const config = ['canary-killer', 'canary-monitor', 'canary-guard'].includes(command) ? DEFAULT_CONFIG : loadConfig(cwd);
+  if (flags.protectCanary && !['canary-killer', 'canary-monitor', 'canary-guard'].includes(command)) config.canaryProtection = true;
 
   if (flags.version) {
     process.stdout.write(`npa ${VERSION} (${NAME})\n`);
@@ -134,7 +134,7 @@ async function main() {
     const result = spawnNpm(process.argv.slice(2).filter(arg => arg !== '--protect-canary'), {
       stdio: 'inherit',
       cwd,
-    }, config.canaryProtection);
+    }, config.canaryProtection, config);
     if (config.canaryProtection && result.error) output.error(result.error.message);
     process.exit(config.canaryProtection ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0);
     return;

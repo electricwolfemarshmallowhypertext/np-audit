@@ -205,7 +205,7 @@ function runNpm(command, args, cwd, config) {
     stdio: 'inherit',
     cwd,
     env: { ...process.env, NPA_RUNNING: '1' },
-  }, config?.canaryProtection);
+  }, config?.canaryProtection, config);
   if (config?.canaryProtection && result.error) output.error(result.error.message);
   return config?.canaryProtection ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0;
 }
@@ -231,7 +231,7 @@ function runPackageScripts(scanResult, cwd, config) {
       } catch (err) { output.error(err.message); return 2; }
       const result = spawnNpm(['run', lifecycle, '--ignore-scripts'], {
         stdio: 'inherit', cwd: pkgDir, env: { ...process.env, NPA_RUNNING: '1' },
-      }, true);
+      }, true, config, cwd);
       if (result.error) output.error(result.error.message);
       if (result.status !== 0) return Number.isInteger(result.status) ? result.status : 1;
     }

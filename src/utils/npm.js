@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-function spawnNpm(args, options, protection = false) {
+function spawnNpm(args, options, protection = false, config = {}, base = options.cwd || process.cwd()) {
+  if (protection) options = { ...options, env: require('./canaryStartup').startupEnvironment(options.env || process.env, base, config) };
   if (process.platform === 'win32' && protection) {
     // Node cannot spawn a .cmd file directly. Run npm's JavaScript entry point
     // with argv intact instead of passing user arguments through cmd.exe.

@@ -17,7 +17,7 @@ The command is registered through the existing command loader. Its separate repo
 | [Quarantine helper](../src/core/canaryQuarantine.js) | On explicit `--quarantine`, move discovered `canary.js` files and append ignore rules; preserve the file contents and report each action |
 | [Reference repair](../src/core/canaryRepair.js) and [protection gate](../src/core/canaryProtection.js) | Remove confirmed direct calls, preserve remaining commands, and block controlled commands when protection fails |
 
-The standalone repository commands read trusted-file settings but bypass dependency audit settings, registry/vulnerability requests and update checks. The dependency audit retains its existing behavior unless canary protection is enabled; enabled protection runs before auditing and again immediately before controlled npm launches.
+The standalone repository commands read trusted-file settings but bypass dependency audit settings, registry/vulnerability requests and update checks. The dependency audit retains its existing behavior unless canary protection is enabled; enabled protection runs before auditing and again immediately before controlled npm launches. Protected npm launches also automatically inherit the Node startup guard.
 
 ## Run from a checkout
 
@@ -71,7 +71,7 @@ node /path/to/np-audit/bin/npa.js run build --protect-canary
 
 Protection discovers filenames throughout selected roots and reads manifests, hooks, Git configuration and `canary.js` contents. Other files are counted as filename-only coverage; use the standalone read-only scan for behavior matching in renamed files. Unreadable paths, discovery limits, unsupported hook configuration, failed actions and remaining canary references block the controlled command. Expected Git object/index and quarantine-storage exclusions remain reported but do not alone block this specific protection policy. Global npm operations and commands selecting another project with `--prefix` or `-C` are refused while protection is enabled.
 
-In plain English: np-audit checks and repairs the selected folders before starting commands it launches. If protection fails, it stops the command. Running `npm`, `node` or a shell directly bypasses that check. Protection cannot undo code that already ran or stop an already running process. The optional monitor checks for files introduced later while it is running; it does not intercept execution. Quarantine is a filesystem move, not an isolated execution environment; use stable files while applying actions.
+In plain English: np-audit checks and repairs the selected folders before starting commands it launches. If protection fails, it stops the command. Its protected npm launches and inherited Node children also check at Node startup. Direct Node commands can receive this check through the session settings below. Unconfigured commands and non-Node programs remain outside that startup guard. Protection cannot undo code that already ran or stop an already running process. The optional monitor checks for files introduced later while it is running; it does not intercept execution. Quarantine is a filesystem move, not an isolated execution environment; use stable files while applying actions.
 
 ## Preserve intentional canaries
 
@@ -115,6 +115,24 @@ In plain English: a monitor sees that a file appeared and then reacts. Another p
 Trusted-file and monitor tests verify preserved intentional files/calls, changed-hash quarantine, mixed trusted/untrusted ignore rules, periodic fallback, shutdown and no subprocess/network activity inside monitoring. The live regression test runs actual protected npm `prefix` commands and actual foreground monitor processes, introduces inert files after startup, verifies automatic quarantine and verifies read-only preservation. No scanned fixture script or hook is executed.
 
 The [observed Windows trust and monitor results](validation/canary-killer/cda0b79-windows-trust-monitor.md) retain the actual npm output, monitor reports and filesystem observations for implementation `cda0b79`.
+
+## Check before Node entrypoints run
+
+Protected np-audit npm launches automatically prepend the startup guard to `NODE_OPTIONS`. Descendant Node processes that inherit this environment repeat protection before loading their entrypoint. This uses the same bounded protection and trusted-file policy, with no second enable flag on protected npm launches.
+
+For Node commands launched directly from your terminal, generate settings for explicitly selected folders:
+
+```bash
+node bin/npa.js canary-guard /path/to/project
+```
+
+Apply the two printed assignments in the same terminal. Windows output uses PowerShell assignments; other platforms use shell `export` assignments. These set `NPA_CANARY_GUARD` and `NODE_OPTIONS` for that session. `--json` returns the environment values and setup lines without applying them. The command itself only prints configuration; a Node process already using startup protection still runs its configured check first. No service, profile, system setting or global installation is changed.
+
+The guard runs through Node's `--require` startup mechanism, before the main entrypoint. It checks the configured roots and preserves exact trusted canaries. Failed protection, invalid guard configuration, or an unscoped direct `canary.js` entrypoint stops startup with exit `2`. If the canary entrypoint was quarantined, startup stops instead of loading it. Existing `NODE_OPTIONS` are retained after the guard's preload. Trusted-file configuration reads are bounded to 128 KiB per file; serialized root configuration is bounded to 64 KiB.
+
+This covers configured Node starts, including absolute-path Node invocations and children that retain the environment. Clearing `NODE_OPTIONS`, replacing a child's environment, using a different runtime or running non-Node shell commands bypasses this integration. It is not an operating-system execution policy. It does not prevent a file introduced after startup from being read or executed by code already running, and it does not remove concurrent filesystem races. The check before entrypoint loading is stronger than watching for a later notification, but is not a guarantee of zero execution through every route.
+
+Live tests use harmless inline Node entrypoints that write a marker; no scanned fixture script or canary is executed. They verify protection before that marker, failed protection leaving the marker absent, exact trusted-file preservation, changed-file quarantine, inherited child checks, guard ordering before an existing preload, generated session settings, and actual npm startup catching a file introduced after preflight. The native timing case injects an inert file immediately before forwarding the real npm spawn; it does not substitute a scanner or npm result.
 
 ## Scope and reporting
 

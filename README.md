@@ -114,6 +114,7 @@ node bin/npa.js canary-monitor /path/to/project
 | `npa scan [package]`           | `npa s`     | Scan only, no install              |
 | `npa canary-killer <root> [root...]` | —      | [Optional repository scan](#canary-killer-optional-repository-scan) |
 | `npa canary-monitor <root> [root...]` | —     | Watch folders and apply protection automatically; preserve trusted canaries |
+| `npa canary-guard <root> [root...]` | —       | Print session settings to check before Node scripts start |
 | `npa config get`               | `npa c get` | Show current configuration         |
 | `npa config set <key> <value>` | `npa c set` | Update a config value              |
 | `npa alias --install`          | —           | Install shell alias                |

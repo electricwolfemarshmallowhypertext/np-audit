@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const os = require('os');
 const { LIMITS } = require('./repositoryScanner');
 const { inside, checkPath } = require('./canaryQuarantine');
 
@@ -83,4 +84,16 @@ function verifyTrustedFiles(scan, entries) {
   return { files, trustedPaths, basis: 'Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict.' };
 }
 
-module.exports = { loadTrustedFiles, verifyTrustedFiles, key };
+function startupTrustedFiles(base) {
+  const budget = { bytes: 0 };
+  let files = [];
+  for (const config of new Set([path.join(os.homedir(), '.npmauditor.json'), path.join(base, '.npmauditor.json')])) {
+    let buffer;
+    try { buffer = readBounded(config, 128 * 1024, budget); } catch (err) { if (err.code === 'ENOENT') continue; throw err; }
+    const settings = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(buffer).replace(/^\uFEFF/, ''));
+    if (Object.prototype.hasOwnProperty.call(settings, 'canaryTrustedFiles')) files = settings.canaryTrustedFiles;
+  }
+  return files;
+}
+
+module.exports = { loadTrustedFiles, verifyTrustedFiles, startupTrustedFiles, key };
