@@ -5,8 +5,9 @@ const fs = require('fs');
 const { scanRepository } = require('./repositoryScanner');
 const { quarantineCanaries, DIRECTORY, inside, checkPath } = require('./canaryQuarantine');
 const { repairCanaryReferences, isHook } = require('./canaryRepair');
+const { loadTrustedFiles, verifyTrustedFiles, key } = require('./canaryTrust');
 
-function coverageFailures(scan) {
+function coverageFailures(scan, trustedPaths = new Set()) {
   const critical = target => ['package.json', '.git'].includes(path.basename(target)) || isHook(target, scan) ||
     scan.coverage.gitConfigs.some(config => config.path === target) || /(?:^|[\\/])\.git(?:[\\/])/.test(target);
   const failures = scan.unreadable.filter(item => critical(item.path) || !/encoded data was not valid/.test(item.reason));
@@ -25,26 +26,30 @@ function coverageFailures(scan) {
   for (const item of scan.unresolved) {
     if (/record limit|nesting limit|Git directory pointer|Conditional or expanded Git include|Unsupported Git configuration|Unterminated Git configuration|Unsupported hooksPath/.test(item.reason) ||
         (item.reason === 'Outside supplied scan roots' && scan.coverage.hookDirectories.some(dir => inside(dir.path, item.path)))) failures.push(item);
-    if (item.reference && path.basename(item.reference.replace(/\\/g, '/')) === 'canary.js') failures.push(item);
+    if (item.reference && path.basename(item.reference.replace(/\\/g, '/')) === 'canary.js' && !(item.target && trustedPaths.has(key(item.target)))) failures.push(item);
     if (/Inline JavaScript|Dynamic inline|Runtime option|Dynamic working directory/.test(item.reason) && /canary\.js/.test(item.evidence || item.command || '')) failures.push(item);
   }
   return failures;
 }
 
 function protectRepository(options) {
+  const entries = loadTrustedFiles(options.roots, options.excludes, options.trustedFiles, options.trustBase);
   const scanOptions = { ...options, excludeQuarantine: true, protectionOnly: options.protectionOnly !== false };
   const initial = scanRepository(scanOptions);
-  const repairs = repairCanaryReferences(initial);
-  const quarantine = quarantineCanaries(initial, { ignoreRoots: repairs.ignoreRoots });
+  const initialTrust = verifyTrustedFiles(initial, entries);
+  const repairs = repairCanaryReferences(initial, initialTrust);
+  const quarantine = quarantineCanaries(initial, { ignoreRoots: repairs.ignoreRoots, trustedPaths: initialTrust.trustedPaths });
   quarantine.before = { summary: initial.summary, unreadable: initial.unreadable,
     exclusions: initial.exclusions, unresolved: initial.unresolved };
   const targets = new Set(quarantine.actions.map(action => action.path));
   quarantine.evidence = initial.findings.filter(finding => targets.has(finding.path));
   const report = scanRepository(scanOptions);
-  const remaining = report.references.filter(ref => path.basename((ref.reference || '').replace(/\\/g, '/')) === 'canary.js');
-  const failures = [...coverageFailures(initial).filter(item => !item.reference), ...coverageFailures(report),
+  const trust = verifyTrustedFiles(report, entries);
+  const remaining = report.references.filter(ref => path.basename((ref.reference || '').replace(/\\/g, '/')) === 'canary.js' && !(ref.target && trust.trustedPaths.has(key(ref.target))));
+  const failures = [...coverageFailures(initial, initialTrust.trustedPaths).filter(item => !item.reference), ...coverageFailures(report, trust.trustedPaths),
     ...repairs.failures, ...quarantine.ignoreFailures, ...quarantine.actions.filter(action => action.status !== 'quarantined'),
-    ...report.coverage.canaryFiles, ...remaining];
+    ...report.coverage.canaryFiles.filter(candidate => !trust.trustedPaths.has(key(candidate.path))), ...remaining];
+  report.trust = { files: trust.files, before: initialTrust.files, basis: trust.basis };
   report.repairs = repairs;
   report.quarantine = quarantine;
   report.protection = { allowed: !failures.length && repairs.actionsComplete && quarantine.actionsComplete, failures };
@@ -55,10 +60,18 @@ function protectRepository(options) {
   return report;
 }
 
+function scanCanaries(options) {
+  const entries = loadTrustedFiles(options.roots, options.excludes, options.trustedFiles, options.trustBase);
+  const report = scanRepository(options);
+  const trust = verifyTrustedFiles(report, entries);
+  report.trust = { files: trust.files, basis: trust.basis };
+  return report;
+}
+
 function protectionForCommand(cwd, config = {}) {
   if (!config.canaryProtection) return null;
   const roots = [cwd, ...(config.canaryRoots || []).map(root => path.resolve(cwd, root))];
-  return protectRepository({ roots: [...new Set(roots)] });
+  return protectRepository({ roots: [...new Set(roots)], trustedFiles: config.canaryTrustedFiles || [], trustBase: cwd });
 }
 
 function commandScopeError(args = []) {
@@ -71,4 +84,4 @@ function commandScopeError(args = []) {
   return null;
 }
 
-module.exports = { protectRepository, protectionForCommand, coverageFailures, commandScopeError };
+module.exports = { protectRepository, scanCanaries, protectionForCommand, coverageFailures, commandScopeError };

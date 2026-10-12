@@ -91,8 +91,8 @@ async function main() {
   const parsed = parseArgs(process.argv);
   const { command, args, rawArgs, flags } = parsed;
   const cwd    = process.cwd();
-  const config = command === 'canary-killer' ? DEFAULT_CONFIG : loadConfig(cwd);
-  if (flags.protectCanary && command !== 'canary-killer') config.canaryProtection = true;
+  const config = ['canary-killer', 'canary-monitor'].includes(command) ? DEFAULT_CONFIG : loadConfig(cwd);
+  if (flags.protectCanary && !['canary-killer', 'canary-monitor'].includes(command)) config.canaryProtection = true;
 
   if (flags.version) {
     process.stdout.write(`npa ${VERSION} (${NAME})\n`);

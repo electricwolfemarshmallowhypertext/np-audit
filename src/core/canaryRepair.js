@@ -24,7 +24,7 @@ function hookBase(target, scan) {
   return versioned ? target.slice(0, versioned.index) : path.dirname(target);
 }
 
-function cleanCommand(command, base, roots) {
+function cleanCommand(command, base, roots, trustedPaths = new Set()) {
   const segments = [];
   let quote = null;
   let start = 0;
@@ -42,12 +42,18 @@ function cleanCommand(command, base, roots) {
   if (quote) unsafe = true;
   const kept = [];
   const targets = [];
+  let trustedMentions = false;
   for (const segment of segments) {
     const normalized = process.platform === 'win32' ? segment.replace(/\\(?=[\w.\/\\-])/g, '/') : segment;
     const tokens = tokenize(normalized);
     const refs = parseCommand(normalized);
     const canary = refs.filter(ref => ref.kind === 'file' && path.basename(ref.path.replace(/\\/g, '/')) === 'canary.js');
     if (!canary.length) { kept.push(segment); continue; }
+    if (canary.every(ref => trustedPaths.has(require('./canaryTrust').key(path.resolve(base, ref.path))))) {
+      trustedMentions = true;
+      kept.push(segment);
+      continue;
+    }
     const interpreter = (tokens[0] || '').split('/').pop();
     if (!['node', 'nodejs', 'canary.js'].includes(interpreter) ||
         (interpreter !== 'canary.js' && tokens[1] !== canary[0].path && tokens[1] !== './' + canary[0].path) ||
@@ -61,13 +67,13 @@ function cleanCommand(command, base, roots) {
     const text = value.slice(1, -1);
     return /^(?:[^\s]*[\/\\])?canary\.js$/.test(text) ? text : ' '.repeat(value.length);
   });
-  if (!targets.length && /\b(?:node|nodejs)\s+(?:[^\s;|]*[\/\\])?canary\.js\b/.test(unquoted)) unsafe = true;
+  if (!targets.length && !trustedMentions && /\b(?:node|nodejs)\s+(?:[^\s;|]*[\/\\])?canary\.js\b/.test(unquoted)) unsafe = true;
   if ((targets.length || unsafe) && /\b(?:if|then|for|while|case|function|cd|exec)\b/.test(command)) unsafe = true;
-  return { changed: targets.length > 0 && !unsafe, blocked: unsafe && (targets.length > 0 || /\bcanary\.js\b/.test(command)),
+  return { changed: targets.length > 0 && !unsafe, blocked: unsafe && (targets.length > 0 || (!trustedMentions && /\bcanary\.js\b/.test(command))),
     value: kept.filter(Boolean).join(' && '), targets };
 }
 
-function repairCanaryReferences(scan) {
+function repairCanaryReferences(scan, { trustedPaths = new Set() } = {}) {
   const actions = [];
   const failures = [];
   const ignoreRoots = new Set();
@@ -110,7 +116,7 @@ function repairCanaryReferences(scan) {
         const manifest = JSON.parse(original.replace(/^\uFEFF/, ''));
         const scripts = scriptLocations(original);
         for (const script of [...scripts].reverse()) {
-          const clean = cleanCommand(script.command, path.dirname(target), scan.roots);
+          const clean = cleanCommand(script.command, path.dirname(target), scan.roots, trustedPaths);
           if (clean.blocked) throw new Error(`Cannot safely repair script ${script.script}: ${script.command.slice(0, 160)}`);
           if (!clean.changed) continue;
           if (scripts.filter(item => item.script === script.script).length !== 1 || manifest.scripts?.[script.script] !== script.command) throw new Error('Duplicate/ambiguous script keys cannot be safely repaired');
@@ -137,7 +143,7 @@ function repairCanaryReferences(scan) {
         updated = lines.map(line => {
           const newline = line.endsWith('\r\n') ? '\r\n' : line.endsWith('\n') ? '\n' : '';
           const text = line.slice(0, line.length - newline.length);
-          const clean = /^\s*#/.test(text) ? { changed: false, blocked: false } : cleanCommand(text, hookBase(target, scan), scan.roots);
+          const clean = /^\s*#/.test(text) ? { changed: false, blocked: false } : cleanCommand(text, hookBase(target, scan), scan.roots, trustedPaths);
           if (clean.blocked || (clean.changed && (continuation || /\\\s*$/.test(text)))) throw new Error(`Cannot safely repair hook line ${location(original, offset).line}`);
           continuation = /\\\s*$/.test(text);
           const beforeOffset = offset;

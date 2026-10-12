@@ -98,6 +98,7 @@ From the np-audit checkout:
 ```bash
 node bin/npa.js canary-killer /path/to/project
 node bin/npa.js canary-killer /path/to/project --quarantine
+node bin/npa.js canary-monitor /path/to/project
 ```
 
 ---
@@ -112,6 +113,7 @@ node bin/npa.js canary-killer /path/to/project --quarantine
 | `npa ci`                       | —           | Audit then run `npm ci`            |
 | `npa scan [package]`           | `npa s`     | Scan only, no install              |
 | `npa canary-killer <root> [root...]` | —      | [Optional repository scan](#canary-killer-optional-repository-scan) |
+| `npa canary-monitor <root> [root...]` | —     | Watch folders and apply protection automatically; preserve trusted canaries |
 | `npa config get`               | `npa c get` | Show current configuration         |
 | `npa config set <key> <value>` | `npa c set` | Update a config value              |
 | `npa alias --install`          | —           | Install shell alias                |

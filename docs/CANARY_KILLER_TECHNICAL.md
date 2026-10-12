@@ -17,7 +17,7 @@ The command is registered through the existing command loader. Its separate repo
 | [Quarantine helper](../src/core/canaryQuarantine.js) | On explicit `--quarantine`, move discovered `canary.js` files and append ignore rules; preserve the file contents and report each action |
 | [Reference repair](../src/core/canaryRepair.js) and [protection gate](../src/core/canaryProtection.js) | Remove confirmed direct calls, preserve remaining commands, and block controlled commands when protection fails |
 
-The standalone repository command bypasses user audit configuration, registry/vulnerability requests and update checks. The dependency audit retains its existing behavior unless canary protection is enabled; enabled protection runs before auditing and again immediately before controlled npm launches.
+The standalone repository commands read trusted-file settings but bypass dependency audit settings, registry/vulnerability requests and update checks. The dependency audit retains its existing behavior unless canary protection is enabled; enabled protection runs before auditing and again immediately before controlled npm launches.
 
 ## Run from a checkout
 
@@ -44,7 +44,7 @@ node bin/npa.js canary-killer /path/to/repository --quarantine --json
 node bin/npa.js canary-killer /srv/app /dev/shm --quarantine --json
 ```
 
-This option removes confirmed direct canary calls from package scripts and hooks, moves regular `canary.js` files into `.np-audit-quarantine/`, and appends `canary.js` plus `.np-audit-quarantine/` to `.gitignore`. It applies by filename, including legitimate canary tests; quarantine is not a malware verdict. Explicit exclusions remain respected. Single-file roots remain available for read-only scanning; quarantine requires directory roots.
+This option removes confirmed direct canary calls from package scripts and hooks, moves regular `canary.js` files into `.np-audit-quarantine/`, and appends `canary.js` plus `.np-audit-quarantine/` to `.gitignore`. It applies by filename, including legitimate canary tests, except for exact trusted path/hash matches. Quarantine is not a malware verdict. Explicit exclusions remain respected. Single-file roots remain available for read-only scanning; quarantine requires directory roots.
 
 Each file is moved into a separate entry directory as `payload.quarantined`. A `metadata.json` records its original path, quarantine path, size, original permission mode and action time. File contents are preserved. The helper uses the nearest discovered Git repository root within the supplied roots, or the most specific supplied directory root when no repository is discovered. Quarantine storage and `.gitignore` writes stay inside supplied roots, and symlinks/reparse points are refused. Existing ignore content is preserved; repeated actions do not duplicate the appended block. Git index and history remain unchanged, so ignore rules do not remove already tracked content or prevent forced staging.
 
@@ -71,7 +71,48 @@ node /path/to/np-audit/bin/npa.js run build --protect-canary
 
 Protection discovers filenames throughout selected roots and reads manifests, hooks, Git configuration and `canary.js` contents. Other files are counted as filename-only coverage; use the standalone read-only scan for behavior matching in renamed files. Unreadable paths, discovery limits, unsupported hook configuration, failed actions and remaining canary references block the controlled command. Expected Git object/index and quarantine-storage exclusions remain reported but do not alone block this specific protection policy. Global npm operations and commands selecting another project with `--prefix` or `-C` are refused while protection is enabled.
 
-In plain English: np-audit checks and repairs the selected folders before starting commands it launches. If protection fails, it stops the command. Running `npm`, `node` or a shell directly bypasses that check. Protection cannot undo code that already ran, supervise files introduced after a check or stop an already running process. No continuous watcher is installed. Quarantine is a filesystem move, not an isolated execution environment; use stable files while applying actions.
+In plain English: np-audit checks and repairs the selected folders before starting commands it launches. If protection fails, it stops the command. Running `npm`, `node` or a shell directly bypasses that check. Protection cannot undo code that already ran or stop an already running process. The optional monitor checks for files introduced later while it is running; it does not intercept execution. Quarantine is a filesystem move, not an isolated execution environment; use stable files while applying actions.
+
+## Preserve intentional canaries
+
+Add explicit trusted files to `.npmauditor.json`, preserving existing settings:
+
+```json
+{
+  "canaryTrustedFiles": [
+    {"path": "tests/canary.js", "sha256": "REPLACE_WITH_THE_FILES_64_CHARACTER_SHA256"}
+  ]
+}
+```
+
+Read the file's SHA-256 without executing it:
+
+```bash
+node -e "const fs=require('fs'),c=require('crypto');console.log(c.createHash('sha256').update(fs.readFileSync('tests/canary.js')).digest('hex'))"
+```
+
+Repository commands read this setting from `.npmauditor.json` in each selected directory root; relative paths resolve from that root. Native protected commands also honor their existing np-audit configuration, resolving those relative paths from the command's working directory. Paths must name `canary.js` inside selected roots. Wildcards, conflicting hashes and invalid records are rejected. There are at most 128 distinct exceptions; configuration reads are bounded to 128 KiB per file and file verification to 1 MiB per file, with 32 MiB read budgets.
+
+An exact match preserves the file and its statically resolved script/hook calls. When other files are quarantined, generated ignore rules include exceptions for preserved trusted files. If the content changes, the hash no longer matches: the exception stops applying and normal protection handles the file. Updating a legitimate canary requires reviewing its new contents and deliberately updating its hash. Hashes are never refreshed automatically.
+
+Reports retain indicators and behavior evidence even for trusted files. `trust.files` records matched, changed, missing, unscanned or unverified files; protection also records pre-action trust status. An exception expresses the configured user's decision. Neither a filename nor a matching hash proves a file benign or malicious. Existing behavior matches remain review findings, not automatic malware verdicts.
+
+## Monitor selected folders
+
+```bash
+node bin/npa.js canary-monitor /path/to/project
+node bin/npa.js canary-monitor /srv/app /dev/shm --json
+```
+
+Starting the monitor runs protection immediately. It watches the selected directory roots and automatically reuses the same repair, quarantine, ignore and trusted-file logic after changes. There is no second quarantine switch. It also rechecks every five seconds to detect persistent files missed by notifications, and groups nearby change events to avoid repeated scans. Duplicate reports are suppressed. `--interval <milliseconds>` changes the periodic interval from 200 to 300000 milliseconds.
+
+The monitor runs in the foreground until Ctrl+C. No service, automatic startup, shell profile or deployment configuration is installed. For observation without file changes, add `--read-only`. Monitoring uses the bounded protection profile: filenames throughout selected roots, with content reads for manifests, hooks, Git configuration and canary files. Use the standalone full scan for behavior searches in renamed files.
+
+`--json` emits one JSON record per changed report or error. Watch failures are explicit; periodic checks continue, and monitoring coverage remains incomplete. Missing roots, unreadable paths and scan limits are reported. Quarantine storage is excluded from analysis and does not trigger monitor scans.
+
+In plain English: a monitor sees that a file appeared and then reacts. Another process could run the file before that reaction. The existing command guard checks before commands np-audit launches; monitoring adds arrival detection but does not replace that guard or guarantee zero execution. Node's [watcher documentation](https://nodejs.org/api/fs.html#caveats) documents platform and notification limitations. Files created and removed between checks may escape observation.
+
+Trusted-file and monitor tests verify preserved intentional files/calls, changed-hash quarantine, mixed trusted/untrusted ignore rules, periodic fallback, shutdown and no subprocess/network activity inside monitoring. The live regression test runs actual protected npm `prefix` commands and actual foreground monitor processes, introduces inert files after startup, verifies automatic quarantine and verifies read-only preservation. No scanned fixture script or hook is executed.
 
 ## Scope and reporting
 

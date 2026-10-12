@@ -25,7 +25,7 @@ function checkPath(target) {
   }
 }
 
-function quarantineCanaries(scan, { ignoreRoots = [] } = {}) {
+function quarantineCanaries(scan, { ignoreRoots = [], trustedPaths = new Set() } = {}) {
   const roots = scan.roots.map(root => path.resolve(root));
   const excluded = scan.exclusions.filter(item => item.reason === 'Explicit path exclusion').map(item => path.resolve(item.path));
   const actions = [];
@@ -64,13 +64,17 @@ function quarantineCanaries(scan, { ignoreRoots = [] } = {}) {
     } catch (err) { if (err.code !== 'ENOENT') throw err; }
     if (original.includes(0)) throw new Error('Binary .gitignore is unsupported');
     const text = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(original);
-    if (text.replace(/\r\n/g, '\n').endsWith(IGNORE_BLOCK)) {
+    const exceptions = scan.coverage.canaryFiles.filter(candidate => trustedPaths.has(require('./canaryTrust').key(candidate.path)))
+      .map(candidate => candidate.path).filter(target => inside(root, target)).sort()
+      .map(target => '!/' + path.relative(root, target).split(path.sep).join('/').replace(/([\\*?\[\]#! ])/g, '\\$1') + '\n').join('');
+    const ignoreBlock = IGNORE_BLOCK + exceptions;
+    if (text.replace(/\r\n/g, '\n').endsWith(ignoreBlock)) {
       const result = { path: target, status: 'already-present' };
       ignoreUpdates.set(root, result);
       return result;
     }
     const newline = text.includes('\r\n') ? '\r\n' : '\n';
-    const block = IGNORE_BLOCK.replace(/\n/g, newline);
+    const block = ignoreBlock.replace(/\n/g, newline);
     const suffix = (original.length && !text.endsWith('\n') ? newline : '') + block;
     const temporary = path.join(root, `.npa-ignore-${require('crypto').randomUUID()}.tmp`);
     inScope(temporary);
@@ -95,6 +99,7 @@ function quarantineCanaries(scan, { ignoreRoots = [] } = {}) {
     } catch (err) { ignoreFailures.push({ path: root, error: err.code || err.message }); }
   }
   for (const candidate of scan.coverage.canaryFiles) {
+    if (trustedPaths.has(require('./canaryTrust').key(candidate.path))) continue;
     const action = { path: candidate.path, status: 'failed' };
     let entry;
     let moved = false;

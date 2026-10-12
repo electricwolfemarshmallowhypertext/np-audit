@@ -1,8 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { scanRepository } = require('../core/repositoryScanner');
-const { protectRepository } = require('../core/canaryProtection');
+const { protectRepository, scanCanaries } = require('../core/canaryProtection');
 const output = require('../utils/output');
 
 function parseOptions(args, cwd) {
@@ -32,6 +31,7 @@ function printReport(report) {
   output.printScanHeader();
   log(`Canary Killer: ${report.summary.status}; ${report.summary.files} text files inspected; ${report.summary.findings} findings`);
   for (const root of report.roots) log(`Root: ${root}`);
+  if (report.trust) for (const item of report.trust.files) log(`${item.path} [${item.status}] explicit SHA-256 exception${item.error ? ': ' + item.error : ''}`);
   if (report.quarantine) {
     log(`Before quarantine coverage: ${report.quarantine.before.summary.status}`);
     for (const action of report.quarantine.actions) {
@@ -94,6 +94,8 @@ module.exports = {
   are preserved. Ambiguous canary commands are reported as blocked.
   This filename policy is explicit; it does not classify matches as malware.
   Quarantine requires directory roots. Git index/history are not rewritten.
+  Exact path/SHA-256 exceptions use canaryTrustedFiles in each root's
+  .npmauditor.json. Matched files and their resolved calls are preserved.
   Exit codes: 0 = complete/no review findings; 1 = review findings;
               2 = incomplete coverage or invalid arguments (takes precedence).
   canary.js is only an indicator; package.jsonl is not an npm manifest.
@@ -111,7 +113,7 @@ module.exports = {
       if (flags.skip || flags.noDev || flags.review || flags.verbose) throw new Error('Canary Killer supports only --json, --exclude, --quarantine and explicit roots');
       const options = parseOptions(rawArgs, cwd);
       if (flags.protectCanary) options.quarantine = true;
-      report = options.quarantine ? protectRepository({ ...options, protectionOnly: false }) : scanRepository(options);
+      report = options.quarantine ? protectRepository({ ...options, protectionOnly: false }) : scanCanaries(options);
     }
     catch (err) {
       if (flags.json) process.stdout.write(JSON.stringify({ scan: 'canary-killer', complete: false, error: err.message }) + '\n');
@@ -124,4 +126,5 @@ module.exports = {
     process.exitCode = !report.complete ? 2 : report.findings.some(f => f.severity === 'review') ? 1 : 0;
   },
   parseOptions,
+  printReport,
 };

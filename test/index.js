@@ -17,6 +17,8 @@ const UNIT_TESTS = [
   'unit/repositoryScanner.test.js',
   'unit/canaryQuarantine.test.js',
   'unit/canaryProtection.test.js',
+  'unit/canaryTrust.test.js',
+  'unit/canaryMonitor.test.js',
   'unit/requireWalker.test.js',
   'unit/updateChecker.test.js',
   'unit/cve.test.js',
@@ -35,24 +37,12 @@ const E2E_TESTS = [
   'e2e/canary-killer.test.js',
   'e2e/canary-protection.test.js',
   'e2e/canary-protection-live.test.js',
+  'e2e/canary-trust-monitor-live.test.js',
   'e2e/registry.test.js',
 ];
 
 let failed = 0;
 let passed = 0;
-
-function runFileSync(file) {
-  const fullPath = path.join(__dirname, file);
-  try {
-    require(fullPath);
-    passed++;
-  } catch (err) {
-    console.error(`\n  FAIL ${file}`);
-    console.error(`       ${err.message}`);
-    if (process.env.NPA_DEBUG) console.error(err.stack);
-    failed++;
-  }
-}
 
 async function runFileAsync(file) {
   const fullPath = path.join(__dirname, file);
@@ -74,7 +64,7 @@ async function main() {
   console.log('\nnpa test suite\n');
 
   console.log('Unit tests:');
-  for (const f of UNIT_TESTS) runFileSync(f);
+  for (const f of UNIT_TESTS) await runFileAsync(f);
 
   console.log('\nE2E tests:');
   for (const f of E2E_TESTS) await runFileAsync(f);
