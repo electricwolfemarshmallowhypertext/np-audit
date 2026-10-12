@@ -114,6 +114,8 @@ In plain English: a monitor sees that a file appeared and then reacts. Another p
 
 Trusted-file and monitor tests verify preserved intentional files/calls, changed-hash quarantine, mixed trusted/untrusted ignore rules, periodic fallback, shutdown and no subprocess/network activity inside monitoring. The live regression test runs actual protected npm `prefix` commands and actual foreground monitor processes, introduces inert files after startup, verifies automatic quarantine and verifies read-only preservation. No scanned fixture script or hook is executed.
 
+The [observed Windows trust and monitor results](validation/canary-killer/cda0b79-windows-trust-monitor.md) retain the actual npm output, monitor reports and filesystem observations for implementation `cda0b79`.
+
 ## Scope and reporting
 
 Supply every standalone scan root explicitly. Paths and repeated `--exclude <path>` options resolve from the current directory. Temporary directories, hidden files, untracked files and `node_modules` are scanned when present under supplied roots; there is no name-based exclusion for `/dev/shm` or `/tmp`. A root may also be an individual regular file. The default repository command only reads local files; `--quarantine` permits the actions above. Neither repository-command mode invokes npm, Git, hooks, scanned scripts, downloads or repository-configured external commands, or runs registry, vulnerability or update checks. Automatic protection also performs its checks without subprocesses or network calls; after successful protection, the controlled command continues with its normal audit/npm behavior.

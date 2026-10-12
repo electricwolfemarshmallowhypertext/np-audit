@@ -1,5 +1,8 @@
 # Canary Killer validation records
 
+- [Trusted files and automatic folder monitoring on Windows (`cda0b79`)](cda0b79-windows-trust-monitor.md), with [recorded npm/monitor results](cda0b79-windows-trust-monitor-real-results.json).
+- [Initial Windows scan-time integration (`94fc955`)](#windows-live-validation-2026-10-12), detailed below.
+
 ## Windows live validation: 2026-10-12
 
 The scan-time protection implementation passed the live integration test on Windows using Node.js 24.16.0 and npm 11.13.0. These results apply to implementation commit [`94fc955`](https://github.com/electricwolfemarshmallowhypertext/np-audit/commit/94fc955c70f0114c1af4fbcd5f7e40c2b8a8efda).
