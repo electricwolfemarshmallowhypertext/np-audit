@@ -1,5 +1,6 @@
 # Canary Killer validation records
 
+- [Direct Node PowerShell session setup (2026-10-12)](2026-10-12-powershell-session.md), with [recorded real-process results](2026-10-12-powershell-session-real-results.json).
 - [Step 3: foreground monitor (2026-10-12)](2026-10-12-step3.md), with [recorded live arrival and session results](2026-10-12-step3-live-results.json).
 - [Step 2: repair, quarantine and ignore (2026-10-12)](2026-10-12-step2.md), with [recorded real CLI results](2026-10-12-step2-real-results.json).
 - [Explicit exceptions for intentional local fixtures (2026-10-12)](2026-10-12-explicit-fixture-trust.md), with [recorded real CLI results](2026-10-12-explicit-fixture-trust-real-results.json).

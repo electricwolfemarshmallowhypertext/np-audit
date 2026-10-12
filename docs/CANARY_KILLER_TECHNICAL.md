@@ -148,6 +148,8 @@ Live tests use harmless inline Node entrypoints that write a marker; no scanned 
 
 The [observed Windows Node startup results](validation/canary-killer/760a3f8-windows-node-startup.md) retain the real-process output and entrypoint observations for implementation `760a3f8`.
 
+The [observed direct Node PowerShell session results](validation/canary-killer/2026-10-12-powershell-session.md) verify the session helper with actual PowerShell and absolute-path Node launches, including preservation and failure blocking.
+
 ## Scope and reporting
 
 Supply every standalone scan root explicitly. Paths and repeated `--exclude <path>` options resolve from the current directory. Temporary directories, hidden files, untracked files and `node_modules` are scanned when present under supplied roots; there is no name-based exclusion for `/dev/shm` or `/tmp`. A root may also be an individual regular file. The default repository command only reads local files; `--quarantine` permits the actions above. Neither repository-command mode invokes npm, Git, hooks, scanned scripts, downloads or repository-configured external commands, or runs registry, vulnerability or update checks. Automatic protection also performs its checks without subprocesses or network calls; after successful protection, the controlled command continues with its normal audit/npm behavior.

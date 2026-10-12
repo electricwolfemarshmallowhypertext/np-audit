@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-12",
+  "testedRevision": "8a90ebcbd4b319b00b8dfab0600f53a9c229ba75",
+  "node": "v24.16.0",
+  "platform": "win32",
+  "method": "Real Windows PowerShell session runs the committed helper, introduces comments-only canary text after setup, and launches the actual absolute-path Node executable with harmless inline entrypoints. No npm, scanned canary, fixture hook or downloaded content executed. Temporary projects removed after assertions. Only those test sessions were configured; other open terminals were not changed.",
+  "sourceSha256": {
+    "bin/enable-canary-guard.ps1": "7dddb245da9863bf77adc5baf8b8584534f7c1c594953d93f7ade34a3d9a6292",
+    "src/commands/canary-guard.js": "694fe043f1e0246b311a450a56f3f56e61e39c69cb889ecde05eabb2d42a6a43",
+    "src/utils/canaryStartup.js": "a42370c61eabf49930dc6284d35938cd1d08d9ed1952d9ebec42457051a857e9",
+    "src/core/canaryPreload.js": "1c40c6625c267de510505d0b97b273782a4036e82f9aed92b4f28d539de906a4",
+    "src/core/canaryTrust.js": "f674d06777f119ec7d4977478cc4356affa4b781704119e0ce8be21db1ec2b41",
+    "src/core/canaryProtection.js": "04bcd0835699700f3642ec6e70a79ed065525163f0ca36a6a3536976496ce011",
+    "test/e2e/canary-powershell-session-live.test.js": "1c2c3804bc21528bf50899871caf333e8eaa2a0fa0eade8904103c6b2284c081",
+    "test/index.js": "dc77ce28f8e0895abe42e1a7e1bedc1074975af524be8c3e9266750e80061d70"
+  },
+  "observations": [
+    {
+      "kind": "configured-direct-node",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-session-live-5uSUOR\\project with spaces",
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "Node startup protection configured for this PowerShell session.\r\n{\"NodeExit\":0,\"NodeOptions\":\"--require \\\"E:/np-audit/src/core/canaryPreload.js\\\" --trace-warnings\",\"Guard\":\"{\\\"roots\\\":[\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\project with spaces\\\"],\\\"base\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\project with spaces\\\"}\",\"PowerShell\":\"5.1.26100.9444\"}\r\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc",
+          "intentional": "node legit/canary.js"
+        }
+      },
+      "canaryPresent": false,
+      "session": {
+        "NodeExit": 0,
+        "NodeOptions": "--require \"E:/np-audit/src/core/canaryPreload.js\" --trace-warnings",
+        "Guard": "{\"roots\":[\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-session-live-5uSUOR\\\\project with spaces\"],\"base\":\"C:\\\\Users\\\\tionn\\\\AppData\\\\Local\\\\Temp\\\\npa-session-live-5uSUOR\\\\project with spaces\"}",
+        "PowerShell": "5.1.26100.9444"
+      },
+      "trustedHashUnchanged": true,
+      "quarantineHashMatched": true,
+      "hook": "node legit/canary.js\necho preserved\n",
+      "ignore": "# np-audit Canary Killer quarantine\ncanary.js\n.np-audit-quarantine/\n!/legit/canary.js\n"
+    },
+    {
+      "kind": "protection-stops-direct-node",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-session-live-5uSUOR\\failed protection",
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 2,
+      "stdout": "Node startup protection configured for this PowerShell session.\r\n{\"NodeExit\":2,\"NodeOptions\":\"--require \\\"E:/np-audit/src/core/canaryPreload.js\\\" --trace-warnings\",\"Guard\":\"{\\\"roots\\\":[\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\failed protection\\\"],\\\"base\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\failed protection\\\"}\",\"PowerShell\":\"5.1.26100.9444\"}\r\n",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\failed protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\failed protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-session-live-5uSUOR\\\\\\\\failed protection\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "entryObservation": null,
+      "canaryPresent": true
+    },
+    {
+      "kind": "invalid-setup-stops-before-node",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-session-live-5uSUOR\\invalid root",
+      "shell": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "✖ ENOENT: no such file or directory, lstat 'C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-session-live-5uSUOR\\absent'\nCanary guard setup failed; session settings were not changed.\r\nAt E:\\np-audit\\bin\\enable-canary-guard.ps1:9 char:5\r\n+     throw 'Canary guard setup failed; session settings were not chang ...\r\n+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (Canary guard se...re not changed.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : Canary guard setup failed; session settings were not changed.\r\n \r\n",
+      "entryRan": false,
+      "entryObservation": null,
+      "canaryPresent": false
+    }
+  ],
+  "fullSuite": {
+    "command": "node test/index.js",
+    "exit": 0,
+    "summary": "30 passed, 0 failed",
+    "environment": "Isolated temporary HOME/USERPROFILE; vulnerability checks disabled and update cache seeded; Node guard environment reset for the suite."
+  }
+}
