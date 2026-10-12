@@ -120,6 +120,15 @@ module.exports = (async () => {
     assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).scripts, { build: 'tsc' });
     observations.push({ kind: 'native-npm-startup-catches-post-preflight-file', root, exit: native.status, stdout: native.stdout, stderr: native.stderr,
       method: 'Timing injection wrapper forwarded the genuine npm spawn; the scanner and npm result were not substituted.', canaryPresent: false });
+    root = fixture('session-only-native');
+    fs.writeFileSync(path.join(root, '.npmauditor.json'), JSON.stringify({ canaryProtection: false, silent: true }));
+    const sessionNative = spawnSync(process.execPath, [CLI, 'prefix'], { cwd: root, env: startupEnvironment(baseEnv, root), encoding: 'utf8', timeout: 15000 });
+    assert.ifError(sessionNative.error);
+    assert.strictEqual(sessionNative.status, 0, sessionNative.stderr);
+    assert.ok(sessionNative.stdout.trim().split(/\r?\n/).includes(root), 'An active session guard must retain real npm forwarding without another native protection switch');
+    assert.ok(!fs.existsSync(path.join(root, 'canary.js')));
+    observations.push({ kind: 'active-session-guard-without-native-enable-flag', root, exit: sessionNative.status,
+      stdout: sessionNative.stdout, stderr: sessionNative.stderr, canaryPresent: false });
     console.log('  live Node startup guard: pre-entry checks, failure blocking, exact trust, inherited child checks, preload ordering, session setup and real native npm late-file protection passed (no scanned scripts executed)');
     return observations;
   } finally { fs.rmSync(parent, { recursive: true, force: true }); }

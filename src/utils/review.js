@@ -206,8 +206,9 @@ function runNpm(command, args, cwd, config) {
     cwd,
     env: { ...process.env, NPA_RUNNING: '1' },
   }, config?.canaryProtection, config);
-  if (config?.canaryProtection && result.error) output.error(result.error.message);
-  return config?.canaryProtection ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0;
+  const guarded = config?.canaryProtection || require('./canaryStartup').activeStartup();
+  if (guarded && result.error) output.error(result.error.message);
+  return guarded ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0;
 }
 
 /**

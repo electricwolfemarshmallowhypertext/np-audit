@@ -5,6 +5,7 @@ const fs = require('fs');
 const { protectRepository } = require('./canaryProtection');
 const { inside } = require('./canaryQuarantine');
 const { startupTrustedFiles } = require('./canaryTrust');
+const { ACTIVE } = require('../utils/canaryStartup');
 
 try {
   const value = process.env.NPA_CANARY_GUARD;
@@ -22,6 +23,7 @@ try {
     throw new Error('Protection failed: ' + JSON.stringify(report.protection.failures.slice(0, 20)));
   }
   if (entry && path.basename(entry) === 'canary.js' && !fs.existsSync(entry)) throw new Error('Canary entrypoint is quarantined or missing; startup blocked');
+  globalThis[ACTIVE] = settings;
   if (report.quarantine.actions.length || report.repairs.actions.length) {
     process.stderr.write(`Canary startup protection: ${report.quarantine.actions.length} files quarantined; ${report.repairs.actions.length} references repaired\n`);
   }

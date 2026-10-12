@@ -1,9 +1,11 @@
 'use strict';
 
 const path = require('path');
+const ACTIVE = Symbol.for('np-audit.canary-startup');
+const activeStartup = () => globalThis[ACTIVE] || null;
 
 function startupEnvironment(env, base, config = {}, roots = null) {
-  const selected = roots || [base, ...(config.canaryRoots || []).map(root => path.resolve(base, root))];
+  const selected = roots || [base, ...(config.canaryRoots || []).map(root => path.resolve(base, root)), ...(activeStartup()?.roots || [])];
   const settings = JSON.stringify({ roots: [...new Set(selected.map(root => path.resolve(root)))], base: path.resolve(base) });
   if (Buffer.byteLength(settings, 'utf8') > 65536) throw new Error('Node startup guard root configuration exceeds 64 KiB');
   const preload = path.resolve(__dirname, '../core/canaryPreload.js').split(path.sep).join('/');
@@ -17,4 +19,4 @@ function shellSetup(env) {
     ? `$env:${name} = ${quote(env[name])}` : `export ${name}=${quote(env[name])}`);
 }
 
-module.exports = { startupEnvironment, shellSetup };
+module.exports = { startupEnvironment, shellSetup, activeStartup, ACTIVE };

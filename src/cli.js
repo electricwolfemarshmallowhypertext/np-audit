@@ -131,12 +131,13 @@ async function main() {
   if (!cmd) {
     // Forward unknown commands to npm (allows `alias npm='npa'`)
     const { spawnNpm } = require('./utils/npm');
+    const guarded = config.canaryProtection || require('./utils/canaryStartup').activeStartup();
     const result = spawnNpm(process.argv.slice(2).filter(arg => arg !== '--protect-canary'), {
       stdio: 'inherit',
       cwd,
     }, config.canaryProtection, config);
-    if (config.canaryProtection && result.error) output.error(result.error.message);
-    process.exit(config.canaryProtection ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0);
+    if (guarded && result.error) output.error(result.error.message);
+    process.exit(guarded ? (Number.isInteger(result.status) ? result.status : 1) : result.status || 0);
     return;
   }
 

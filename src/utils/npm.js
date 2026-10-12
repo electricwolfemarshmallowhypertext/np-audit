@@ -3,10 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { startupEnvironment, activeStartup } = require('./canaryStartup');
 
 function spawnNpm(args, options, protection = false, config = {}, base = options.cwd || process.cwd()) {
-  if (protection) options = { ...options, env: require('./canaryStartup').startupEnvironment(options.env || process.env, base, config) };
-  if (process.platform === 'win32' && protection) {
+  if (protection) options = { ...options, env: startupEnvironment(options.env || process.env, base, config) };
+  if (process.platform === 'win32' && (protection || activeStartup())) {
     // Node cannot spawn a .cmd file directly. Run npm's JavaScript entry point
     // with argv intact instead of passing user arguments through cmd.exe.
     const directories = [...new Set([path.dirname(process.execPath), ...(process.env.PATH || '').split(path.delimiter)])];
