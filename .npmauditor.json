@@ -1,0 +1,12 @@
+{
+  "canaryTrustedFiles": [
+    {
+      "path": "test/fixtures/incident-derived-reconstruction/present/canary.js",
+      "sha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5"
+    },
+    {
+      "path": "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js",
+      "sha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+    }
+  ]
+}

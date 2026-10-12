@@ -1,5 +1,6 @@
 # Canary Killer validation records
 
+- [Explicit exceptions for intentional local fixtures (2026-10-12)](2026-10-12-explicit-fixture-trust.md), with [recorded real CLI results](2026-10-12-explicit-fixture-trust-real-results.json).
 - [Node checks before entrypoints on Windows (`760a3f8`)](760a3f8-windows-node-startup.md), with [recorded real-process results](760a3f8-windows-node-startup-real-results.json).
 - [Trusted files and automatic folder monitoring on Windows (`cda0b79`)](cda0b79-windows-trust-monitor.md), with [recorded npm/monitor results](cda0b79-windows-trust-monitor-real-results.json).
 - [Initial Windows scan-time integration (`94fc955`)](#windows-live-validation-2026-10-12), detailed below.

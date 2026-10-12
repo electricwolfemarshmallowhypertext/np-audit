@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-12",
+  "implementationRevision": "27bcf021e014dd7968bb0de27ec0cc9c78f7db04",
+  "platform": "win32",
+  "node": "v24.16.0",
+  "configuration": {
+    "canaryTrustedFiles": [
+      {
+        "path": "test/fixtures/incident-derived-reconstruction/present/canary.js",
+        "sha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5"
+      },
+      {
+        "path": "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js",
+        "sha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda"
+      }
+    ]
+  },
+  "configurationSha256": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966",
+  "method": "Real CLI processes. Read-only scan of actual checkout; protection on an isolated copy using the exact local fixture bytes and exception records. No scripts, hooks or downloaded content executed. Temporary projects removed after assertions.",
+  "actualCheckout": {
+    "root": "E:\\np-audit",
+    "exit": 2,
+    "complete": false,
+    "trust": [
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+        "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "configuredBy": "E:\\np-audit\\.npmauditor.json",
+        "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "status": "trusted"
+      },
+      {
+        "path": "E:\\np-audit\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+        "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+        "configuredBy": "E:\\np-audit\\.npmauditor.json",
+        "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+        "status": "trusted"
+      }
+    ],
+    "inputHashesBefore": {
+      "test/fixtures/incident-derived-reconstruction/present/canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+      "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+      "test/fixtures/incident-derived-reconstruction/present/package.json": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+      "test/fixtures/incident-derived-reconstruction/present/.githooks/pre-commit": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+      ".gitignore": "19a64b179d5c367060457d809080858f94b0dcd9dc0483bda67a2c7519f3adce",
+      ".npmauditor.json": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966"
+    },
+    "inputHashesAfter": {
+      "test/fixtures/incident-derived-reconstruction/present/canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+      "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+      "test/fixtures/incident-derived-reconstruction/present/package.json": "447a3cd46c05ba9b2d898aea4d5eebbddb87716a0f6f01967cf40b099d13c4a4",
+      "test/fixtures/incident-derived-reconstruction/present/.githooks/pre-commit": "0ceed34739ed59a41ea30c424fe16f7a9582906e939a7be62ad7994d1bb0ae0c",
+      ".gitignore": "19a64b179d5c367060457d809080858f94b0dcd9dc0483bda67a2c7519f3adce",
+      ".npmauditor.json": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966"
+    }
+  },
+  "protectedCopy": {
+    "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-explicit-trust-proof-odRvEY\\trusted-project",
+    "exit": 2,
+    "complete": false,
+    "allowed": true,
+    "trust": [
+      {
+        "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-explicit-trust-proof-odRvEY\\trusted-project\\test\\fixtures\\incident-derived-reconstruction\\present\\canary.js",
+        "expectedSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-explicit-trust-proof-odRvEY\\trusted-project\\.npmauditor.json",
+        "actualSha256": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+        "status": "trusted"
+      },
+      {
+        "path": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-explicit-trust-proof-odRvEY\\trusted-project\\test\\fixtures\\incident-derived-reconstruction\\temporary\\dev\\shm\\canary.js",
+        "expectedSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+        "configuredBy": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-explicit-trust-proof-odRvEY\\trusted-project\\.npmauditor.json",
+        "actualSha256": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+        "status": "trusted"
+      }
+    ],
+    "quarantineActions": [],
+    "repairActions": [],
+    "inputHashesBefore": {
+      "test/fixtures/incident-derived-reconstruction/present/canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+      "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+      "package.json": "ce0d15d97e1428ab545ebc75a585b0397918f1b961319b0ce0aedad5e486d066",
+      ".git/hooks/pre-commit": "2d3e6a26c04133611212bdc5189ee6fb653de06bde924b6fcf693cc42590f9cb",
+      ".npmauditor.json": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966"
+    },
+    "inputHashesAfter": {
+      "test/fixtures/incident-derived-reconstruction/present/canary.js": "c26f91af317e0559b3a387b584a58e8ad2c95b06fb972471addcbd97900be7e5",
+      "test/fixtures/incident-derived-reconstruction/temporary/dev/shm/canary.js": "2c2c77aec4da9e3d5484e12c98c1dc80c1d781d3f1f2e7dbe41cea235d785eda",
+      "package.json": "ce0d15d97e1428ab545ebc75a585b0397918f1b961319b0ce0aedad5e486d066",
+      ".git/hooks/pre-commit": "2d3e6a26c04133611212bdc5189ee6fb653de06bde924b6fcf693cc42590f9cb",
+      ".npmauditor.json": "2cd50bbed588540d72c3c4cace59eb133094350586253d8d0f9e76d64db6e966"
+    },
+    "reviewEvidenceRetained": true
+  },
+  "existingRegressionResult": "test/unit/canaryTrust.test.js passed: exact pins, changed hash, mixed ignore exceptions, invalid records and retained review evidence"
+}
