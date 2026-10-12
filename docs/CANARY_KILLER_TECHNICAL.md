@@ -118,7 +118,7 @@ The [observed Windows trust and monitor results](validation/canary-killer/cda0b7
 
 ## Check before Node entrypoints run
 
-Protected np-audit npm launches automatically prepend the startup guard to `NODE_OPTIONS`. Descendant Node processes that inherit this environment repeat protection before loading their entrypoint. This uses the same bounded protection and trusted-file policy, with no second enable flag on protected npm launches.
+Protected np-audit npm launches automatically prepend the startup guard to `NODE_OPTIONS`. Descendant Node processes that inherit this environment repeat protection before loading their entrypoint. This uses the same bounded protection and trusted-file policy, with no second enable flag on protected npm launches. An already active session guard also applies when the native `canaryProtection` setting is false; forwarding npm preserves that session environment. Protected child launches retain the inherited selected roots.
 
 For Node commands launched directly from your terminal, generate settings for explicitly selected folders:
 
@@ -133,6 +133,8 @@ The guard runs through Node's `--require` startup mechanism, before the main ent
 This covers configured Node starts, including absolute-path Node invocations and children that retain the environment. Clearing `NODE_OPTIONS`, replacing a child's environment, using a different runtime or running non-Node shell commands bypasses this integration. It is not an operating-system execution policy. It does not prevent a file introduced after startup from being read or executed by code already running, and it does not remove concurrent filesystem races. The check before entrypoint loading is stronger than watching for a later notification, but is not a guarantee of zero execution through every route.
 
 Live tests use harmless inline Node entrypoints that write a marker; no scanned fixture script or canary is executed. They verify protection before that marker, failed protection leaving the marker absent, exact trusted-file preservation, changed-file quarantine, inherited child checks, guard ordering before an existing preload, generated session settings, and actual npm startup catching a file introduced after preflight. The native timing case injects an inert file immediately before forwarding the real npm spawn; it does not substitute a scanner or npm result.
+
+The [observed Windows Node startup results](validation/canary-killer/760a3f8-windows-node-startup.md) retain the real-process output and entrypoint observations for implementation `760a3f8`.
 
 ## Scope and reporting
 

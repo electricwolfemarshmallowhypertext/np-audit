@@ -1,5 +1,6 @@
 # Canary Killer validation records
 
+- [Node checks before entrypoints on Windows (`760a3f8`)](760a3f8-windows-node-startup.md), with [recorded real-process results](760a3f8-windows-node-startup-real-results.json).
 - [Trusted files and automatic folder monitoring on Windows (`cda0b79`)](cda0b79-windows-trust-monitor.md), with [recorded npm/monitor results](cda0b79-windows-trust-monitor-real-results.json).
 - [Initial Windows scan-time integration (`94fc955`)](#windows-live-validation-2026-10-12), detailed below.
 
@@ -56,7 +57,7 @@ The representative hook's `node canary.js` line was removed; its `echo preserved
 
 Standalone repository scans returned `2` because overall coverage remained incomplete, including excluded Git metadata and the unresolved `tsc` command. Successful canary protection does not make that scan clean. Native scan/install/ci exit codes describe their command results; detailed protection coverage remains in their reports.
 
-These results verify scan-time detection, repair, quarantine, ignore updates, successful real npm launches and failure blocking in the tested Windows environment. They do not verify execution of `tsc`, an application build, installation of external dependencies, deployment, host integrity, continuous monitoring or interception of commands launched outside np-audit. The optional Node startup guard and additional shell integration remain future work.
+These results verify scan-time detection, repair, quarantine, ignore updates, successful real npm launches and failure blocking in the tested Windows environment. They do not verify execution of `tsc`, an application build, installation of external dependencies, deployment, host integrity, continuous monitoring or interception of commands launched outside np-audit. At that tested revision, Node startup and additional shell integration remained future work. The later Node startup results are linked above.
 
 ### Repeat the live test
 

@@ -1,0 +1,191 @@
+{
+  "testedRevision": "760a3f835128f31b58f5a6fafbdbeaeb2241c85c",
+  "date": "2026-10-12",
+  "platform": "win32",
+  "node": "v24.16.0",
+  "npm": "11.13.0",
+  "method": "Committed live test with actual absolute-path Node processes and actual npm. Entry-point checks used harmless inline code, not scanned canary scripts. Native late-introduction case used a timing-injection wrapper that forwarded the real npm spawn. npm used offline prefix queries with scripts disabled. No scanned canary, fixture hook or downloaded content executed; no session settings or services installed on the host.",
+  "assertions": "All committed Node startup live-test assertions passed",
+  "sourceSha256": {
+    "src/core/canaryPreload.js": "1c40c6625c267de510505d0b97b273782a4036e82f9aed92b4f28d539de906a4",
+    "src/utils/canaryStartup.js": "a42370c61eabf49930dc6284d35938cd1d08d9ed1952d9ebec42457051a857e9",
+    "src/utils/npm.js": "2f9bc439f27deeed9b89c812ff046875d7289ef1f890049a2b3309790233f225",
+    "src/utils/review.js": "4afdca036c4ed3766befd60bf80bdf42c4d928b1bb63cfaf8ca78b5a90736dd8",
+    "src/commands/canary-guard.js": "f0cf2a0c315551877563c74f72611578b82d57a3abdeabf9eaa86dab65ce5325",
+    "src/core/canaryTrust.js": "f674d06777f119ec7d4977478cc4356affa4b781704119e0ce8be21db1ec2b41",
+    "src/core/canaryProtection.js": "04bcd0835699700f3642ec6e70a79ed065525163f0ca36a6a3536976496ce011",
+    "src/core/canaryQuarantine.js": "101c758ddac0d749994abb8c7104450d401f9b402702f824c01459fbe47a0cc1",
+    "src/core/canaryRepair.js": "d962bddd43d5b160ef60e52ad360019c6aeb2a616113c55dbed78a68b241e3b6",
+    "src/cli.js": "8d58da01d0592f9ac936a26418d4eead6cdbe9e2196b8a1fd1a2904f3dcd8acc",
+    "test/e2e/canary-startup-live.test.js": "0021457d65c55447276dfcdbf1d47bb37c1ed4464d30ac8dbdad4793f4f5f6e5"
+  },
+  "observations": [
+    {
+      "kind": "protection-before-inline-entry",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\before-entry",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "{\"canaryPresent\":false,\"scripts\":{\"build\":\"tsc\"}}\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        }
+      },
+      "canaryPresent": false,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "failure-blocks-inline-entry",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\failed-protection",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Protection failed: [{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-startup-live-6d1NoT\\\\\\\\failed-protection\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-startup-live-6d1NoT\\\\\\\\failed-protection\\\\\\\\canary.js\\\",\\\"status\\\":\\\"failed\\\",\\\"error\\\":\\\".gitignore is not a regular file\\\"},{\\\"path\\\":\\\"C:\\\\\\\\Users\\\\\\\\tionn\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\npa-startup-live-6d1NoT\\\\\\\\failed-protection\\\\\\\\canary.js\\\"}]\"\n",
+      "entryRan": false,
+      "entryObservation": null,
+      "canaryPresent": true,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "trusted-canary-preserved-before-entry",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\approved",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "{\"canaryPresent\":true,\"scripts\":{\"build\":\"node canary.js && tsc\",\"prepare\":\"node canary.js\"}}\n",
+      "stderr": "",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": true,
+        "scripts": {
+          "build": "node canary.js && tsc",
+          "prepare": "node canary.js"
+        }
+      },
+      "canaryPresent": true,
+      "scripts": {
+        "build": "node canary.js && tsc",
+        "prepare": "node canary.js"
+      }
+    },
+    {
+      "kind": "changed-trust-quarantined-before-entry",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\approved-then-changed",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "{\"canaryPresent\":false,\"scripts\":{\"build\":\"tsc\"}}\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        }
+      },
+      "canaryPresent": false,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "inherited-child-catches-later-file",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\inherited-child",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "{\"childExit\":0,\"childStdout\":\"{\\\"canaryPresent\\\":false,\\\"scripts\\\":{\\\"build\\\":\\\"tsc\\\"}}\\n\",\"childStderr\":\"Canary startup protection: 1 files quarantined; 2 references repaired\\n\"}\n",
+      "stderr": "",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        }
+      },
+      "canaryPresent": false,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "guard-precedes-existing-preload",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\existing-preload",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "{\"canaryPresent\":false,\"scripts\":{\"build\":\"tsc\"}}\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        }
+      },
+      "canaryPresent": false,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "invalid-settings-block-entry",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\invalid-settings",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Canary startup blocked: \"Unexpected token 'i', \\\"invalid JSON\\\" is not valid JSON\"\n",
+      "entryRan": false,
+      "entryObservation": null,
+      "canaryPresent": false,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "generated-session-settings-work",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\session-settings",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "exit": 0,
+      "stdout": "{\"canaryPresent\":false,\"scripts\":{\"build\":\"tsc\"}}\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "entryRan": true,
+      "entryObservation": {
+        "canaryPresent": false,
+        "scripts": {
+          "build": "tsc"
+        }
+      },
+      "canaryPresent": false,
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    {
+      "kind": "native-npm-startup-catches-post-preflight-file",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\native-late-introduction",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\native-late-introduction\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 2 references repaired\n",
+      "method": "Timing injection wrapper forwarded the genuine npm spawn; the scanner and npm result were not substituted.",
+      "canaryPresent": false
+    },
+    {
+      "kind": "active-session-guard-without-native-enable-flag",
+      "root": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\session-only-native",
+      "exit": 0,
+      "stdout": "C:\\Users\\tionn\\AppData\\Local\\Temp\\npa-startup-live-6d1NoT\\session-only-native\n",
+      "stderr": "Canary startup protection: 1 files quarantined; 3 references repaired\n",
+      "canaryPresent": false
+    }
+  ],
+  "fullSuite": {
+    "command": "node test/index.js",
+    "environment": "Temporary HOME/USERPROFILE, vulnerability checks disabled and update cache seeded; removed after run.",
+    "exit": 0,
+    "summary": "29 passed, 0 failed"
+  }
+}
